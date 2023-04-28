@@ -10,13 +10,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 @Builder
-public class Plan {
-    private long id;
+public class PlanLike {
+    private long planId;
     private long memberId;
-    private String title;
-    private String content;
-    private long hit;
-    private String plan;
     private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
 }

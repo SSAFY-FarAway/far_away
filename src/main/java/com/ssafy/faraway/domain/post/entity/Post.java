@@ -1,4 +1,4 @@
-package com.ssafy.faraway.domain.hotplace.entity;
+package com.ssafy.faraway.domain.post.entity;
 
 import lombok.*;
 
@@ -10,15 +10,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 @Builder
-public class HotPlace {
+public class Post {
     private long id;
     private long memberId;
+    private String category;
     private String title;
     private String content;
-    private String zipcode;
-    private String mainAddress;
-    private String subAddress;
-    private int rating;
+    private long hit;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 }
