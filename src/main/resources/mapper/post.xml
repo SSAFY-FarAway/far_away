@@ -4,6 +4,13 @@
 
 <mapper namespace="com.ssafy.faraway.domain.post.repository.PostRepository">
 
+    <select id="findById" parameterType="long" resultType="PostResponseDto">
+        select p.id, p.member_id, m.login_id, p.category, p.title, p.content, p.hit, p.modified_date
+        from post p join member m
+        on p.member_id = m.id
+        and p.id = #{id};
+    </select>
+
     <insert id="save" parameterType="Post">
         insert into post (member_id, category, title, content)
         values (#{memberId}, #{category}, #{title}, #{content})

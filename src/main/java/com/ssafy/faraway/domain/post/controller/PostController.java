@@ -3,6 +3,8 @@ package com.ssafy.faraway.domain.post.controller;
 import com.ssafy.faraway.common.PostSearchCondition;
 import com.ssafy.faraway.domain.post.dto.req.PostSaveRequestDto;
 import com.ssafy.faraway.domain.post.dto.res.PostListResponseDto;
+import com.ssafy.faraway.domain.post.dto.res.PostResponseDto;
+import com.ssafy.faraway.domain.post.repository.PostRepository;
 import com.ssafy.faraway.domain.post.service.PostService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -46,5 +48,20 @@ public class PostController {
             return new ResponseEntity<List<PostListResponseDto>>(list, HttpStatus.OK);
         }
         return new ResponseEntity<List<PostListResponseDto>>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<PostResponseDto> findPostById(Long id) {
+        PostResponseDto postResponseDto = null;
+        try {
+            postResponseDto = postService.findById(id);
+            if (postResponseDto == null) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<PostResponseDto>(postResponseDto, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
