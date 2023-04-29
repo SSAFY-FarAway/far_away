@@ -13,10 +13,11 @@ import java.sql.SQLException;
 
 @RequiredArgsConstructor
 @Service
-public class MemberServiceImpl implements MemberService {
+public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository;
 
     @Transactional
+    @Override
     public Integer save(MemberSaveRequestDto memberSaveRequestDto){
         return memberRepository.save(memberSaveRequestDto);
     }
@@ -31,14 +32,15 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.findAll();
     }
 
+    @Transactional
+    @Override
+    public Integer delete(Long id) throws SQLException {
+        return memberRepository.delete(id);
+    }
+
+    @Transactional
     @Override
     public Integer update(MemberUpdateRequestDto memberUpdateRequestDto) throws SQLException {
         return memberRepository.update(memberUpdateRequestDto);
     }
-
-    @Override
-    public Integer delete(String id) throws SQLException {
-        return memberRepository.delete(id);
-    }
-
 }

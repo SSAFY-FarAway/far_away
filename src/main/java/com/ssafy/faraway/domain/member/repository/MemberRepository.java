@@ -16,5 +16,5 @@ public interface MemberRepository {
 
     Integer update(MemberUpdateRequestDto memberUpdateRequestDto);
 
-    Integer delete(String id);
+    Integer delete(Long id);
 }

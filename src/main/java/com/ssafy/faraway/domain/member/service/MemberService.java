@@ -6,7 +6,9 @@ import com.ssafy.faraway.domain.member.dto.res.MemberListResponseDto;
 import com.ssafy.faraway.domain.member.dto.res.MemberResponseDto;
 
 import java.sql.SQLException;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface MemberService {
     Integer save(MemberSaveRequestDto memberSaveRequestDto) throws SQLException;
 
@@ -16,5 +18,5 @@ public interface MemberService {
 
     Integer update(MemberUpdateRequestDto memberUpdateRequestDto) throws SQLException;
 
-    Integer delete(String id) throws SQLException;
+    Integer delete(Long id) throws SQLException;
 }

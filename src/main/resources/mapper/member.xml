@@ -19,4 +19,28 @@
         select id, login_id, last_name, first_name, birth, email, mileage, `role`, cerified
         from member
     </select>
+
+    <update id="update" parameterType="memberUpdateRequestDto">
+        update member
+        <trim prefix="set" suffixOverrides=",">
+            <if test="loginPwd != null">loginPwd = #{loginPwd},</if>
+            <if test="firstName != null">firstName = #{firstName},</if>
+            <if test="lastName != null">lastName = #{lastName},</if>
+            <if test="birth != null">birth = #{birth},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="zipcode != null">zipcode = #{zipcode},</if>
+            <if test="mainAddress != null">mainAddress = #{mainAddress},</if>
+            <if test="subAddress != null">subAddress = #{subAddress},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+
+    <delete id="delete" parameterType="Long">
+        delete form member
+        where id = #{id}
+    </delete>
+
+
+    
 </mapper>
