@@ -4,12 +4,9 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Builder
 public class Member {
     private long id;
     private String loginId;
@@ -24,8 +21,25 @@ public class Member {
     private String salt;
     private long mileage;
     private int role;
+    private int cerified;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
+
+
+    @Builder
+    public Member(String loginId, String loginPwd, String lastName, String firstName, String birth, String email, String zipcode, String mainAddress, String subAddress, String salt, int role) {
+        this.loginId = loginId;
+        this.loginPwd = loginPwd;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.birth = birth;
+        this.email = email;
+        this.zipcode = zipcode;
+        this.mainAddress = mainAddress;
+        this.subAddress = subAddress;
+        this.salt = salt;
+        this.role = role;
+    }
 }
 
 
