@@ -2,12 +2,9 @@ package com.ssafy.faraway.domain.attraction.entity;
 
 import lombok.*;
 
-@Setter
+
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
-@Builder
 public class AttractionInfo {
     private int contentId;
     private int contentTypeId;
@@ -24,4 +21,6 @@ public class AttractionInfo {
     private double latitude;
     private double longitude;
     private String mLevel;
+
+    
 }

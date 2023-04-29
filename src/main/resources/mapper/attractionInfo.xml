@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.faraway.domain.attraction.repository.AttractionRepository">
+
+    <select id="findAll" resultType="AttractionGetResponseDto">
+        select a.content_id, a.title, a.addr1, a.zipcode, a.tel, a.first_image, a.latitude, a.longitude, s.sido_name, g.gugun_name
+        from attraction_info a, sido s, gugun g
+        where a.sido_code = s.sido_code and a.gugun_code = g.gugun_code;
+    </select>
+
+</mapper>
