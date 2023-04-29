@@ -14,4 +14,10 @@
         select sido_code, sido_name
         from sido;
     </select>
+
+    <select id="findAllGugun" parameterType="int" resultType="GugunGetResponseDto">
+        select gugun_code, gugun_name
+        from gugun
+        where sido_code = #{sidoCode};
+    </select>
 </mapper>

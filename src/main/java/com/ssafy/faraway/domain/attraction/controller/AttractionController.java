@@ -1,6 +1,7 @@
 package com.ssafy.faraway.domain.attraction.controller;
 
 import com.ssafy.faraway.domain.attraction.dto.res.AttractionGetResponseDto;
+import com.ssafy.faraway.domain.attraction.dto.res.GugunGetResponseDto;
 import com.ssafy.faraway.domain.attraction.dto.res.SidoGetResponseDto;
 import com.ssafy.faraway.domain.attraction.service.AttractionService;
 import io.swagger.annotations.Api;
@@ -8,10 +9,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -54,6 +52,20 @@ public class AttractionController {
     }
 
 
+    @GetMapping("/gugun/{sidoCode}}")
+    public ResponseEntity<List<GugunGetResponseDto>> findAllGugun(@PathVariable int sidoCode) {
+        List<GugunGetResponseDto> list = null;
+        try {
+            list = attractionService.findAllGugun(sidoCode);
+            if(list == null || list.size() == 0) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
 
 
 }
