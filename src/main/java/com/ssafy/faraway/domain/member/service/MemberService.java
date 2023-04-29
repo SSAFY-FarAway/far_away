@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface MemberService {
+    MemberResponseDto find(Long id) throws SQLException;
+
     List<MemberListResponseDto> findAll() throws SQLException;
 
 }

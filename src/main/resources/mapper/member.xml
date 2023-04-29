@@ -3,6 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.faraway.domain.member.repository.MemberRepository">
+    <select id="find" parameterType="Long" resultType="MemberResponseDto">
+        select id, login_id loginId, last_name lastName, first_name firstName, birth, email, zipcode, main_address mainAddress, sub_address subAddress, mileage, cerified,`role`, created_date createdDate
+        from member
+        where id = #{id}
+    </select>
+
     <select id="findAll"  resultType="MemberListResponseDto">
         select id, login_id loginId, last_name lastName, first_name firstName, birth, email, mileage, `role`, cerified
         from member

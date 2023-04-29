@@ -19,9 +19,21 @@ import java.util.List;
 public class MemberController {
     private final MemberService memberService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> find(@PathVariable("id") Long id) {
+        try {
+            MemberResponseDto memberResponseDto = memberService.find(id);
+            if (memberResponseDto != null)
+                return new ResponseEntity<MemberResponseDto>(memberResponseDto, HttpStatus.OK);
+            else
+                return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return exceptionHandling(e);
+        }
+    }
+
     @GetMapping("/")
     public ResponseEntity<List<MemberListResponseDto>> findAll() {
-        System.out.println("gd");
         List<MemberListResponseDto> list = null;
         try {
             list = memberService.findAll();
@@ -35,4 +47,9 @@ public class MemberController {
         return new ResponseEntity<List<MemberListResponseDto>>(HttpStatus.NO_CONTENT);
     }
 
+
+    private ResponseEntity<String> exceptionHandling(Exception e) {
+        e.printStackTrace();
+        return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

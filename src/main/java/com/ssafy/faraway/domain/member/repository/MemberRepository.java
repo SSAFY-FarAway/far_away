@@ -9,6 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface MemberRepository {
+    MemberResponseDto find(Long id);
     List<MemberListResponseDto> findAll();
 
 }
