@@ -15,6 +15,7 @@
 	<description>travel website for you </description>
 	<properties>
 		<java.version>1.8</java.version>
+		<swagger-version>3.0.0</swagger-version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -69,6 +70,29 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
+
+		<!-- spring swagger setting -->
+		<!-- swagger 사용을 위해 추가한다. -->
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger-version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+
+
 
 	</dependencies>
 
