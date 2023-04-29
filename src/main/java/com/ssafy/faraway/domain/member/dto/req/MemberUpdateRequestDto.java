@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class MemberUpdateRequestDto {
-    private String id;
+    private Long id;
     private String loginPwd;
     private String lastName;
     private String firstName;
@@ -18,7 +18,7 @@ public class MemberUpdateRequestDto {
     private String subAddress;
 
     @Builder
-    public MemberUpdateRequestDto(String id, String loginPwd, String lastName, String firstName, String birth, String email, String zipcode, String mainAddress, String subAddress) {
+    public MemberUpdateRequestDto(Long id, String loginPwd, String lastName, String firstName, String birth, String email, String zipcode, String mainAddress, String subAddress) {
         this.id = id;
         this.loginPwd = loginPwd;
         this.lastName = lastName;
