@@ -1,6 +1,7 @@
 package com.ssafy.faraway.domain.post.controller;
 
 import com.ssafy.faraway.common.PostSearchCondition;
+import com.ssafy.faraway.domain.post.dto.req.PostSaveRequestDto;
 import com.ssafy.faraway.domain.post.dto.res.PostListResponseDto;
 import com.ssafy.faraway.domain.post.service.PostService;
 import io.swagger.annotations.Api;
@@ -17,6 +18,20 @@ import java.util.List;
 @Api(tags = "post")
 public class PostController {
     private final PostService postService;
+
+    @PostMapping(value = "/")
+    public ResponseEntity<Integer> savePost(@RequestBody PostSaveRequestDto postSaveRequestDto) {
+        try {
+            int result = postService.save(postSaveRequestDto);
+            if (result == 0) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity<Integer>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @GetMapping(value = "/")
     public ResponseEntity<List<PostListResponseDto>> findAllPost(PostSearchCondition postSearchCondition) {

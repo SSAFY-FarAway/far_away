@@ -4,9 +4,11 @@ import com.ssafy.faraway.domain.post.entity.Post;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @NoArgsConstructor
+@ToString
 public class PostSaveRequestDto {
     private long memberId;
     private String category;

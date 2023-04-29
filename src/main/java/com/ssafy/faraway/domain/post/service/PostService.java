@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface PostService {
 
+    Integer save(PostSaveRequestDto postSaveRequestDto) throws Exception;
     List<PostListResponseDto> findAllByCondition(PostSearchCondition postSearchCondition) throws Exception;
 }

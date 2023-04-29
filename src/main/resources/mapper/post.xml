@@ -4,6 +4,11 @@
 
 <mapper namespace="com.ssafy.faraway.domain.post.repository.PostRepository">
 
+    <insert id="save" parameterType="Post">
+        insert into post (member_id, category, title, content)
+        values (#{memberId}, #{category}, #{title}, #{content})
+    </insert>
+
     <select id="findAllByCondition" parameterType="PostSearchCondition" resultType="PostListResponseDto">
         select p.id, p.member_id, m.login_id, p.category, p.title, p.hit, p.modified_date
         from post p join member m

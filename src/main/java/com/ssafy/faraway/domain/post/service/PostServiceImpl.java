@@ -1,6 +1,7 @@
 package com.ssafy.faraway.domain.post.service;
 
 import com.ssafy.faraway.common.PostSearchCondition;
+import com.ssafy.faraway.domain.post.dto.req.PostSaveRequestDto;
 import com.ssafy.faraway.domain.post.dto.res.PostListResponseDto;
 import com.ssafy.faraway.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,13 @@ import java.util.List;
 @Service
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
+
+    @Transactional
+    @Override
+    public Integer save(PostSaveRequestDto postSaveRequestDto) throws Exception {
+        System.out.println(postSaveRequestDto);
+        return postRepository.save(postSaveRequestDto.toEntity());
+    }
 
     @Transactional(readOnly = true)
     @Override
