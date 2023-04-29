@@ -20,4 +20,20 @@
         from gugun
         where sido_code = #{sidoCode};
     </select>
+    
+    <select id="findAttractionBySidoCodeAndGugunCodeAndContentTypeId" parameterType="AttractionGetRequestDto" resultType="AttractionGetResponseDto">
+        select a.content_id, a.title, a.addr1, a.zipcode, a.tel, a.first_image, a.latitude, a.longitude, s.sido_name, g.gugun_name,g.gugun_code
+        from attraction_info a, sido s, gugun g
+        where a.sido_code = s.sido_code and a.gugun_code = g.gugun_code
+            <if test="sidoCode != null">
+                and a.sido_code = #{sidoCode}
+                <if test="gugunCode != null">
+                    and a.gugun_code = #{gugunCode}
+                </if>
+                <if test="contentTypeId != null">
+                    and a.content_type_id = #{contentTypeId}
+                </if>
+            </if>
+          ;
+    </select>
 </mapper>

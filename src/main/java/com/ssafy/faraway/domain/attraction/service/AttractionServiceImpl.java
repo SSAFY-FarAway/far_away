@@ -1,5 +1,6 @@
 package com.ssafy.faraway.domain.attraction.service;
 
+import com.ssafy.faraway.domain.attraction.dto.req.AttractionGetRequestDto;
 import com.ssafy.faraway.domain.attraction.dto.res.AttractionGetResponseDto;
 import com.ssafy.faraway.domain.attraction.dto.res.GugunGetResponseDto;
 import com.ssafy.faraway.domain.attraction.dto.res.SidoGetResponseDto;
@@ -27,6 +28,11 @@ public class AttractionServiceImpl implements AttractionService{
     @Override
     public List<GugunGetResponseDto> findAllGugun(int sidoCode) throws Exception {
         return attractionRepository.findAllGugun(sidoCode);
+    }
+
+    @Override
+    public List<AttractionGetResponseDto> findAttractionBySidoCodeAndGugunCodeAndContentTypeId(AttractionGetRequestDto attractionGetRequestDto) throws Exception {
+        return attractionRepository.findAttractionBySidoCodeAndGugunCodeAndContentTypeId(attractionGetRequestDto);
     }
 
 
