@@ -4,12 +4,9 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Builder
 public class Post {
     private long id;
     private long memberId;
@@ -19,4 +16,12 @@ public class Post {
     private long hit;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
+
+    @Builder
+    public Post(long memberId, String category, String title, String content) {
+        this.memberId = memberId;
+        this.category = category;
+        this.title = title;
+        this.content = content;
+    }
 }
