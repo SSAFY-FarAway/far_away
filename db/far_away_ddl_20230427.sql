@@ -1,6 +1,7 @@
 -- drop database  if exists `faraway`;
 -- create database `faraway`;
 
+
 use faraway;
 -- show tables;
 
@@ -30,7 +31,7 @@ CREATE TABLE `plan` (
 
 DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member` (
-    `id`	bigint	NOT NULL	COMMENT 'Long',
+    `id`	bigint	NOT NULL auto_increment primary key	COMMENT 'Long',
     `login_id`	varchar(20)	NOT NULL	COMMENT 'String',
     `login_pwd`	varchar(255)	NOT NULL	COMMENT 'String',
     `last_name`	varchar(20)	NOT NULL	COMMENT 'String',
