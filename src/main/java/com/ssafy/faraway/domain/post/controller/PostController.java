@@ -37,7 +37,7 @@ public class PostController {
     }
 
     @GetMapping(value = "/")
-    public ResponseEntity<List<PostListResponseDto>> findAllPost(PostSearchCondition postSearchCondition) {
+    public ResponseEntity<List<PostListResponseDto>> findAllPost(@RequestBody PostSearchCondition postSearchCondition) {
         List<PostListResponseDto> list = null;
         try {
             list = postService.findAllByCondition(postSearchCondition);
