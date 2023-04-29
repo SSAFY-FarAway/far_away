@@ -43,6 +43,7 @@ CREATE TABLE `member` (
     `salt`	varchar(45)	NOT NULL	COMMENT 'String',
     `mileage`	bigint	NOT NULL DEFAULT 0	COMMENT 'Long',
     `role`	int	NOT NULL DEFAULT 1 COMMENT 'Integer',
+    `cerified` int NOT NULL DEFAULT 0 COMMENT 'Integer',
     `created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime',
     `modified_date`	timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
 );
