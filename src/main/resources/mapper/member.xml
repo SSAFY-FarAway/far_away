@@ -7,4 +7,12 @@
         select id, login_id loginId, last_name lastName, first_name firstName, birth, email, mileage, `role`, cerified
         from member
     </select>
+
+    <!-- regist new member-->
+    <insert id="save" parameterType="MemberSaveRequestDto">
+        insert into member (login_id, login_pwd, last_name, first_name, birth, email, zipcode, main_address,
+        sub_address,salt)
+        values (#{loginId}, #{loginPwd}, #{lastName}, #{firstName}, #{birth}, #{email}, #{zipcode}, #{mainAddress}, #{subAddress}, #{salt})
+    </insert>
+
 </mapper>

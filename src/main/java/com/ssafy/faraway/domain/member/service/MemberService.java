@@ -13,5 +13,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface MemberService {
     List<MemberListResponseDto> findAll() throws SQLException;
-
+    Integer save(MemberSaveRequestDto memberSaveRequestDto)throws SQLException;
 }

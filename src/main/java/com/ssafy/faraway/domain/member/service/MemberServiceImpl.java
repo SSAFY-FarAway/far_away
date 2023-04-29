@@ -22,9 +22,57 @@ import java.math.BigInteger;
 public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository;
 
+    @Transactional
+    @Override
+    public Integer save(MemberSaveRequestDto memberSaveRequestDto){ //이메일 인증 추가 예정 !
+        String salt = getSalt();
+        String encodedPwd = encrypt(memberSaveRequestDto.getLoginPwd(), salt);
+        MemberSaveRequestDto encryptMember = MemberSaveRequestDto.builder()
+                .loginId(memberSaveRequestDto.getLoginId())
+                .loginPwd(encodedPwd)
+                .lastName(memberSaveRequestDto.getLastName())
+                .firstName(memberSaveRequestDto.getFirstName())
+                .birth(memberSaveRequestDto.getBirth())
+                .email(memberSaveRequestDto.getEmail())
+                .zipcode(memberSaveRequestDto.getZipcode())
+                .mainAddress(memberSaveRequestDto.getMainAddress())
+                .subAddress(memberSaveRequestDto.getSubAddress())
+                .salt(salt).build();
+        return memberRepository.save(encryptMember);
+    }
+
     @Override
     public List<MemberListResponseDto> findAll() throws SQLException {
         return memberRepository.findAll();
+    }
+
+    public String getSalt() {
+        String salt="";
+        try {
+            SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+            byte[] bytes = new byte[16];
+            random.nextBytes(bytes);
+            salt = new String(Base64.getEncoder().encode(bytes));
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return salt;
+    }
+
+    public String encrypt(String loginPwd, String hash) {
+        String salt = hash+loginPwd;
+        String hex = null;
+
+        try {
+            MessageDigest msg = MessageDigest.getInstance("SHA-512");
+            msg.update(salt.getBytes());
+            hex = String.format("%128x", new BigInteger(1, msg.digest()));
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return hex;
     }
 
 }

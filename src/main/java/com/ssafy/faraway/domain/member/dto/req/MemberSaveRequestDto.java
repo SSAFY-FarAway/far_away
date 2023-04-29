@@ -15,6 +15,7 @@ public class MemberSaveRequestDto {
     private String birth;
     private String email;
     private String zipcode;
+
     private String mainAddress;
     private String subAddress;
     private String salt;
