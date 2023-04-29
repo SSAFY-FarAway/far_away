@@ -46,6 +46,12 @@ public class MemberServiceImpl implements MemberService{
         return memberRepository.findAll();
     }
 
+    @Transactional
+    @Override
+    public Integer update(MemberUpdateRequestDto memberUpdateRequestDto) throws SQLException {
+        return memberRepository.update(memberUpdateRequestDto);
+    }
+
     public String getSalt() {
         String salt="";
         try {

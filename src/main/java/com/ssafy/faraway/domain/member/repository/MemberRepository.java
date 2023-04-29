@@ -12,4 +12,6 @@ public interface MemberRepository {
     List<MemberListResponseDto> findAll();
     Integer save(MemberSaveRequestDto memberSaveRequestDto);
 
+    Integer update(MemberUpdateRequestDto memberUpdateRequestDto) ;
+
 }

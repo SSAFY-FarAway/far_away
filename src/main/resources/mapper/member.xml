@@ -15,4 +15,19 @@
         values (#{loginId}, #{loginPwd}, #{lastName}, #{firstName}, #{birth}, #{email}, #{zipcode}, #{mainAddress}, #{subAddress}, #{salt})
     </insert>
 
+    <!-- modify member-->
+    <update id="update" parameterType="MemberUpdateRequestDto">
+        update member
+        <trim prefix="set" suffixOverrides=",">
+            <if test="loginPwd != null">login_pwd = #{loginPwd},</if>
+            <if test="firstName != null">first_name = #{firstName},</if>
+            <if test="lastName != null">last_name = #{lastName},</if>
+            <if test="birth != null">birth = #{birth},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="zipcode != null">zipcode = #{zipcode},</if>
+            <if test="mainAddress != null">main_address = #{mainAddress},</if>
+            <if test="subAddress != null">sub_address = #{subAddress},</if>
+        </trim>
+        where id = #{id}
+    </update>
 </mapper>
