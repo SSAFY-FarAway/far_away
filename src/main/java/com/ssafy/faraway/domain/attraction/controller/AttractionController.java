@@ -1,12 +1,16 @@
 package com.ssafy.faraway.domain.attraction.controller;
 
 import com.ssafy.faraway.domain.attraction.dto.res.AttractionGetResponseDto;
+import com.ssafy.faraway.domain.attraction.dto.res.SidoGetResponseDto;
 import com.ssafy.faraway.domain.attraction.service.AttractionService;
 import io.swagger.annotations.Api;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,14 +23,37 @@ public class AttractionController {
 
     private final AttractionService attractionService;
 
-    @RequestMapping("/")
+    @GetMapping(value = "/")
     public ResponseEntity<List<AttractionGetResponseDto>> findAllAttraction() {
-        System.out.println("나 불리니?");
         List<AttractionGetResponseDto> list = null;
-        list = attractionService.findAll();
-        if(list == null || list.size() == 0) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        try {
+            list = attractionService.findAll();
+            if(list == null || list.size() == 0) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(list, HttpStatus.OK);
+
+
     }
+
+    @GetMapping("/sido")
+    public ResponseEntity<List<SidoGetResponseDto>> findAllSido() {
+        List<SidoGetResponseDto> list = null;
+        try {
+            list = attractionService.findAllSido();
+            if(list == null || list.size() == 0) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
+
 }
