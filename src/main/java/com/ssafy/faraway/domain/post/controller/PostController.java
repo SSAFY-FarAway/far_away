@@ -51,7 +51,7 @@ public class PostController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<PostResponseDto> findPostById(Long id) {
+    public ResponseEntity<PostResponseDto> findPostById(@PathVariable Long id) {
         PostResponseDto postResponseDto = null;
         try {
             postResponseDto = postService.findById(id);
@@ -59,6 +59,20 @@ public class PostController {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             return new ResponseEntity<PostResponseDto>(postResponseDto, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Integer> deletePost(@PathVariable Long id) {
+        try {
+            int result = postService.delete(id);
+            if (result == 0) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

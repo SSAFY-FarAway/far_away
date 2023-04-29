@@ -31,4 +31,9 @@
         </if>
     </select>
 
+    <delete id="delete" parameterType="long">
+        delete from post
+        where id = #{id}
+    </delete>
+
 </mapper>

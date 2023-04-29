@@ -34,4 +34,10 @@ public class PostServiceImpl implements PostService {
     public PostResponseDto findById(Long id) throws Exception {
         return postRepository.findById(id);
     }
+
+    @Transactional
+    @Override
+    public Integer delete(Long id) throws Exception {
+        return postRepository.delete(id);
+    }
 }

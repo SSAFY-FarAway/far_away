@@ -15,4 +15,5 @@ public interface PostRepository {
     Integer save(Post post) throws SQLException;
     List<PostListResponseDto> findAllByCondition(PostSearchCondition postSearchCondition) throws SQLException;
     PostResponseDto findById(Long id) throws SQLException;
+    Integer delete(Long id) throws SQLException;
 }
