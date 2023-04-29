@@ -22,64 +22,9 @@ import java.math.BigInteger;
 public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository;
 
-    @Transactional
-    @Override
-    public Integer save(MemberSaveRequestDto memberSaveRequestDto){
-//        String salt = getSalt();
-//        memberSaveRequestDto.s
-//                dto.setpaw(암호화된 비밀번호);
-        return memberRepository.save(memberSaveRequestDto);
-    }
-
-    @Override
-    public MemberResponseDto find(String id) throws SQLException {
-        return memberRepository.find(id);
-    }
-
     @Override
     public List<MemberListResponseDto> findAll() throws SQLException {
         return memberRepository.findAll();
-    }
-
-    @Transactional
-    @Override
-    public Integer delete(Long id) throws SQLException {
-        return memberRepository.delete(id);
-    }
-
-    @Transactional
-    @Override
-    public Integer update(MemberUpdateRequestDto memberUpdateRequestDto) throws SQLException {
-        return memberRepository.update(memberUpdateRequestDto);
-    }
-
-    public String getSalt() {
-        String salt="";
-        try {
-            SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
-            byte[] bytes = new byte[16];
-            random.nextBytes(bytes);
-            salt = new String(Base64.getEncoder().encode(bytes));
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return salt;
-    }
-
-    public String encrypt(String loginPwd, String hash) {
-        String salt = hash+loginPwd;
-        String hex = null;
-
-        try {
-            MessageDigest msg = MessageDigest.getInstance("SHA-512");
-            msg.update(salt.getBytes());
-            hex = String.format("%128x", new BigInteger(1, msg.digest()));
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return hex;
     }
 
 }

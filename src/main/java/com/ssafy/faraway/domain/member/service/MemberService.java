@@ -12,13 +12,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface MemberService {
-    Integer save(MemberSaveRequestDto memberSaveRequestDto) throws SQLException;
-
-    MemberResponseDto find(String id) throws SQLException;
-
     List<MemberListResponseDto> findAll() throws SQLException;
 
-    Integer update(MemberUpdateRequestDto memberUpdateRequestDto) throws SQLException;
-
-    Integer delete(Long id) throws SQLException;
 }

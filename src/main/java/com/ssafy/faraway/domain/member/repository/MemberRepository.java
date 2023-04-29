@@ -9,13 +9,6 @@ import java.util.List;
 
 @Mapper
 public interface MemberRepository {
-    Integer save(MemberSaveRequestDto memberSaveRequestDto);
-
-    MemberResponseDto find(String id);
-
     List<MemberListResponseDto> findAll();
 
-    Integer update(MemberUpdateRequestDto memberUpdateRequestDto);
-
-    Integer delete(Long id);
 }
