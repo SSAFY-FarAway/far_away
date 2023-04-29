@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -28,7 +29,7 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public MemberListResponseDto findAll() throws SQLException {
+    public List<MemberListResponseDto> findAll() throws SQLException {
         return memberRepository.findAll();
     }
 
