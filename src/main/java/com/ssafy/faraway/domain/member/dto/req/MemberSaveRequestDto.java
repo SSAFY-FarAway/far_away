@@ -15,13 +15,13 @@ public class MemberSaveRequestDto {
     private String birth;
     private String email;
     private String zipcode;
+
     private String mainAddress;
     private String subAddress;
-
-    private long mileage;
+    private String salt;
 
     @Builder
-    public MemberSaveRequestDto(String loginId, String loginPwd, String lastName, String firstName, String birth, String email, String zipcode, String mainAddress, String subAddress, long mileage) {
+    public MemberSaveRequestDto(String loginId, String loginPwd, String lastName, String firstName, String birth, String email, String zipcode, String mainAddress, String subAddress, String salt) {
         this.loginId = loginId;
         this.loginPwd = loginPwd;
         this.lastName = lastName;
@@ -31,7 +31,7 @@ public class MemberSaveRequestDto {
         this.zipcode = zipcode;
         this.mainAddress = mainAddress;
         this.subAddress = subAddress;
-        this.mileage = mileage;
+        this.salt = salt;
     }
 
     public Member toEntity() {
@@ -45,6 +45,7 @@ public class MemberSaveRequestDto {
                 .zipcode(zipcode)
                 .mainAddress(mainAddress)
                 .subAddress(subAddress)
+                .salt(salt)
                 .build();
     }
 }
