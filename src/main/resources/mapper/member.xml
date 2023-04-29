@@ -2,5 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="">
+<mapper namespace="com.ssafy.faraway.domain.member.repository.MemberRepository">
+    <insert id="save" parameterType="MemberSaveRequestDto">
+        insert into member (login_id, login_pwd, last_name, first_name, birth, email, zipcode, main_address,
+                            sub_address,salt)
+        values (#{loginId}, #{loginPwd}, #{lastName}, #{firstName}, #{birth}, #{email}, #{zipcode}, #{mainAddress}, #{subAddress}, #{salt})
+    </insert>
+
+    <select id="find" parameterType="string" resultType="MemberResponseDto">
+        select id, login_id, last_name, first_name, birth, email, zipcode, main_address, sub_address, mileage, cerified,`role`, created_date
+        from member
+        where id = #{id}
+    </select>
+
+    <select id="findAll"  resultType="MemberListResponseDto">
+        select id, login_id, last_name, first_name, birth, email, mileage, `role`, cerified
+        from member
+    </select>
 </mapper>
