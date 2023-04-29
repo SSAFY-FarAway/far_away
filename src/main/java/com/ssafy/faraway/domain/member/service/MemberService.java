@@ -16,4 +16,6 @@ public interface MemberService {
     Integer save(MemberSaveRequestDto memberSaveRequestDto)throws SQLException;
 
     Integer update(MemberUpdateRequestDto memberUpdateRequestDto) throws SQLException;
+
+    Integer delete(Long id) throws SQLException;
 }

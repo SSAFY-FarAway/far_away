@@ -52,6 +52,12 @@ public class MemberServiceImpl implements MemberService{
         return memberRepository.update(memberUpdateRequestDto);
     }
 
+    @Transactional
+    @Override
+    public Integer delete(Long id) throws SQLException {
+        return memberRepository.delete(id);
+    }
+
     public String getSalt() {
         String salt="";
         try {

@@ -30,4 +30,11 @@
         </trim>
         where id = #{id}
     </update>
+
+    <!-- delete member-->
+    <delete id="delete" parameterType="Long">
+        delete from member
+        where id = #{id}
+    </delete>
+
 </mapper>

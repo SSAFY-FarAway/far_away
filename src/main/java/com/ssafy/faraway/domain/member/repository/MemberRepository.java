@@ -14,4 +14,6 @@ public interface MemberRepository {
 
     Integer update(MemberUpdateRequestDto memberUpdateRequestDto) ;
 
+    Integer delete(Long id);
+
 }

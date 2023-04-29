@@ -60,6 +60,18 @@ public class MemberController {
         }
     }
 
+    @DeleteMapping("/")
+    public ResponseEntity<?> delete(@RequestBody Long id) {
+        try {
+            memberService.delete(id);
+            List<MemberListResponseDto> list = memberService.findAll();
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return exceptionHandling(e);
+        }
+    }
+
     private ResponseEntity<String> exceptionHandling(Exception e) {
         e.printStackTrace();
         return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
