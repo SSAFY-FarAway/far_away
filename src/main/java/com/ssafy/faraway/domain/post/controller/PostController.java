@@ -2,6 +2,7 @@ package com.ssafy.faraway.domain.post.controller;
 
 import com.ssafy.faraway.common.PostSearchCondition;
 import com.ssafy.faraway.domain.post.dto.req.PostSaveRequestDto;
+import com.ssafy.faraway.domain.post.dto.req.PostUpdateRequestDto;
 import com.ssafy.faraway.domain.post.dto.res.PostListResponseDto;
 import com.ssafy.faraway.domain.post.dto.res.PostResponseDto;
 import com.ssafy.faraway.domain.post.repository.PostRepository;
@@ -59,6 +60,20 @@ public class PostController {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             return new ResponseEntity<PostResponseDto>(postResponseDto, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping(value = "/")
+    public ResponseEntity<Integer> updatePost(@RequestBody PostUpdateRequestDto postUpdateRequestDto) {
+        try {
+            int result = postService.update(postUpdateRequestDto);
+            if (result == 0) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity<Integer>(result, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

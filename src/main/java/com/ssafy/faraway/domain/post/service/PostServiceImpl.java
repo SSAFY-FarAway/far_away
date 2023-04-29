@@ -2,6 +2,7 @@ package com.ssafy.faraway.domain.post.service;
 
 import com.ssafy.faraway.common.PostSearchCondition;
 import com.ssafy.faraway.domain.post.dto.req.PostSaveRequestDto;
+import com.ssafy.faraway.domain.post.dto.req.PostUpdateRequestDto;
 import com.ssafy.faraway.domain.post.dto.res.PostListResponseDto;
 import com.ssafy.faraway.domain.post.dto.res.PostResponseDto;
 import com.ssafy.faraway.domain.post.repository.PostRepository;
@@ -33,6 +34,12 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostResponseDto findById(Long id) throws Exception {
         return postRepository.findById(id);
+    }
+
+    @Transactional
+    @Override
+    public Integer update(PostUpdateRequestDto postUpdateRequestDto) throws Exception {
+        return postRepository.update(postUpdateRequestDto);
     }
 
     @Transactional

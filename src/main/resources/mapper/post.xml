@@ -31,6 +31,12 @@
         </if>
     </select>
 
+    <update id="update" parameterType="PostUpdateRequestDto">
+        update post
+        set category = #{category}, title = #{title}, content = #{content}
+        where id = #{id}
+    </update>
+
     <delete id="delete" parameterType="long">
         delete from post
         where id = #{id}
