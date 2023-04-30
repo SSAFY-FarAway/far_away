@@ -30,6 +30,7 @@ CREATE TABLE `plan` (
 
 DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member` (
+
                           `id`   bigint   AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
                           `login_id`   varchar(20)   NOT NULL   COMMENT 'String',
                           `login_pwd`   varchar(255)   NOT NULL   COMMENT 'String',
@@ -45,6 +46,7 @@ CREATE TABLE `member` (
                           `role`   int   NOT NULL DEFAULT 1 COMMENT 'Integer',
                           `created_date`   timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP   COMMENT 'LocalDateTime',
                           `modified_date`   timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP   COMMENT 'LocalDateTime'
+
 );
 
 DROP TABLE IF EXISTS `hotplace`;
