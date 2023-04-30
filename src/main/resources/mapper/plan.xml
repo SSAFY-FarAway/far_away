@@ -8,4 +8,23 @@
         values (#{memberId},#{title},#{content},#{plan});
     </insert>
 
+
+    <select id="findAllByCondition" parameterType="PlanSearchCondition" resultType="PlanGetResponseDto">
+        select p.id, p.title, m.login_id, p.hit, p.created_date
+        from plan p, member m
+        where p.member_id = m.id
+        <if test="!key.equals('none')">
+            and ${key} like concat('%', #{word}, '%')
+        </if>
+        <if test="!orderBy.equals('none')">
+            order by ${orderBy} ${orderByDir}
+        </if>
+        <if test="orderBy.equals('none')">
+            order by p.modified_date ${orderByDir}
+        </if>
+        ;
+    </select>
+
+
+
 </mapper>
