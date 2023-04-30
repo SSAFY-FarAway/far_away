@@ -38,7 +38,11 @@
         where id = #{id};
     </update>
 
-
+    <update id="updatePlan" parameterType="PlanUpdateRequestDto">
+        update plan
+        set title = #{title}, content = #{content}, plan = #{plan}
+        where id = #{id};
+    </update>
 
 
 </mapper>

@@ -3,6 +3,7 @@ package com.ssafy.faraway.domain.plan.service;
 import com.ssafy.faraway.common.PlanSearchCondition;
 import com.ssafy.faraway.domain.attraction.dto.res.AttractionGetResponseDto;
 import com.ssafy.faraway.domain.plan.dto.req.PlanSaveRequestDto;
+import com.ssafy.faraway.domain.plan.dto.req.PlanUpdateRequestDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetDetailDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetResponseDto;
 
@@ -16,4 +17,5 @@ public interface PlanService {
     List<Long> getShortestPath(List<AttractionGetResponseDto> attractionList);
 
     int updateHit(Long id) throws Exception;
+    int updatePlan(PlanUpdateRequestDto planUpdateRequestDto) throws Exception;
 }

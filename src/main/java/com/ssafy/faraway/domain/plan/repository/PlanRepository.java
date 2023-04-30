@@ -2,6 +2,7 @@ package com.ssafy.faraway.domain.plan.repository;
 
 import com.ssafy.faraway.common.PlanSearchCondition;
 import com.ssafy.faraway.domain.plan.dto.req.PlanSaveRequestDto;
+import com.ssafy.faraway.domain.plan.dto.req.PlanUpdateRequestDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetDetailDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetResponseDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,4 +17,6 @@ public interface PlanRepository {
     PlanGetDetailDto findById(Long id) throws SQLException;
 
     int updateHit(Long id) throws SQLException;
+
+    int updatePlan(PlanUpdateRequestDto planUpdateRequestDto) throws SQLException;
 }

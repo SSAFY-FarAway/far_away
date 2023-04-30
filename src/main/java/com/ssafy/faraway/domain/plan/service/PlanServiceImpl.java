@@ -4,6 +4,7 @@ import com.ssafy.faraway.common.PlanSearchCondition;
 import com.ssafy.faraway.common.util.ShortestPath;
 import com.ssafy.faraway.domain.attraction.dto.res.AttractionGetResponseDto;
 import com.ssafy.faraway.domain.plan.dto.req.PlanSaveRequestDto;
+import com.ssafy.faraway.domain.plan.dto.req.PlanUpdateRequestDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetDetailDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetDetailResponseDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetResponseDto;
@@ -53,6 +54,11 @@ public class PlanServiceImpl implements PlanService{
     @Override
     public int updateHit(Long id) throws Exception {
         return planRepository.updateHit(id);
+    }
+
+    @Override
+    public int updatePlan(PlanUpdateRequestDto planUpdateRequestDto) throws Exception {
+        return planRepository.updatePlan(planUpdateRequestDto);
     }
 
     private double[][] makeMap(List<AttractionGetResponseDto> attractionList) {

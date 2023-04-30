@@ -6,6 +6,7 @@ import com.ssafy.faraway.domain.attraction.dto.res.AttractionGetResponseDto;
 import com.ssafy.faraway.domain.attraction.service.AttractionService;
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.plan.dto.req.PlanSaveRequestDto;
+import com.ssafy.faraway.domain.plan.dto.req.PlanUpdateRequestDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetDetailDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetDetailResponseDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetResponseDto;
@@ -94,6 +95,24 @@ public class PlanController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+
+    @PutMapping("/")
+    public ResponseEntity updatePlan(@RequestBody PlanUpdateRequestDto planUpdateRequestDto) {
+
+        try {
+            int result = planService.updatePlan(planUpdateRequestDto);
+            if(result != 0) {
+                return ResponseEntity.ok().build();
+            }
+            return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+
+
     }
 
 
