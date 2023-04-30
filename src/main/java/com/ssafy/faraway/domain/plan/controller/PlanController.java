@@ -116,4 +116,18 @@ public class PlanController {
     }
 
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletePlan(@PathVariable Long id) {
+        try {
+            // TODO: 세션 ID와 해당 경로의 MEMBER_ID 일치하는지 확인
+            int result = planService.deletePlan(id);
+            if(result != 0) {
+                return ResponseEntity.ok().build();
+            }
+            return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
 }

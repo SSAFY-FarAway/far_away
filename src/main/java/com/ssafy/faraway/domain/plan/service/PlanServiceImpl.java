@@ -61,6 +61,11 @@ public class PlanServiceImpl implements PlanService{
         return planRepository.updatePlan(planUpdateRequestDto);
     }
 
+    @Override
+    public int deletePlan(Long id) throws Exception {
+        return planRepository.deletePlan(id);
+    }
+
     private double[][] makeMap(List<AttractionGetResponseDto> attractionList) {
         int size = attractionList.size();
         double[][] map = new double[size][size];

@@ -44,5 +44,8 @@
         where id = #{id};
     </update>
 
-
+    <delete id="deletePlan" parameterType="long">
+        delete from plan
+        where id = #{id};
+    </delete>
 </mapper>
