@@ -115,7 +115,7 @@ public class PostController {
         }
     }
 
-    @GetMapping(value = "/comment")
+    @GetMapping(value = "/{id}/comment")
     public ResponseEntity<List<PostCommentListResponseDto>> findCommentByPostId(@PathVariable Long id) {
         List<PostCommentListResponseDto> list = null;
         try {
