@@ -4,14 +4,17 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Builder
 public class PostLike {
     private long postId;
     private long memberId;
     private LocalDateTime createdDate;
+
+    @Builder
+    public PostLike(long postId, long memberId) {
+        this.postId = postId;
+        this.memberId = memberId;
+    }
 }
