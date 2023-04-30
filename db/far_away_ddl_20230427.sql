@@ -1,7 +1,6 @@
 drop database  if exists `faraway`;
 create database `faraway`;
 
-
 use faraway;
 -- show tables;
 
@@ -31,15 +30,7 @@ CREATE TABLE `plan` (
 
 DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member` (
-<<<<<<< HEAD
     `id`	bigint	AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
-=======
-<<<<<<< HEAD
-    `id`	bigint	NOT NULL auto_increment primary key	COMMENT 'Long',
-=======
-    `id`	bigint	AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
->>>>>>> 12772da693c43ecb88b8fe2fee154f10be40f8b3
->>>>>>> ea50f240a83f98f0ba3ab0cf27e095442346a0ef
     `login_id`	varchar(20)	NOT NULL	COMMENT 'String',
     `login_pwd`	varchar(255)	NOT NULL	COMMENT 'String',
     `last_name`	varchar(20)	NOT NULL	COMMENT 'String',
