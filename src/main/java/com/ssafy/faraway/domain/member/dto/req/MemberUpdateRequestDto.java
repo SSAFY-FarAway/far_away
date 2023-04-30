@@ -12,12 +12,7 @@ import javax.validation.constraints.Size;
 @Getter
 @NoArgsConstructor
 public class MemberUpdateRequestDto {
-    @NotEmpty(message = "loginId ust not be empty")
-    @Size(min = 6, max = 20)
     private Long id;
-    @NotEmpty(message = "loginPwd must not be empty")
-    @Size(min=8)
-    private String loginPwd;
     @NotEmpty(message = "lastName must not be empty")
     @Size(max=20)
     private String lastName;
@@ -38,14 +33,9 @@ public class MemberUpdateRequestDto {
     @NotEmpty(message = "subAddress must not be empty")
     private String subAddress;
 
-    public void setLoginPwd(String loginPwd) {
-        this.loginPwd = loginPwd;
-    }
-
     @Builder
-    public MemberUpdateRequestDto(Long id, String loginPwd, String lastName, String firstName, String birth, String email, String zipcode, String mainAddress, String subAddress) {
+    public MemberUpdateRequestDto(Long id, String lastName, String firstName, String birth, String email, String zipcode, String mainAddress, String subAddress) {
         this.id = id;
-        this.loginPwd = loginPwd;
         this.lastName = lastName;
         this.firstName = firstName;
         this.birth = birth;

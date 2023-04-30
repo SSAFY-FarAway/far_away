@@ -25,7 +25,6 @@
     <update id="update" parameterType="MemberUpdateRequestDto">
         update member
         <trim prefix="set" suffixOverrides=",">
-            <if test="loginPwd != null">login_pwd = #{loginPwd},</if>
             <if test="firstName != null">first_name = #{firstName},</if>
             <if test="lastName != null">last_name = #{lastName},</if>
             <if test="birth != null">birth = #{birth},</if>
