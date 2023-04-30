@@ -1,29 +1,28 @@
--- drop database  if exists `faraway`;
--- create database `faraway`;
-
+drop database  if exists `faraway`;
+create database `faraway`;
 
 use faraway;
 -- show tables;
 
 DROP TABLE IF EXISTS `post`;
 CREATE TABLE `post` (
-    `id`	bigint	NOT NULL COMMENT 'Long',
+    `id`	bigint	AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
     `member_id`	bigint	NOT NULL	COMMENT 'Long',
     `category`	varchar(20)	NOT NULL	COMMENT 'String',
     `title`	varchar(30)	NOT NULL	COMMENT 'String',
     `content`	text	NOT NULL	COMMENT 'String',
-    `hit`	bigint	NOT NULL	COMMENT 'Long',
+    `hit`	bigint	NOT NULL DEFAULT 0 COMMENT 'Long',
     `created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime',
     `modified_date`	timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
 );
 
 DROP TABLE IF EXISTS `plan`;
 CREATE TABLE `plan` (
-    `id`	bigint	NOT NULL COMMENT 'Long',
+    `id`	bigint	AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
     `member_id`	bigint	NOT NULL	COMMENT 'Long',
     `title`	varchar(30)	NOT NULL	COMMENT 'String',
     `content`	text	NOT NULL	COMMENT 'String',
-    `hit`	bigint	NULL	COMMENT 'Long',
+    `hit`	bigint	NOT NULL DEFAULT 0 COMMENT 'Long',
     `plan`	varchar(255)	NOT NULL	COMMENT 'String',
     `created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime',
     `modified_date`	timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
@@ -31,7 +30,7 @@ CREATE TABLE `plan` (
 
 DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member` (
-    `id`	bigint	NOT NULL auto_increment primary key	COMMENT 'Long',
+    `id`	bigint	AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
     `login_id`	varchar(20)	NOT NULL	COMMENT 'String',
     `login_pwd`	varchar(255)	NOT NULL	COMMENT 'String',
     `last_name`	varchar(20)	NOT NULL	COMMENT 'String',
@@ -44,14 +43,13 @@ CREATE TABLE `member` (
     `salt`	varchar(45)	NOT NULL	COMMENT 'String',
     `mileage`	bigint	NOT NULL DEFAULT 0	COMMENT 'Long',
     `role`	int	NOT NULL DEFAULT 1 COMMENT 'Integer',
-    `cerified` int NOT NULL DEFAULT 0 COMMENT 'Integer',
     `created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime',
     `modified_date`	timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
 );
 
 DROP TABLE IF EXISTS `hotplace`;
 CREATE TABLE `hotplace` (
-    `id`	bigint	NOT NULL	COMMENT 'Long',
+    `id`	bigint	AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
     `member_id`	bigint	NOT NULL	COMMENT 'Long',
     `title`	varchar(30)	NULL	COMMENT 'String',
     `content`	text	NULL	COMMENT 'String',
@@ -79,7 +77,7 @@ CREATE TABLE `plan_like` (
 
 DROP TABLE IF EXISTS `image`;
 CREATE TABLE `image` (
-     `id`	bigint	NOT NULL COMMENT 'Long',
+     `id`	bigint	AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
      `hotplace_id`	bigint	NOT NULL	COMMENT 'Long',
      `name`	varchar(50)	NULL	COMMENT 'String',
      `path`	varchar( 100)	NULL	COMMENT 'String'
@@ -93,41 +91,53 @@ CREATE TABLE `hotplace_like` (
      `created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
 );
 
-ALTER TABLE `post` ADD CONSTRAINT `PK_POST` PRIMARY KEY AUTO_INCREMENT  (
-    `id`
-    );
+DROP TABLE IF EXISTS `post_comment`;
+CREATE TABLE `post_comment` (
+	`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
+    `post_id` bigint NOT NULL COMMENT 'Long',
+    `member_id` bigint NOT NULL COMMENT 'Long',
+    `content` text NOT NULL COMMENT 'Long',
+	`created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime',
+    `modified_date`	timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
+);
 
-ALTER TABLE `plan` ADD CONSTRAINT `PK_PLAN` PRIMARY KEY AUTO_INCREMENT (
-    `id`
-    );
+ALTER TABLE `post_comment` ADD CONSTRAINT `FK_post_comment_post_id_TO_post_id` FOREIGN KEY (
+	`post_id`) REFERENCES `post` (`id`);
 
-ALTER TABLE `member` ADD CONSTRAINT `PK_MEMBER` PRIMARY KEY AUTO_INCREMENT (
-    `id`
-    );
+ALTER TABLE `post_comment` ADD CONSTRAINT `FK_post_comment_member_id_TO_member_id` FOREIGN KEY (
+	`member_id`) REFERENCES `member` (`id`);
+    
+DROP TABLE IF EXISTS `plan_comment`;
+CREATE TABLE `plan_comment` (
+	`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
+    `plan_id` bigint NOT NULL COMMENT 'Long',
+    `member_id` bigint NOT NULL COMMENT 'Long',
+    `content` text NOT NULL COMMENT 'Long',
+	`created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime',
+    `modified_date`	timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
+);
 
-ALTER TABLE `hotplace` ADD CONSTRAINT `PK_HOTPLACE` PRIMARY KEY AUTO_INCREMENT (
-    `id`
-    );
+ALTER TABLE `plan_comment` ADD CONSTRAINT `FK_plan_comment_plan_id_TO_plan_id` FOREIGN KEY (
+	`plan_id`) REFERENCES `plan` (`id`);
+    
+ALTER TABLE `plan_comment` ADD CONSTRAINT `FK_plan_comment_member_id_TO_member_id` FOREIGN KEY (
+	`member_id`) REFERENCES `member` (`id`);
+    
+DROP TABLE IF EXISTS `hotplace_comment`;
+CREATE TABLE `hotplace_comment` (
+	`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
+    `hotplace_id` bigint NOT NULL COMMENT 'Long',
+    `member_id` bigint NOT NULL COMMENT 'Long',
+    `content` text NOT NULL COMMENT 'Long',
+	`created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime',
+    `modified_date`	timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
+);
 
-ALTER TABLE `post_like` ADD CONSTRAINT `PK_POST_LIKE` PRIMARY KEY AUTO_INCREMENT (
-    `member_id`,
-    `post_id`
-    );
+ALTER TABLE `hotplace_comment` ADD CONSTRAINT `FK_hotplace_comment_hotplace_id_TO_hotplace_id` FOREIGN KEY (
+	`hotplace_id`) REFERENCES `hotplace` (`id`);
 
-
-ALTER TABLE `plan_like` ADD CONSTRAINT `PK_PLAN_LIKE` PRIMARY KEY AUTO_INCREMENT (
-    `plan_id`,
-    `member_id`
-    );
-
-ALTER TABLE `image` ADD CONSTRAINT `PK_IMAGE` PRIMARY KEY AUTO_INCREMENT (
-    `id`
-    );
-
-ALTER TABLE `hotplace_like` ADD CONSTRAINT `PK_HOTPLACE_LIKE` PRIMARY KEY AUTO_INCREMENT (
-    `hotplace_id`,
-    `member_id`
-    );
+ALTER TABLE `hotplace_comment` ADD CONSTRAINT `FK_hotplace_comment_member_id_TO_member_id` FOREIGN KEY (
+	`member_id`) REFERENCES `hotplace` (`id`);
 
 ALTER TABLE `post_like` ADD CONSTRAINT `FK_post_like_id_TO_member_id` FOREIGN KEY (
                                                                                    `member_id`
