@@ -17,6 +17,10 @@ public class MemberUpdateRequestDto {
     private String mainAddress;
     private String subAddress;
 
+    public void setLoginPwd(String loginPwd) {
+        this.loginPwd = loginPwd;
+    }
+
     @Builder
     public MemberUpdateRequestDto(Long id, String loginPwd, String lastName, String firstName, String birth, String email, String zipcode, String mainAddress, String subAddress) {
         this.id = id;

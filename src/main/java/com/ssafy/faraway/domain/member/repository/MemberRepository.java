@@ -14,7 +14,7 @@ public interface MemberRepository {
     Integer save(MemberSaveRequestDto memberSaveRequestDto);
 
     Integer update(MemberUpdateRequestDto memberUpdateRequestDto) ;
-
     Integer delete(Long id);
+    String salt(Long id);
 
 }
