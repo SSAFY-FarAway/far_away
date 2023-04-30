@@ -11,6 +11,12 @@
         and p.id = #{id};
     </select>
 
+    <update id="updateHit" parameterType="long">
+        update post
+        set hit = hit + 1
+        where id = #{id}
+    </update>
+
     <insert id="save" parameterType="Post">
         insert into post (member_id, category, title, content)
         values (#{memberId}, #{category}, #{title}, #{content})
