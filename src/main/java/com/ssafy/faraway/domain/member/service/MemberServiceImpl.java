@@ -44,7 +44,10 @@ public class MemberServiceImpl implements MemberService{
     @Transactional
     @Override
     public Integer update(MemberUpdateRequestDto memberUpdateRequestDto) throws SQLException {
-
+        if(memberUpdateRequestDto.getLoginPwd() != null){
+            String salt = memberRepository.salt(memberUpdateRequestDto.getId());
+            memberUpdateRequestDto.setLoginPwd(encrypt(memberUpdateRequestDto.getLoginPwd(), salt));
+        }
         return memberRepository.update(memberUpdateRequestDto);
     }
 
