@@ -72,15 +72,15 @@ public class PlanController {
     public ResponseEntity<PlanGetDetailResponseDto> findPlanById(@PathVariable Long id) {
         PlanGetDetailDto plan = null;
         try {
+
             plan = planService.findById(id);
             if(plan == null) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
+            planService.updateHit(id);
 
             //해당 값이 있는 경우 plan list 로 attractionList 받아오기
-            System.out.println(plan.getPlan());
             List<AttractionGetResponseDto> attractionList = attractionService.findAllByIds(plan.getPlan());
-            System.out.println(attractionList);
 
             // 해당 attractionList로 최단 경로 list 받아오기
             List<Long> shortestPath = planService.getShortestPath(attractionList);

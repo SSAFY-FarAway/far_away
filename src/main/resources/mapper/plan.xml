@@ -29,8 +29,15 @@
         select p.id,p.title,p.content,p.hit, m.login_id,p.plan
         from plan p, member m
         where p.member_id = m.id
-        and p.id = #{id}
+        and p.id = #{id};
     </select>
+
+    <update id="updateHit" parameterType="long">
+        update plan
+        set hit = hit+1
+        where id = #{id};
+    </update>
+
 
 
 

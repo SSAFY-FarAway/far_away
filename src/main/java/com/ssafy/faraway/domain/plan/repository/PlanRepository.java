@@ -15,4 +15,5 @@ public interface PlanRepository {
     List<PlanGetResponseDto> findAllByCondition(PlanSearchCondition planSearchCondition) throws SQLException;
     PlanGetDetailDto findById(Long id) throws SQLException;
 
+    int updateHit(Long id) throws SQLException;
 }

@@ -14,4 +14,6 @@ public interface PlanService {
     PlanGetDetailDto findById(Long id) throws Exception;
 
     List<Long> getShortestPath(List<AttractionGetResponseDto> attractionList);
+
+    int updateHit(Long id) throws Exception;
 }

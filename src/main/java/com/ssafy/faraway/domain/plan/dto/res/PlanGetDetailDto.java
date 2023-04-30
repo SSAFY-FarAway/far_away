@@ -28,15 +28,5 @@ public class PlanGetDetailDto {
         for(String p : plans) {
             this.plan.add(Long.parseLong(p.trim()));
         }
-        System.out.println(this.plan);
     }
-
-//    public void setPlan(String plan) {
-//        System.out.println(plan);
-//        String[] plans = plan.split(",");
-//        for(String p : plans) {
-//            this.plan.add(Long.parseLong(p.trim()));
-//        }
-//        System.out.println(this.plan);
-//    }
 }

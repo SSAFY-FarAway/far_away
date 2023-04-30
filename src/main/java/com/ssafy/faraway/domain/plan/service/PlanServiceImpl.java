@@ -50,6 +50,11 @@ public class PlanServiceImpl implements PlanService{
         return list;
     }
 
+    @Override
+    public int updateHit(Long id) throws Exception {
+        return planRepository.updateHit(id);
+    }
+
     private double[][] makeMap(List<AttractionGetResponseDto> attractionList) {
         int size = attractionList.size();
         double[][] map = new double[size][size];
