@@ -27,18 +27,9 @@ public class MemberServiceImpl implements MemberService{
     public Integer save(MemberSaveRequestDto memberSaveRequestDto){ //이메일 인증 추가 예정 !
         String salt = getSalt();
         String encodedPwd = encrypt(memberSaveRequestDto.getLoginPwd(), salt);
-        MemberSaveRequestDto encryptMember = MemberSaveRequestDto.builder()
-                .loginId(memberSaveRequestDto.getLoginId())
-                .loginPwd(encodedPwd)
-                .lastName(memberSaveRequestDto.getLastName())
-                .firstName(memberSaveRequestDto.getFirstName())
-                .birth(memberSaveRequestDto.getBirth())
-                .email(memberSaveRequestDto.getEmail())
-                .zipcode(memberSaveRequestDto.getZipcode())
-                .mainAddress(memberSaveRequestDto.getMainAddress())
-                .subAddress(memberSaveRequestDto.getSubAddress())
-                .salt(salt).build();
-        return memberRepository.save(encryptMember);
+        memberSaveRequestDto.setSalt(salt);
+        memberSaveRequestDto.setLoginPwd(encodedPwd);
+        return memberRepository.save(memberSaveRequestDto);
     }
 
     @Override
@@ -53,6 +44,10 @@ public class MemberServiceImpl implements MemberService{
     @Transactional
     @Override
     public Integer update(MemberUpdateRequestDto memberUpdateRequestDto) throws SQLException {
+        if(memberUpdateRequestDto.getLoginPwd() != null){
+            String salt = memberRepository.salt(memberUpdateRequestDto.getId());
+            memberUpdateRequestDto.setLoginPwd(encrypt(memberUpdateRequestDto.getLoginPwd(), salt));
+        }
         return memberRepository.update(memberUpdateRequestDto);
     }
 
