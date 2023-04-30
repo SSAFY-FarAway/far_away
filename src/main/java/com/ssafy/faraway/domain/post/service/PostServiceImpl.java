@@ -38,6 +38,12 @@ public class PostServiceImpl implements PostService {
 
     @Transactional
     @Override
+    public Integer updateHit(Long id) throws Exception {
+        return postRepository.updateHit(id);
+    }
+
+    @Transactional
+    @Override
     public Integer update(PostUpdateRequestDto postUpdateRequestDto) throws Exception {
         return postRepository.update(postUpdateRequestDto);
     }

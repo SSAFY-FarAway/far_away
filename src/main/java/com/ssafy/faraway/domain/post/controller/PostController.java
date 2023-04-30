@@ -5,7 +5,6 @@ import com.ssafy.faraway.domain.post.dto.req.PostSaveRequestDto;
 import com.ssafy.faraway.domain.post.dto.req.PostUpdateRequestDto;
 import com.ssafy.faraway.domain.post.dto.res.PostListResponseDto;
 import com.ssafy.faraway.domain.post.dto.res.PostResponseDto;
-import com.ssafy.faraway.domain.post.repository.PostRepository;
 import com.ssafy.faraway.domain.post.service.PostService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -56,6 +55,7 @@ public class PostController {
         PostResponseDto postResponseDto = null;
         try {
             postResponseDto = postService.findById(id);
+            postService.updateHit(id);
             if (postResponseDto == null) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }

@@ -13,6 +13,7 @@ public interface PostService {
     Integer save(PostSaveRequestDto postSaveRequestDto) throws Exception;
     List<PostListResponseDto> findAllByCondition(PostSearchCondition postSearchCondition) throws Exception;
     PostResponseDto findById(Long id) throws Exception;
+    Integer updateHit(Long id) throws Exception;
     Integer update(PostUpdateRequestDto postUpdateRequestDto) throws Exception;
     Integer delete (Long id) throws Exception;
 }
