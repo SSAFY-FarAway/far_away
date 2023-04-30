@@ -49,5 +49,23 @@
         where id = #{id}
     </select>
 
+    <select id="id" parameterType="String" resultType="Long">
+        select id
+        from member
+        where login_id = #{loginId}
+    </select>
+
+    <select id="cerified" parameterType="Long" resultType="Integer">
+        select cerified
+        from meber
+        where id = #{id}
+    </select>
+
+    <select id="login" parameterType="MemberLoginRequestDto" resultType="MemberLoginResponseDto">
+        select id, login_id loginId, last_name lastName, first_name firstName, mileage, `role`
+        from member
+        where login_id = #{loginId} and login_pwd = #{loginPwd}
+    </select>
+
 
 </mapper>
