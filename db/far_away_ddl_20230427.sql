@@ -127,7 +127,7 @@ CREATE TABLE `hotplace_comment` (
     `modified_date`	timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
 );
 
-ALTER TABLE `hotplace_comment` ADD CONSTRAINT `FK_hotplace_comment_post_id_TO_post_id` FOREIGN KEY (
+ALTER TABLE `hotplace_comment` ADD CONSTRAINT `FK_hotplace_comment_hotplace_id_TO_hotplace_id` FOREIGN KEY (
 	`hotplace_id`) REFERENCES `hotplace` (`id`);
 
 ALTER TABLE `post_like` ADD CONSTRAINT `FK_post_like_id_TO_member_id` FOREIGN KEY (
