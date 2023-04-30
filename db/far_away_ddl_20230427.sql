@@ -31,11 +31,7 @@ CREATE TABLE `plan` (
 
 DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member` (
-<<<<<<< HEAD
-    `id`	bigint	NOT NULL auto_increment primary key	COMMENT 'Long',
-=======
     `id`	bigint	AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
->>>>>>> 12772da693c43ecb88b8fe2fee154f10be40f8b3
     `login_id`	varchar(20)	NOT NULL	COMMENT 'String',
     `login_pwd`	varchar(255)	NOT NULL	COMMENT 'String',
     `last_name`	varchar(20)	NOT NULL	COMMENT 'String',

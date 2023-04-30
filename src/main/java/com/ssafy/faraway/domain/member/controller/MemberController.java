@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -43,13 +44,13 @@ public class MemberController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         if (list != null && !list.isEmpty()) {
-            return new ResponseEntity<List<MemberListResponseDto>>(list, HttpStatus.OK);
+            return new ResponseEntity<>(list, HttpStatus.OK);
         }
-        return new ResponseEntity<List<MemberListResponseDto>>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> save(@RequestBody MemberSaveRequestDto memberSaveRequestDto) {
+    public ResponseEntity<?> save(@RequestBody @Valid final MemberSaveRequestDto memberSaveRequestDto) {
         try {
             memberService.save(memberSaveRequestDto);
             List<MemberListResponseDto> list = memberService.findAll();
