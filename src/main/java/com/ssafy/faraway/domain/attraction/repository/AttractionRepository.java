@@ -15,4 +15,7 @@ public interface AttractionRepository {
     List<SidoGetResponseDto> findAllSido() throws SQLException;
     List<GugunGetResponseDto> findAllGugun(int sidoCode) throws SQLException;
     List<AttractionGetResponseDto> findAttractionBySidoCodeAndGugunCodeAndContentTypeId(AttractionGetRequestDto attractionGetRequestDto) throws SQLException;
+    List<AttractionGetResponseDto> findAllByIds(List<Long> attractions) throws Exception;
+
+
 }

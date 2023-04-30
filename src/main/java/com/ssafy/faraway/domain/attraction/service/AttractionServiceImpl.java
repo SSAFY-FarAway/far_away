@@ -35,5 +35,11 @@ public class AttractionServiceImpl implements AttractionService{
         return attractionRepository.findAttractionBySidoCodeAndGugunCodeAndContentTypeId(attractionGetRequestDto);
     }
 
+    @Override
+    public List<AttractionGetResponseDto> findAllByIds(List<Long> attractions) throws Exception {
+        System.out.println(attractions);
+        return attractionRepository.findAllByIds(attractions);
+    }
+
 
 }

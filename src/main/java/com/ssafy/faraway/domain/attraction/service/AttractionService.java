@@ -13,4 +13,5 @@ public interface AttractionService {
     List<SidoGetResponseDto> findAllSido() throws  Exception;
     List<GugunGetResponseDto> findAllGugun(int sidoCode) throws Exception;
     List<AttractionGetResponseDto> findAttractionBySidoCodeAndGugunCodeAndContentTypeId(AttractionGetRequestDto attractionGetRequestDto) throws Exception;
+    List<AttractionGetResponseDto> findAllByIds(List<Long> attractions) throws Exception;
 }

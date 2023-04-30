@@ -5,9 +5,8 @@
 <mapper namespace="com.ssafy.faraway.domain.attraction.repository.AttractionRepository">
 
     <select id="findAll" resultType="AttractionGetResponseDto">
-        select a.content_id, a.title, a.addr1, a.zipcode, a.tel, a.first_image, a.latitude, a.longitude, s.sido_name, g.gugun_name
-        from attraction_info a, sido s, gugun g
-        where a.sido_code = s.sido_code and a.gugun_code = g.gugun_code;
+        select a.content_id, a.title, a.addr1, a.zipcode, a.tel, a.first_image, a.latitude, a.longitude
+        from attraction_info a;
     </select>
 
     <select id="findAllSido" resultType="SidoGetResponseDto">
@@ -22,9 +21,9 @@
     </select>
     
     <select id="findAttractionBySidoCodeAndGugunCodeAndContentTypeId" parameterType="AttractionGetRequestDto" resultType="AttractionGetResponseDto">
-        select a.content_id, a.title, a.addr1, a.zipcode, a.tel, a.first_image, a.latitude, a.longitude, s.sido_name, g.gugun_name,g.gugun_code
-        from attraction_info a, sido s, gugun g
-        where a.sido_code = s.sido_code and a.gugun_code = g.gugun_code
+        select a.content_id, a.title, a.addr1, a.zipcode, a.tel, a.first_image, a.latitude, a.longitude, a.sido_code, a.gugun_code
+        from attraction_info a
+        where
             <if test="sidoCode != null">
                 and a.sido_code = #{sidoCode}
                 <if test="gugunCode != null">
@@ -36,6 +35,19 @@
             </if>
           ;
     </select>
+    
+    <select id="findAllByIds" resultType="AttractionGetResponseDto">
+        select a.content_id, a.title, a.addr1, a.zipcode, a.tel, a.first_image, a.latitude, a.longitude
+        from attraction_info a
+        where
+         a.content_id in
+        <foreach collection="attractions" item="attraction" open="(" close=")" separator=",">
+            #{attraction}
+        </foreach>
+        ;
+    </select>
+
+
     
 
 

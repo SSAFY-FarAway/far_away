@@ -25,6 +25,13 @@
         ;
     </select>
 
+    <select id="findById" parameterType="long" resultType="PlanGetDetailDto">
+        select p.id,p.title,p.content,p.hit, m.login_id,p.plan
+        from plan p, member m
+        where p.member_id = m.id
+        and p.id = #{id}
+    </select>
+
 
 
 </mapper>

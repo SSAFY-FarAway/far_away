@@ -16,8 +16,6 @@ public class AttractionGetResponseDto {
     private String firstImage;
     private int latitude;
     private int longitude;
-    private String sidoName;
-    private String gugunName;
 
 
 }
