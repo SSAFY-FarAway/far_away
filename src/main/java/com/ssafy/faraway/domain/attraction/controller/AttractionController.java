@@ -70,9 +70,9 @@ public class AttractionController {
 
     @GetMapping("/")
     public ResponseEntity<List<AttractionGetResponseDto>> findAttractionBySidoCodeAndGugunCodeAndContentTypeId(
-            @RequestParam(name = "sido_code", required = false) int sidoCode,
-            @RequestParam(name = "gugun_code", required = false) int gugunCode,
-            @RequestParam(name = "content_type_id", required = false) int contentTypeId
+            @RequestParam(name = "sido_code", required = false) Integer sidoCode,
+            @RequestParam(name = "gugun_code", required = false) Integer gugunCode,
+            @RequestParam(name = "content_type_id", required = false) Integer contentTypeId
                                                                                                                ) {
         AttractionGetRequestDto attractionGetRequestDto = new AttractionGetRequestDto().builder()
                 .sidoCode(sidoCode)

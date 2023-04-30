@@ -9,8 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class AttractionGetRequestDto {
-    private int sidoCode;
-    private int gugunCode;
-    private int contentTypeId;
+    private Integer sidoCode;
+    private Integer gugunCode;
+    private Integer contentTypeId;
 
 }
