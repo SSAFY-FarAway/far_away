@@ -103,6 +103,23 @@ public class MemberController {
         }
     }
 
+
+    @GetMapping("/auth")
+    public ResponseEntity<?> logout(HttpSession session) {
+        try {
+            MemberLoginResponseDto memberLoginResponseDto = (MemberLoginResponseDto) session.getAttribute("memberInfo");
+            if(memberLoginResponseDto == null){
+                return new ResponseEntity<>("로그인 정보가 없습니다.", HttpStatus.OK);
+            }
+            session.invalidate();
+            return new ResponseEntity<>("로그아웃 성공.", HttpStatus.OK);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return exceptionHandling(e);
+        }
+    }
+
     private ResponseEntity<String> exceptionHandling(Exception e) {
         e.printStackTrace();
         return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

@@ -22,4 +22,6 @@ public interface MemberRepository {
     int cerified(Long id);
     MemberLoginResponseDto login(MemberLoginRequestDto memberLoginRequestDto);
 
+
+
 }
