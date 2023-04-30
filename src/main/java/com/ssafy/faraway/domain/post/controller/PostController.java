@@ -101,7 +101,7 @@ public class PostController {
         }
     }
 
-    @PostMapping(value = "/{id}")
+    @PostMapping(value = "/comment")
     public ResponseEntity savePostComment(@PathVariable Long id, @RequestBody PostCommentSaveRequestDto postCommentSaveRequestDto) {
         try {
             int result = postCommentService.save(postCommentSaveRequestDto);
@@ -115,7 +115,7 @@ public class PostController {
         }
     }
 
-    @GetMapping(value = "/{id}/comment")
+    @GetMapping(value = "/comment")
     public ResponseEntity<List<PostCommentListResponseDto>> findCommentByPostId(@PathVariable Long id) {
         List<PostCommentListResponseDto> list = null;
         try {
