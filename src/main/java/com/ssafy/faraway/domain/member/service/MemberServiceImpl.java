@@ -42,6 +42,10 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
+    public MemberResponseDto find(Long id) throws SQLException {
+        return memberRepository.find(id);
+    }
+    @Override
     public List<MemberListResponseDto> findAll() throws SQLException {
         return memberRepository.findAll();
     }
