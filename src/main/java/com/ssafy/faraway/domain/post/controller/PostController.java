@@ -70,30 +70,30 @@ public class PostController {
     }
 
     @PutMapping(value = "/")
-    public ResponseEntity<Integer> updatePost(@RequestBody PostUpdateRequestDto postUpdateRequestDto) {
+    public ResponseEntity updatePost(@RequestBody PostUpdateRequestDto postUpdateRequestDto) {
         try {
             int result = postService.update(postUpdateRequestDto);
             if (result == 0) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                return ResponseEntity.badRequest().build();
             }
-            return new ResponseEntity<Integer>(result, HttpStatus.OK);
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.internalServerError().build();
         }
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Integer> deletePost(@PathVariable Long id) {
+    public ResponseEntity deletePost(@PathVariable Long id) {
         try {
             int result = postService.delete(id);
             if (result == 0) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                return ResponseEntity.badRequest().build();
             }
-            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.internalServerError().build();
         }
     }
 
