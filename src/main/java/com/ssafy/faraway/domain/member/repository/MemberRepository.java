@@ -19,7 +19,7 @@ public interface MemberRepository {
     Integer delete(Long id);
     String salt(Long id);
     Long id(String loginId);
-    int cerified(Long id);
+    int certified(Long id);
     MemberLoginResponseDto login(MemberLoginRequestDto memberLoginRequestDto);
 
 

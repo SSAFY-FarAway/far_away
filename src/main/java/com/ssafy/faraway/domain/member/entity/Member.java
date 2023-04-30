@@ -21,7 +21,7 @@ public class Member {
     private String salt;
     private long mileage;
     private int role;
-    private int cerified;
+    private int certified;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 

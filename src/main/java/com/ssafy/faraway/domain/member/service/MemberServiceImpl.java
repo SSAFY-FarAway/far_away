@@ -58,7 +58,7 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public MemberLoginResponseDto login(MemberLoginRequestDto memberLoginRequestDto) throws SQLException {
         Long id = memberRepository.id(memberLoginRequestDto.getLoginId());
-//        if(memberRepository.cerified(id) == 0){  // 이메일 인증 완료 후 주석 처리 해제 !!
+//        if(memberRepository.certified(id) == 0){  // 이메일 인증 완료 후 주석 처리 해제 !!
 //            return null;
 //        }
         String salt = memberRepository.salt(id);

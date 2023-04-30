@@ -17,7 +17,6 @@ public class MemberListResponseDto {
     private String email;
     private long mileage;
     private int role;
-
-    private int cerified;
+    private int certified;
 }
 

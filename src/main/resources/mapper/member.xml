@@ -4,13 +4,13 @@
 
 <mapper namespace="com.ssafy.faraway.domain.member.repository.MemberRepository">
     <select id="find" parameterType="Long" resultType="MemberResponseDto">
-        select id, login_id loginId, last_name lastName, first_name firstName, birth, email, zipcode, main_address mainAddress, sub_address subAddress, mileage, cerified,`role`, created_date createdDate
+        select id, login_id loginId, last_name lastName, first_name firstName, birth, email, zipcode, main_address mainAddress, sub_address subAddress, mileage, certified,`role`, created_date createdDate
         from member
         where id = #{id}
     </select>
 
     <select id="findAll"  resultType="MemberListResponseDto">
-        select id, login_id loginId, last_name lastName, first_name firstName, birth, email, mileage, `role`, cerified
+        select id, login_id loginId, last_name lastName, first_name firstName, birth, email, mileage, `role`, certified
         from member
     </select>
 
@@ -54,8 +54,8 @@
         where login_id = #{loginId}
     </select>
 
-    <select id="cerified" parameterType="Long" resultType="Integer">
-        select cerified
+    <select id="certified" parameterType="Long" resultType="Integer">
+        select certified
         from meber
         where id = #{id}
     </select>

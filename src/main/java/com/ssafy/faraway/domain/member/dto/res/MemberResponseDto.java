@@ -19,7 +19,7 @@ public class MemberResponseDto {
     private String mainAddress;
     private String subAddress;
     private long mileage;
-    private int cerified;
+    private int certified;
     private int role;
     private LocalDateTime createdDate;
 }
