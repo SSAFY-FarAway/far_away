@@ -10,24 +10,23 @@ import lombok.NoArgsConstructor;
 public class MemberLoginRequestDto {
     private String loginId;
     private String loginPwd;
-    private String salt;
+
 
     @Builder
-    public MemberLoginRequestDto(String loginId, String loginPwd, String salt) {
+    public MemberLoginRequestDto(String loginId, String loginPwd) {
         this.loginId = loginId;
         this.loginPwd = loginPwd;
-        this.salt = salt;
     }
 
     public void setLoginPwd(String loginPwd) {
         this.loginPwd = loginPwd;
     }
 
+
     public Member toEntity() {
         return Member.builder()
                 .loginId(loginId)
                 .loginPwd(loginPwd)
-                .salt(salt)
                 .build();
     }
 }

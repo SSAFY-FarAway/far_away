@@ -1,8 +1,10 @@
 package com.ssafy.faraway.domain.member.service;
 
+import com.ssafy.faraway.domain.member.dto.req.MemberLoginRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberSaveRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberUpdateRequestDto;
 import com.ssafy.faraway.domain.member.dto.res.MemberListResponseDto;
+import com.ssafy.faraway.domain.member.dto.res.MemberLoginResponseDto;
 import com.ssafy.faraway.domain.member.dto.res.MemberResponseDto;
 import com.ssafy.faraway.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -56,6 +58,18 @@ public class MemberServiceImpl implements MemberService{
     public Integer delete(Long id) throws SQLException {
         return memberRepository.delete(id);
     }
+
+    @Override
+    public MemberLoginResponseDto login(MemberLoginRequestDto memberLoginRequestDto) throws SQLException {
+        Long id = memberRepository.id(memberLoginRequestDto.getLoginId());
+//        if(memberRepository.cerified(id) == 0){  // 이메일 인증 완료 후 주석 처리 해제 !!
+//            return null;
+//        }
+        String salt = memberRepository.salt(id);
+        memberLoginRequestDto.setLoginPwd(encrypt(memberLoginRequestDto.getLoginPwd(), salt));
+        return memberRepository.login(memberLoginRequestDto);
+    }
+
 
     public String getSalt() {
         String salt="";
