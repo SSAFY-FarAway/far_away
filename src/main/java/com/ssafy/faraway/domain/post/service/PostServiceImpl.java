@@ -1,6 +1,8 @@
 package com.ssafy.faraway.domain.post.service;
 
-import com.ssafy.faraway.common.PostSearchCondition;
+import com.ssafy.faraway.common.Pagination;
+import com.ssafy.faraway.common.PagingResponse;
+import com.ssafy.faraway.common.SearchCondition;
 import com.ssafy.faraway.domain.post.dto.req.PostSaveRequestDto;
 import com.ssafy.faraway.domain.post.dto.req.PostUpdateRequestDto;
 import com.ssafy.faraway.domain.post.dto.res.PostListResponseDto;
@@ -10,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -24,10 +27,25 @@ public class PostServiceImpl implements PostService {
         return postRepository.save(postSaveRequestDto.toEntity());
     }
 
+//    @Transactional(readOnly = true)
+//    @Override
+//    public List<PostListResponseDto> findAllByCondition(SearchCondition searchCondition) throws Exception {
+//        return postRepository.findAllByCondition(searchCondition);
+//    }
+
     @Transactional(readOnly = true)
     @Override
-    public List<PostListResponseDto> findAllByCondition(PostSearchCondition postSearchCondition) throws Exception {
-        return postRepository.findAllByCondition(postSearchCondition);
+    public PagingResponse<PostListResponseDto> findAllByCondition(SearchCondition searchCondition) throws Exception {
+        int count = postRepository.getTotalCount(searchCondition);
+        if (count < 1) {
+            return new PagingResponse<>(Collections.emptyList(), null);
+        }
+
+        Pagination pagination = new Pagination(count, searchCondition);
+        searchCondition.setPagination(pagination);
+
+        List<PostListResponseDto> list = postRepository.findAllByCondition(searchCondition);
+        return new PagingResponse<>(list, pagination);
     }
 
     @Transactional(readOnly = true)

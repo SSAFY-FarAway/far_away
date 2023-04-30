@@ -1,6 +1,7 @@
 package com.ssafy.faraway.domain.post.controller;
 
-import com.ssafy.faraway.common.PostSearchCondition;
+import com.ssafy.faraway.common.PagingResponse;
+import com.ssafy.faraway.common.SearchCondition;
 import com.ssafy.faraway.domain.post.dto.req.PostCommentSaveRequestDto;
 import com.ssafy.faraway.domain.post.dto.req.PostSaveRequestDto;
 import com.ssafy.faraway.domain.post.dto.req.PostUpdateRequestDto;
@@ -40,14 +41,16 @@ public class PostController {
     }
 
     @GetMapping(value = "/")
-    public ResponseEntity<List<PostListResponseDto>> findAllPost(@RequestBody PostSearchCondition postSearchCondition) {
-        List<PostListResponseDto> list = null;
+    public ResponseEntity<PagingResponse<PostListResponseDto>> findAllPost(@ModelAttribute SearchCondition searchCondition) {
+        PagingResponse<PostListResponseDto> pagingResponse = null;
         try {
-            list = postService.findAllByCondition(postSearchCondition);
-            if (list != null && !list.isEmpty()) {
-                return new ResponseEntity<List<PostListResponseDto>>(list, HttpStatus.OK);
+//            list = postService.findAllByCondition(searchCondition);
+            pagingResponse = postService.findAllByCondition(searchCondition);
+            System.out.println(pagingResponse);
+            if (pagingResponse != null) {
+                return new ResponseEntity<PagingResponse<PostListResponseDto>>(pagingResponse, HttpStatus.OK);
             }
-            return new ResponseEntity<List<PostListResponseDto>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -59,8 +62,8 @@ public class PostController {
         PostResponseDto postResponseDto = null;
         try {
             postResponseDto = postService.findById(id);
-            postService.updateHit(id);
-            if (postResponseDto == null) {
+            int result = postService.updateHit(id);
+            if (postResponseDto == null || result == 0) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             return new ResponseEntity<PostResponseDto>(postResponseDto, HttpStatus.OK);

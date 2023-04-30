@@ -5,10 +5,18 @@
 <mapper namespace="com.ssafy.faraway.domain.post.repository.PostRepository">
 
     <select id="findById" parameterType="long" resultType="PostResponseDto">
-        select p.id, p.member_id, m.login_id, p.category, p.title, p.content, p.hit, p.modified_date
-        from post p join member m
-        on p.member_id = m.id
-        and p.id = #{id};
+        select p.id,
+               p.member_id,
+               m.login_id,
+               p.category,
+               p.title,
+               p.content,
+               p.hit,
+               p.modified_date
+        from post p
+                 join member m
+                      on p.member_id = m.id
+                          and p.id = #{id};
     </select>
 
     <update id="updateHit" parameterType="long">
@@ -22,29 +30,42 @@
         values (#{memberId}, #{category}, #{title}, #{content})
     </insert>
 
-    <select id="findAllByCondition" parameterType="PostSearchCondition" resultType="PostListResponseDto">
+    <select id="findAllByCondition" parameterType="SearchCondition" resultType="PostListResponseDto">
         select p.id, p.member_id, m.login_id, p.category, p.title, p.hit, p.modified_date
+        from post p join member m
+        on p.member_id = m.id
+        <if test='key != null and !key.equals("none")'>
+            and ${key} like concat('%', #{word}, '%')
+        </if>
+        <if test='orderBy != null and !orderBy.equals("none")'>
+            order by ${orderBy} ${orderByDir}
+        </if>
+        <if test='orderBy.equals("none")'>
+            order by p.modified_date ${orderByDir}
+        </if>
+        limit #{pagination.limitStart}, #{recordSize}
+    </select>
+
+    <select id="getTotalCount" parameterType="SearchCondition" resultType="int">
+        select count(*)
         from post p join member m
         on p.member_id = m.id
         <if test="!key.equals('none')">
             and ${key} like concat('%', #{word}, '%')
         </if>
-        <if test="!orderBy.equals('none')">
-            order by ${orderBy} ${orderByDir}
-        </if>
-        <if test="orderBy.equals('none')">
-            order by p.modified_date ${orderByDir}
-        </if>
     </select>
 
     <update id="update" parameterType="PostUpdateRequestDto">
         update post
-        set category = #{category}, title = #{title}, content = #{content}
+        set category = #{category},
+            title    = #{title},
+            content  = #{content}
         where id = #{id}
     </update>
 
     <delete id="delete" parameterType="long">
-        delete from post
+        delete
+        from post
         where id = #{id}
     </delete>
 
