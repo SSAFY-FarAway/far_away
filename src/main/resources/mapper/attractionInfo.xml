@@ -23,9 +23,9 @@
     <select id="findAttractionBySidoCodeAndGugunCodeAndContentTypeId" parameterType="AttractionGetRequestDto" resultType="AttractionGetResponseDto">
         select a.content_id, a.title, a.addr1, a.zipcode, a.tel, a.first_image, a.latitude, a.longitude, a.sido_code, a.gugun_code
         from attraction_info a
-        where
+        <where>
             <if test="sidoCode != null">
-                and a.sido_code = #{sidoCode}
+                a.sido_code = #{sidoCode}
                 <if test="gugunCode != null">
                     and a.gugun_code = #{gugunCode}
                 </if>
@@ -33,6 +33,7 @@
                     and a.content_type_id = #{contentTypeId}
                 </if>
             </if>
+        </where>
           ;
     </select>
     
