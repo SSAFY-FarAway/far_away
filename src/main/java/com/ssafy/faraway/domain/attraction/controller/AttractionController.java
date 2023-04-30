@@ -22,21 +22,6 @@ public class AttractionController {
 
     private final AttractionService attractionService;
 
-//    @GetMapping(value = "/")
-//    public ResponseEntity<List<AttractionGetResponseDto>> findAllAttraction() {
-//        List<AttractionGetResponseDto> list = null;
-//        try {
-//            list = attractionService.findAll();
-//            if(list == null || list.size() == 0) {
-//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//            }
-//            return new ResponseEntity<>(list, HttpStatus.OK);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//
-//
-//    }
 
     @GetMapping("/sido")
     public ResponseEntity<List<SidoGetResponseDto>> findAllSido() {
@@ -70,15 +55,8 @@ public class AttractionController {
 
     @GetMapping("/")
     public ResponseEntity<List<AttractionGetResponseDto>> findAttractionBySidoCodeAndGugunCodeAndContentTypeId(
-            @RequestParam(name = "sido_code", required = false) Integer sidoCode,
-            @RequestParam(name = "gugun_code", required = false) Integer gugunCode,
-            @RequestParam(name = "content_type_id", required = false) Integer contentTypeId
-                                                                                                               ) {
-        AttractionGetRequestDto attractionGetRequestDto = new AttractionGetRequestDto().builder()
-                .sidoCode(sidoCode)
-                .gugunCode(gugunCode)
-                .contentTypeId(contentTypeId)
-                .build();
+            AttractionGetRequestDto attractionGetRequestDto) {
+
         List<AttractionGetResponseDto> list = null;
         try {
             list = attractionService.findAttractionBySidoCodeAndGugunCodeAndContentTypeId(attractionGetRequestDto);

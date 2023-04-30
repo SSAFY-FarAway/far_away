@@ -102,6 +102,7 @@ public class PlanController {
     public ResponseEntity updatePlan(@RequestBody PlanUpdateRequestDto planUpdateRequestDto) {
 
         try {
+            // TODO: session id 와 plan Member_id 검사
             int result = planService.updatePlan(planUpdateRequestDto);
             if(result != 0) {
                 return ResponseEntity.ok().build();

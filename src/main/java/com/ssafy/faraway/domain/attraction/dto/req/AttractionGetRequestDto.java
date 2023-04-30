@@ -3,7 +3,6 @@ package com.ssafy.faraway.domain.attraction.dto.req;
 import lombok.*;
 
 @Getter
-@Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
