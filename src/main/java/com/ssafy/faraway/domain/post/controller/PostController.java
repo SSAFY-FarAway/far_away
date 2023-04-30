@@ -45,6 +45,7 @@ public class PostController {
         PagingResponse<PostListResponseDto> pagingResponse = null;
         try {
 //            list = postService.findAllByCondition(searchCondition);
+            System.out.println(searchCondition);
             pagingResponse = postService.findAllByCondition(searchCondition);
             System.out.println(pagingResponse);
             if (pagingResponse != null) {
@@ -120,13 +121,13 @@ public class PostController {
         List<PostCommentListResponseDto> list = null;
         try {
             list = postCommentService.findAllByPostId(id);
-            if (list != null && !list.isEmpty()) {
-                return new ResponseEntity<List<PostCommentListResponseDto>>(list, HttpStatus.OK);
+            if (list == null || list.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<List<PostCommentListResponseDto>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<List<PostCommentListResponseDto>>(list, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.internalServerError().build();
         }
     }
 }
