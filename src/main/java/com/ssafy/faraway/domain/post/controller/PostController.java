@@ -22,16 +22,16 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping(value = "/")
-    public ResponseEntity<Integer> savePost(@RequestBody PostSaveRequestDto postSaveRequestDto) {
+    public ResponseEntity savePost(@RequestBody PostSaveRequestDto postSaveRequestDto) {
         try {
             int result = postService.save(postSaveRequestDto);
             if (result == 0) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                return ResponseEntity.badRequest().build();
             }
-            return new ResponseEntity<Integer>(result, HttpStatus.OK);
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.internalServerError().build();
         }
     }
 
