@@ -114,7 +114,7 @@ CREATE TABLE `plan_comment` (
     `modified_date`	timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
 );
 
-ALTER TABLE `plan_comment` ADD CONSTRAINT `FK_plan_comment_post_id_TO_plan_id` FOREIGN KEY (
+ALTER TABLE `plan_comment` ADD CONSTRAINT `FK_plan_comment_plan_id_TO_plan_id` FOREIGN KEY (
 	`plan_id`) REFERENCES `plan` (`id`);
     
 DROP TABLE IF EXISTS `hotplace_comment`;
