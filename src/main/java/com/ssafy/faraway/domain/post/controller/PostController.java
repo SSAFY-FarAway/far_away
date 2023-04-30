@@ -1,10 +1,12 @@
 package com.ssafy.faraway.domain.post.controller;
 
 import com.ssafy.faraway.common.PostSearchCondition;
+import com.ssafy.faraway.domain.post.dto.req.PostCommentSaveRequestDto;
 import com.ssafy.faraway.domain.post.dto.req.PostSaveRequestDto;
 import com.ssafy.faraway.domain.post.dto.req.PostUpdateRequestDto;
 import com.ssafy.faraway.domain.post.dto.res.PostListResponseDto;
 import com.ssafy.faraway.domain.post.dto.res.PostResponseDto;
+import com.ssafy.faraway.domain.post.service.PostCommentService;
 import com.ssafy.faraway.domain.post.service.PostService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ import java.util.List;
 @Api(tags = "post")
 public class PostController {
     private final PostService postService;
+    private final PostCommentService postCommentService;
 
     @PostMapping(value = "/")
     public ResponseEntity savePost(@RequestBody PostSaveRequestDto postSaveRequestDto) {
@@ -91,6 +94,20 @@ public class PostController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping(value = "/{id}")
+    public ResponseEntity savePostComment(@PathVariable Long id, @RequestBody PostCommentSaveRequestDto postCommentSaveRequestDto) {
+        try {
+            int result = postCommentService.save(postCommentSaveRequestDto);
+            if (result == 0) {
+                return ResponseEntity.badRequest().build();
+            }
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
         }
     }
 }
