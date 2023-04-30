@@ -104,6 +104,9 @@ CREATE TABLE `post_comment` (
 ALTER TABLE `post_comment` ADD CONSTRAINT `FK_post_comment_post_id_TO_post_id` FOREIGN KEY (
 	`post_id`) REFERENCES `post` (`id`);
 
+ALTER TABLE `post_comment` ADD CONSTRAINT `FK_post_comment_member_id_TO_member_id` FOREIGN KEY (
+	`member_id`) REFERENCES `member` (`id`);
+    
 DROP TABLE IF EXISTS `plan_comment`;
 CREATE TABLE `plan_comment` (
 	`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
@@ -117,6 +120,9 @@ CREATE TABLE `plan_comment` (
 ALTER TABLE `plan_comment` ADD CONSTRAINT `FK_plan_comment_plan_id_TO_plan_id` FOREIGN KEY (
 	`plan_id`) REFERENCES `plan` (`id`);
     
+ALTER TABLE `plan_comment` ADD CONSTRAINT `FK_plan_comment_member_id_TO_member_id` FOREIGN KEY (
+	`member_id`) REFERENCES `member` (`id`);
+    
 DROP TABLE IF EXISTS `hotplace_comment`;
 CREATE TABLE `hotplace_comment` (
 	`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
@@ -129,6 +135,9 @@ CREATE TABLE `hotplace_comment` (
 
 ALTER TABLE `hotplace_comment` ADD CONSTRAINT `FK_hotplace_comment_hotplace_id_TO_hotplace_id` FOREIGN KEY (
 	`hotplace_id`) REFERENCES `hotplace` (`id`);
+
+ALTER TABLE `hotplace_comment` ADD CONSTRAINT `FK_hotplace_comment_member_id_TO_member_id` FOREIGN KEY (
+	`member_id`) REFERENCES `hotplace` (`id`);
 
 ALTER TABLE `post_like` ADD CONSTRAINT `FK_post_like_id_TO_member_id` FOREIGN KEY (
                                                                                    `member_id`
