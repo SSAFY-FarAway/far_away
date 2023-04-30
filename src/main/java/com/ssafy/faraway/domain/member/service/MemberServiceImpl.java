@@ -27,6 +27,7 @@ public class MemberServiceImpl implements MemberService{
     public Integer save(MemberSaveRequestDto memberSaveRequestDto){ //이메일 인증 추가 예정 !
         String salt = getSalt();
         String encodedPwd = encrypt(memberSaveRequestDto.getLoginPwd(), salt);
+
         MemberSaveRequestDto encryptMember = MemberSaveRequestDto.builder()
                 .loginId(memberSaveRequestDto.getLoginId())
                 .loginPwd(encodedPwd)
@@ -38,6 +39,7 @@ public class MemberServiceImpl implements MemberService{
                 .mainAddress(memberSaveRequestDto.getMainAddress())
                 .subAddress(memberSaveRequestDto.getSubAddress())
                 .salt(salt).build();
+
         return memberRepository.save(encryptMember);
     }
 

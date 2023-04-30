@@ -34,6 +34,14 @@ public class MemberSaveRequestDto {
         this.salt = salt;
     }
 
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public void setLoginPwd(String loginPwd) {
+        this.loginPwd = loginPwd;
+    }
+
     public Member toEntity() {
         return Member.builder()
                 .loginId(loginId)
