@@ -4,6 +4,7 @@ import com.ssafy.faraway.common.PostSearchCondition;
 import com.ssafy.faraway.domain.post.dto.req.PostCommentSaveRequestDto;
 import com.ssafy.faraway.domain.post.dto.req.PostSaveRequestDto;
 import com.ssafy.faraway.domain.post.dto.req.PostUpdateRequestDto;
+import com.ssafy.faraway.domain.post.dto.res.PostCommentListResponseDto;
 import com.ssafy.faraway.domain.post.dto.res.PostListResponseDto;
 import com.ssafy.faraway.domain.post.dto.res.PostResponseDto;
 import com.ssafy.faraway.domain.post.service.PostCommentService;
@@ -43,14 +44,14 @@ public class PostController {
         List<PostListResponseDto> list = null;
         try {
             list = postService.findAllByCondition(postSearchCondition);
+            if (list != null && !list.isEmpty()) {
+                return new ResponseEntity<List<PostListResponseDto>>(list, HttpStatus.OK);
+            }
+            return new ResponseEntity<List<PostListResponseDto>>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        if (list != null && !list.isEmpty()) {
-            return new ResponseEntity<List<PostListResponseDto>>(list, HttpStatus.OK);
-        }
-        return new ResponseEntity<List<PostListResponseDto>>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping(value = "/{id}")
@@ -108,6 +109,21 @@ public class PostController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @GetMapping(value = "/{id}/comment")
+    public ResponseEntity<List<PostCommentListResponseDto>> findCommentByPostId(@PathVariable Long id) {
+        List<PostCommentListResponseDto> list = null;
+        try {
+            list = postCommentService.findAllByPostId(id);
+            if (list != null && !list.isEmpty()) {
+                return new ResponseEntity<List<PostCommentListResponseDto>>(list, HttpStatus.OK);
+            }
+            return new ResponseEntity<List<PostCommentListResponseDto>>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

@@ -6,4 +6,13 @@
         insert into post_comment (post_id, member_id, content)
         values (#{postId}, #{memberId}, #{content})
     </insert>
+
+    <select id="findAllByPostId" parameterType="long" resultType="PostCommentListResponseDto">
+        select pc.id, pc.post_id, pc.member_id, m.login_id, pc.content, pc.modified_date
+        from post_comment pc join post p
+        on pc.post_id = p.id
+        join member m
+        on pc.member_id = m.id
+        and pc.post_id = #{postId}
+    </select>
 </mapper>
