@@ -5,10 +5,17 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 @Getter
 @NoArgsConstructor
 public class MemberLoginRequestDto {
+    @NotEmpty(message = "loginId ust not be empty")
+    @Size(min = 6, max = 20)
     private String loginId;
+    @NotEmpty(message = "loginPwd must not be empty")
+    @Size(min=8)
     private String loginPwd;
 
 
