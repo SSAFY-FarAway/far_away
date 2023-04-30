@@ -65,7 +65,7 @@ public class MemberController {
     }
 
     @PutMapping("/")
-    public ResponseEntity<?> update(@RequestBody MemberUpdateRequestDto memberUpdateRequestDto) {
+    public ResponseEntity<?> update(@RequestBody @Valid MemberUpdateRequestDto memberUpdateRequestDto) {
         try {
             memberService.update(memberUpdateRequestDto);
             List<MemberListResponseDto> list = memberService.findAll();
@@ -89,14 +89,14 @@ public class MemberController {
     }
 
     @PostMapping("/auth")
-    public ResponseEntity<?> login(@RequestBody MemberLoginRequestDto memberLoginRequestDto, HttpSession session) {
+    public ResponseEntity<?> login(@RequestBody @Valid MemberLoginRequestDto memberLoginRequestDto, HttpSession session) {
         try {
             MemberLoginResponseDto memberLoginResponseDto = memberService.login(memberLoginRequestDto);
             if(memberLoginResponseDto != null){
                 session.setAttribute("memberInfo", memberLoginResponseDto);
                 return new ResponseEntity<>(memberLoginResponseDto, HttpStatus.OK);
             }else{
-                return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+                return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
             e.printStackTrace();
