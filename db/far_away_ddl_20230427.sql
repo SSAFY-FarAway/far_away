@@ -91,6 +91,45 @@ CREATE TABLE `hotplace_like` (
      `created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
 );
 
+DROP TABLE IF EXISTS `post_comment`;
+CREATE TABLE `post_comment` (
+	`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
+    `post_id` bigint NOT NULL COMMENT 'Long',
+    `member_id` bigint NOT NULL COMMENT 'Long',
+    `content` text NOT NULL COMMENT 'Long',
+	`created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime',
+    `modified_date`	timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
+);
+
+ALTER TABLE `post_comment` ADD CONSTRAINT `FK_post_comment_post_id_TO_post_id` FOREIGN KEY (
+	`post_id`) REFERENCES `post` (`id`);
+
+DROP TABLE IF EXISTS `plan_comment`;
+CREATE TABLE `plan_comment` (
+	`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
+    `plan_id` bigint NOT NULL COMMENT 'Long',
+    `member_id` bigint NOT NULL COMMENT 'Long',
+    `content` text NOT NULL COMMENT 'Long',
+	`created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime',
+    `modified_date`	timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
+);
+
+ALTER TABLE `plan_comment` ADD CONSTRAINT `FK_plan_comment_plan_id_TO_plan_id` FOREIGN KEY (
+	`plan_id`) REFERENCES `plan` (`id`);
+    
+DROP TABLE IF EXISTS `hotplace_comment`;
+CREATE TABLE `hotplace_comment` (
+	`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
+    `hotplace_id` bigint NOT NULL COMMENT 'Long',
+    `member_id` bigint NOT NULL COMMENT 'Long',
+    `content` text NOT NULL COMMENT 'Long',
+	`created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime',
+    `modified_date`	timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
+);
+
+ALTER TABLE `hotplace_comment` ADD CONSTRAINT `FK_hotplace_comment_hotplace_id_TO_hotplace_id` FOREIGN KEY (
+	`hotplace_id`) REFERENCES `hotplace` (`id`);
+
 ALTER TABLE `post_like` ADD CONSTRAINT `FK_post_like_id_TO_member_id` FOREIGN KEY (
                                                                                    `member_id`
     )
