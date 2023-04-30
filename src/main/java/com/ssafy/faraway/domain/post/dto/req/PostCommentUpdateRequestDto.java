@@ -1,6 +1,6 @@
 package com.ssafy.faraway.domain.post.dto.req;
 
-import com.ssafy.faraway.domain.post.entity.Post;
+import com.ssafy.faraway.domain.post.entity.PostComment;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,25 +9,22 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @ToString
-public class PostSaveRequestDto {
+public class PostCommentUpdateRequestDto {
+    private long postId;
     private long memberId;
-    private String category;
-    private String title;
     private String content;
 
     @Builder
-    public PostSaveRequestDto(long memberId, String category, String title, String content) {
+    public PostCommentUpdateRequestDto(long postId, long memberId, String content) {
+        this.postId = postId;
         this.memberId = memberId;
-        this.category = category;
-        this.title = title;
         this.content = content;
     }
 
-    public Post toEntity() {
-        return Post.builder()
+    public PostComment toEntity() {
+        return PostComment.builder()
+                .postId(postId)
                 .memberId(memberId)
-                .category(category)
-                .title(title)
                 .content(content)
                 .build();
     }

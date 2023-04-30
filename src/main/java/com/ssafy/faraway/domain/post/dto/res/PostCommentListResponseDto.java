@@ -2,28 +2,25 @@ package com.ssafy.faraway.domain.post.dto.res;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class PostListResponseDto {
+public class PostCommentListResponseDto {
     private long id;
+    private long postId;
     private long memberId;
     private String loginId;
-    private String category;
-    private String title;
-    private long hit;
+    private String conent;
     private LocalDateTime modifiedDate;
 
     @Builder
-    public PostListResponseDto(long id, long memberId, String loginId, String category, String title, long hit, LocalDateTime modifiedDate) {
+    public PostCommentListResponseDto(long id, long postId, long memberId, String loginId, String conent, LocalDateTime modifiedDate) {
         this.id = id;
+        this.postId = postId;
         this.memberId = memberId;
         this.loginId = loginId;
-        this.category = category;
-        this.title = title;
-        this.hit = hit;
+        this.conent = conent;
         this.modifiedDate = modifiedDate;
     }
 }
