@@ -49,6 +49,10 @@ public class MainController {
         model.addAttribute("word",word);
 
         return "plan/list";
+    }
 
+    @GetMapping("/plan_write")
+    public String planWrite() {
+        return "plan/write";
     }
 }
