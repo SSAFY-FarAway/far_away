@@ -4,6 +4,7 @@ import com.ssafy.faraway.common.PagingResponse;
 import com.ssafy.faraway.common.SearchCondition;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSaveRequestDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceListResponseDto;
+import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceResponseDto;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,21 @@ public class HotPlaceController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<HotPlaceResponseDto> findHotPlaceById(@PathVariable Long id) {
+        try {
+            HotPlaceResponseDto hotPlaceResponseDto = hotPlaceService.findById(id);
+            hotPlaceService.updateHit(id);
+            if (hotPlaceResponseDto == null) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<HotPlaceResponseDto>(hotPlaceResponseDto, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

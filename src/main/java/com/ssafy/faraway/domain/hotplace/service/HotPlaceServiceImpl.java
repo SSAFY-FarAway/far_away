@@ -5,6 +5,7 @@ import com.ssafy.faraway.common.PagingResponse;
 import com.ssafy.faraway.common.SearchCondition;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSaveRequestDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceListResponseDto;
+import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceResponseDto;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,18 @@ public class HotPlaceServiceImpl implements HotPlaceService {
     @Override
     public Integer save(HotPlaceSaveRequestDto hotPlaceSaveRequestDto) throws Exception {
         return hotPlaceRepository.save(hotPlaceSaveRequestDto.toEntity());
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public HotPlaceResponseDto findById(Long id) throws Exception {
+        return hotPlaceRepository.findById(id);
+    }
+
+    @Transactional
+    @Override
+    public Integer updateHit(Long id) throws Exception {
+        return hotPlaceRepository.updateHit(id);
     }
 
     @Transactional(readOnly = true)
