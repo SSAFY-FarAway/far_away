@@ -5,12 +5,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <jsp:include page="./frament/head.jsp"/>
 <body id="page-top">
 <jsp:include page="./frament/nav.jsp"/>
 <!-- Masthead-->
 <header class="masthead">
     <div class="container">
+
         <div class="masthead-subheading">Wherever You Go</div>
         <div class="masthead-heading text-uppercase">FAR AWAY</div>
         <a
@@ -52,6 +54,7 @@
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
               <i class="far fa-tired fa-stack-1x fa-inverse"></i>
             </span>
+
                 <h4 class="my-3">You get Tired?</h4>
                 <p class="text-muted">피곤에 찌든 자여 여행을 떠나라~</p>
             </div>
