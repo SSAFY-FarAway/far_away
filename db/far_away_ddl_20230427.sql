@@ -78,14 +78,20 @@ CREATE TABLE `plan_like` (
                              `created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
 );
 
-DROP TABLE IF EXISTS `image`;
-CREATE TABLE `image` (
-                         `id`	bigint	AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
-                         `hotplace_id`	bigint	NOT NULL	COMMENT 'Long',
-                         `name`	varchar(50)	NULL	COMMENT 'String',
-                         `path`	varchar( 100)	NULL	COMMENT 'String'
-    -- created_date 보류
-);
+DROP TABLE IF EXISTS `file`;
+
+CREATE TABLE IF NOT EXISTS `file` (
+  `id` bigint AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
+  `hotplace_id` bigint NOT NULL COMMENT 'Long',
+  `save_folder` VARCHAR(45) NOT NULL COMMENT 'String',
+  `original_file` VARCHAR(50) NOT NULL COMMENT 'String',
+  `save_file` VARCHAR(50) NOT NULL COMMENT 'String',
+  `created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime',
+  CONSTRAINT `FK_file_hotplace_id_TO_hotplace_id`
+    FOREIGN KEY (`hotplace_id`)
+    REFERENCES `hotplace` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
 
 DROP TABLE IF EXISTS `hotplace_like`;
 CREATE TABLE `hotplace_like` (
@@ -105,10 +111,10 @@ CREATE TABLE `post_comment` (
 );
 
 ALTER TABLE `post_comment` ADD CONSTRAINT `FK_post_comment_post_id_TO_post_id` FOREIGN KEY (
-                                                                                            `post_id`) REFERENCES `post` (`id`);
+                                                                                            `post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `post_comment` ADD CONSTRAINT `FK_post_comment_member_id_TO_member_id` FOREIGN KEY (
-                                                                                                `member_id`) REFERENCES `member` (`id`);
+                                                                                                `member_id`) REFERENCES `member` (`id`) ON DELETE CASCADE;
 
 DROP TABLE IF EXISTS `plan_comment`;
 CREATE TABLE `plan_comment` (
@@ -121,10 +127,10 @@ CREATE TABLE `plan_comment` (
 );
 
 ALTER TABLE `plan_comment` ADD CONSTRAINT `FK_plan_comment_plan_id_TO_plan_id` FOREIGN KEY (
-                                                                                            `plan_id`) REFERENCES `plan` (`id`);
+                                                                                            `plan_id`) REFERENCES `plan` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `plan_comment` ADD CONSTRAINT `FK_plan_comment_member_id_TO_member_id` FOREIGN KEY (
-                                                                                                `member_id`) REFERENCES `member` (`id`);
+                                                                                                `member_id`) REFERENCES `member` (`id`) ON DELETE CASCADE;
 
 DROP TABLE IF EXISTS `hotplace_comment`;
 CREATE TABLE `hotplace_comment` (
@@ -137,10 +143,10 @@ CREATE TABLE `hotplace_comment` (
 );
 
 ALTER TABLE `hotplace_comment` ADD CONSTRAINT `FK_hotplace_comment_hotplace_id_TO_hotplace_id` FOREIGN KEY (
-                                                                                                            `hotplace_id`) REFERENCES `hotplace` (`id`);
+                                                                                                            `hotplace_id`) REFERENCES `hotplace` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `hotplace_comment` ADD CONSTRAINT `FK_hotplace_comment_member_id_TO_member_id` FOREIGN KEY (
-                                                                                                        `member_id`) REFERENCES `member` (`id`);
+                                                                                                        `member_id`) REFERENCES `member` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `post_like` ADD CONSTRAINT `FK_post_like_id_TO_member_id` FOREIGN KEY (
                                                                                    `member_id`
@@ -203,11 +209,4 @@ ALTER TABLE `plan` ADD CONSTRAINT `FK_plan_member_id_TO_member_id` FOREIGN KEY (
     )
     REFERENCES `member` (
                          `id`
-        );
-
-ALTER TABLE `image` ADD CONSTRAINT `FK_image_hotplace_id_TO_hotplace_id` FOREIGN KEY (
-                                                                                      `hotplace_id`
-    )
-    REFERENCES `hotplace` (
-                           `id`
         );
