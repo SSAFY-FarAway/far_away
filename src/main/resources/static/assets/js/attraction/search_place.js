@@ -1,6 +1,3 @@
-var root = "http://localhost/faraway";
-
-
 window.onload = function () {
     makeSidoList();
 }
