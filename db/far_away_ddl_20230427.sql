@@ -31,22 +31,23 @@ CREATE TABLE `plan` (
 
 DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member` (
-    `id`	bigint	AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
-    `login_id`	varchar(20)	NOT NULL UNIQUE	COMMENT 'String',
-    `login_pwd`	varchar(255)	NOT NULL	COMMENT 'String',
-    `last_name`	varchar(20)	NOT NULL	COMMENT 'String',
-    `first_name`	varchar(30)	NOT NULL	COMMENT 'String',
-    `birth`	varchar(6)	NOT NULL	COMMENT 'String',
-    `email`	varchar(100)	NOT NULL UNIQUE	COMMENT 'String',
-    `zipcode`	varchar(5)	NOT NULL	COMMENT 'String',
-    `main_address`	varchar(255)	NOT NULL	COMMENT 'String',
-    `sub_address`	varchar(255)	NULL	COMMENT 'String',
-    `salt`	varchar(45)	NOT NULL	COMMENT 'String',
-    `mileage`	bigint	NOT NULL DEFAULT 0	COMMENT 'Long',
-    `role`	int	NOT NULL DEFAULT 1 COMMENT 'Integer',
-    `certified` int NOT NULL DEFAULT 0 COMMENT  'Integer',
-    `created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime',
-    `modified_date`	timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
+
+                          `id`	bigint	AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
+                          `login_id`	varchar(20)	NOT NULL UNIQUE	COMMENT 'String',
+                          `login_pwd`	varchar(255)	NOT NULL	COMMENT 'String',
+                          `last_name`	varchar(20)	NOT NULL	COMMENT 'String',
+                          `first_name`	varchar(30)	NOT NULL	COMMENT 'String',
+                          `birth`	varchar(6)	NOT NULL	COMMENT 'String',
+                          `email`	varchar(100)	NOT NULL UNIQUE	COMMENT 'String',
+                          `zipcode`	varchar(5)	NOT NULL	COMMENT 'String',
+                          `main_address`	varchar(255)	NOT NULL	COMMENT 'String',
+                          `sub_address`	varchar(255)	NULL	COMMENT 'String',
+                          `salt`	varchar(45)	NOT NULL	COMMENT 'String',
+                          `mileage`	bigint	NOT NULL DEFAULT 0	COMMENT 'Long',
+                          `role`	int	NOT NULL DEFAULT 1 COMMENT 'Integer',
+                          `certified` int NOT NULL DEFAULT 0 COMMENT  'Integer',
+                          `created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime',
+                          `modified_date`	timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
 );
 
 DROP TABLE IF EXISTS `hotplace`;
