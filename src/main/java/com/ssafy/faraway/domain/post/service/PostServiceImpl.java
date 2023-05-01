@@ -23,7 +23,6 @@ public class PostServiceImpl implements PostService {
     @Transactional
     @Override
     public Integer save(PostSaveRequestDto postSaveRequestDto) throws Exception {
-        System.out.println(postSaveRequestDto);
         return postRepository.save(postSaveRequestDto.toEntity());
     }
 

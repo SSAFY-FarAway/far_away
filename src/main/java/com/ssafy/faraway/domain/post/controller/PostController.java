@@ -46,10 +46,7 @@ public class PostController {
     public ResponseEntity<PagingResponse<PostListResponseDto>> findAllPost(@ModelAttribute SearchCondition searchCondition) {
         PagingResponse<PostListResponseDto> pagingResponse = null;
         try {
-//            list = postService.findAllByCondition(searchCondition);
-            System.out.println(searchCondition);
             pagingResponse = postService.findAllByCondition(searchCondition);
-            System.out.println(pagingResponse);
             if (pagingResponse != null) {
                 return new ResponseEntity<PagingResponse<PostListResponseDto>>(pagingResponse, HttpStatus.OK);
             }
@@ -136,7 +133,6 @@ public class PostController {
     @PutMapping(value = "/comment")
     public ResponseEntity updateComment(@RequestBody @Valid final PostCommentUpdateRequestDto postCommentUpdateRequestDto) {
         try {
-            System.out.println(postCommentUpdateRequestDto);
             int result = postCommentService.update(postCommentUpdateRequestDto);
             if (result == 0) {
                 return ResponseEntity.badRequest().build();
@@ -148,7 +144,7 @@ public class PostController {
         }
     }
 
-    @DeleteMapping("/comment/{id}")
+    @DeleteMapping(value = "/comment/{id}")
     public ResponseEntity deleteComment(@PathVariable Long id) {
         try {
             int result = postCommentService.delete(id);
