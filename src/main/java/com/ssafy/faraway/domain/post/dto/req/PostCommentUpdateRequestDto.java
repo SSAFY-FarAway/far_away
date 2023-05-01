@@ -1,6 +1,5 @@
 package com.ssafy.faraway.domain.post.dto.req;
 
-import com.ssafy.faraway.domain.post.entity.PostComment;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +12,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @ToString
 public class PostCommentUpdateRequestDto {
+    @NotNull(message = "댓글 정보가 없습니다.")
+    private long id;
     @NotNull(message = "게시글 정보가 없습니다.")
     private long postId;
     @NotNull(message = "사용자 정보가 없습니다.")
@@ -21,17 +22,10 @@ public class PostCommentUpdateRequestDto {
     private String content;
 
     @Builder
-    public PostCommentUpdateRequestDto(long postId, long memberId, String content) {
+    public PostCommentUpdateRequestDto(long id, long postId, long memberId, String content) {
+        this.id = id;
         this.postId = postId;
         this.memberId = memberId;
         this.content = content;
-    }
-
-    public PostComment toEntity() {
-        return PostComment.builder()
-                .postId(postId)
-                .memberId(memberId)
-                .content(content)
-                .build();
     }
 }

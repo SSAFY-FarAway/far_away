@@ -3,6 +3,7 @@ package com.ssafy.faraway.domain.post.controller;
 import com.ssafy.faraway.common.PagingResponse;
 import com.ssafy.faraway.common.SearchCondition;
 import com.ssafy.faraway.domain.post.dto.req.PostCommentSaveRequestDto;
+import com.ssafy.faraway.domain.post.dto.req.PostCommentUpdateRequestDto;
 import com.ssafy.faraway.domain.post.dto.req.PostSaveRequestDto;
 import com.ssafy.faraway.domain.post.dto.req.PostUpdateRequestDto;
 import com.ssafy.faraway.domain.post.dto.res.PostCommentListResponseDto;
@@ -126,6 +127,21 @@ public class PostController {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             return new ResponseEntity<List<PostCommentListResponseDto>>(list, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @PutMapping(value = "/comment")
+    public ResponseEntity updateComment(@RequestBody @Valid final PostCommentUpdateRequestDto postCommentUpdateRequestDto) {
+        try {
+            System.out.println(postCommentUpdateRequestDto);
+            int result = postCommentService.update(postCommentUpdateRequestDto);
+            if (result == 0) {
+                return ResponseEntity.badRequest().build();
+            }
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();

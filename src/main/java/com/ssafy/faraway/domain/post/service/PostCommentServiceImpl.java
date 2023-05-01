@@ -1,6 +1,7 @@
 package com.ssafy.faraway.domain.post.service;
 
 import com.ssafy.faraway.domain.post.dto.req.PostCommentSaveRequestDto;
+import com.ssafy.faraway.domain.post.dto.req.PostCommentUpdateRequestDto;
 import com.ssafy.faraway.domain.post.dto.res.PostCommentListResponseDto;
 import com.ssafy.faraway.domain.post.repository.PostCommentRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,5 +25,11 @@ public class PostCommentServiceImpl implements PostCommentService {
     @Override
     public List<PostCommentListResponseDto> findAllByPostId(long postId) throws Exception {
         return postCommentRepository.findAllByPostId(postId);
+    }
+
+    @Transactional
+    @Override
+    public Integer update(PostCommentUpdateRequestDto postCommentUpdateRequestDto) throws Exception {
+        return postCommentRepository.update(postCommentUpdateRequestDto);
     }
 }
