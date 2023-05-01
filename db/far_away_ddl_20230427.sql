@@ -47,7 +47,6 @@ CREATE TABLE `member` (
                           `certified` int NOT NULL DEFAULT 0 COMMENT  'Integer',
                           `created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime',
                           `modified_date`	timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
-
 );
 
 DROP TABLE IF EXISTS `hotplace`;
