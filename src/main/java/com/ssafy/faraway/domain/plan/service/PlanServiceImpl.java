@@ -1,6 +1,9 @@
 package com.ssafy.faraway.domain.plan.service;
 
+import com.ssafy.faraway.common.Pagination;
+import com.ssafy.faraway.common.PagingResponse;
 import com.ssafy.faraway.common.PlanSearchCondition;
+import com.ssafy.faraway.common.SearchCondition;
 import com.ssafy.faraway.common.util.ShortestPath;
 import com.ssafy.faraway.domain.attraction.dto.res.AttractionGetResponseDto;
 import com.ssafy.faraway.domain.plan.dto.req.PlanSaveRequestDto;
@@ -14,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -26,8 +30,16 @@ public class PlanServiceImpl implements PlanService{
     }
 
     @Override
-    public List<PlanGetResponseDto> findAllByCondition(PlanSearchCondition planSearchCondition) throws Exception {
-        return planRepository.findAllByCondition(planSearchCondition);
+    public PagingResponse<PlanGetResponseDto> findAllByCondition(SearchCondition searchCondition) throws Exception {
+        int count = planRepository.getTotalCount(searchCondition);
+        System.out.println(count);
+        if (count < 1) {
+            return new PagingResponse<>(Collections.emptyList(), null);
+        }
+        Pagination pagination = new Pagination(count,searchCondition);
+        searchCondition.setPagination(pagination);
+        List<PlanGetResponseDto> list = planRepository.findAllByCondition(searchCondition);
+        return new PagingResponse<>(list, pagination);
     }
 
     @Override

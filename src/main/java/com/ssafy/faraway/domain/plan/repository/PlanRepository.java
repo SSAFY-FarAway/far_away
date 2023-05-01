@@ -1,6 +1,7 @@
 package com.ssafy.faraway.domain.plan.repository;
 
 import com.ssafy.faraway.common.PlanSearchCondition;
+import com.ssafy.faraway.common.SearchCondition;
 import com.ssafy.faraway.domain.plan.dto.req.PlanSaveRequestDto;
 import com.ssafy.faraway.domain.plan.dto.req.PlanUpdateRequestDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetDetailDto;
@@ -13,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface PlanRepository {
     int save(PlanSaveRequestDto planSaveRequestDto) throws SQLException;
-    List<PlanGetResponseDto> findAllByCondition(PlanSearchCondition planSearchCondition) throws SQLException;
+    List<PlanGetResponseDto> findAllByCondition(SearchCondition searchCondition) throws SQLException;
     PlanGetDetailDto findById(Long id) throws SQLException;
 
     int updateHit(Long id) throws SQLException;
@@ -22,4 +23,5 @@ public interface PlanRepository {
 
     int deletePlan(Long id) throws SQLException;
 
+    int getTotalCount(SearchCondition searchCondition) throws SQLException;
 }

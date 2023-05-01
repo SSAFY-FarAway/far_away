@@ -9,20 +9,20 @@
     </insert>
 
 
-    <select id="findAllByCondition" parameterType="PlanSearchCondition" resultType="PlanGetResponseDto">
+    <select id="findAllByCondition" parameterType="SearchCondition" resultType="PlanGetResponseDto">
         select p.id, p.title, m.login_id, p.hit, p.created_date
         from plan p, member m
         where p.member_id = m.id
-        <if test="!key.equals('none')">
+        <if test='key != null and !key.equals("none")'>
             and ${key} like concat('%', #{word}, '%')
         </if>
-        <if test="!orderBy.equals('none')">
+        <if test='orderBy != null and !orderBy.equals("none")'>
             order by ${orderBy} ${orderByDir}
         </if>
-        <if test="orderBy.equals('none')">
+        <if test='orderBy.equals("none")'>
             order by p.modified_date ${orderByDir}
         </if>
-        ;
+        limit #{pagination.limitStart}, #{recordSize}
     </select>
 
     <select id="findById" parameterType="long" resultType="PlanGetDetailDto">
@@ -48,4 +48,13 @@
         delete from plan
         where id = #{id};
     </delete>
+
+    <select id="getTotalCount" parameterType="SearchCondition" resultType="int">
+        select count(*)
+        from plan p join member m
+        on p.member_id = m.id
+        <if test="!key.equals('none')">
+            and ${key} like concat('%', #{word}, '%')
+        </if>
+    </select>
 </mapper>

@@ -16,6 +16,7 @@ public class SearchCondition {
     private Pagination pagination;
 
     public SearchCondition() {
+        this.page = 1;
         this.recordSize = 10;
         this.pageSize = 10;
     }

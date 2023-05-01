@@ -28,97 +28,25 @@
     <link href="resources/static/assets/css/style.css" rel="stylesheet" />
     <link href="resources/static/assets/css/map.css" rel="stylesheet" />
 </head>
-
+<jsp:include page="../frament/head.jsp"/>
 <body id="page-top">
-<!-- Navigation   헤더 -->
-<nav class="shadow navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-    <div class="container">
-        <a class="navbar-brand fs-4" href="${root}">
-            <!-- <img src="assets/img/navbar-logo.svg" alt="..." /> -->
-            Let's Travel Well
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            Menu
-            <i class="fas fa-bars ms-1"></i>
-        </button>
-        <%--        <jsp:include page="/fragment/nav.jsp">--%>
-        <%--            <jsp:param value="ok" name="flag" />--%>
-        <%--        </jsp:include>--%>
-    </div>
-</nav>
-<!-- Navigation   헤더 end -->
+<jsp:include page="../frament/nav.jsp"/>
 
 <header class="masthead">
-    <div class="masthead-subheading">Search Wherever You Go</div>
+    <div class="masthead-subheading">Share Wherever Your Plan</div>
 </header>
 
-<center>
-    <section class="page-section p-3 mt-3" id="search-place">
-        <div class="text-center fw-bold w-75" role="alert">
-            <h2 class="section-heading text-uppercase">Travel Information</h2>
-            <h3 class="section-subheading text-muted">
-                원하는 여행지를 검색해보세요.
-            </h3>
+<section class="page-section p-3 mt-3" id="share-plan-list">
+    <div class="text-center fw-bold" role="alert">
+        <h2 class="section-heading text-uppercase">Travel Plan</h2>
+        <h3 class="section-subheading text-muted">
+            원하는 여행경로를 공유해보세요.
+        </h3>
 
-            <!-- 관광지 검색 start -->
-            <form class="mb-3 d-flex justify-content-center" onsubmit="return false;" role="search">
-                <div class="col-3 m-1 ms-5">
-                    <select id="search-area" class="form-select me-2 shadow">
-                        <option value="0" selected>검색 할 시도</option>
-                        <c:forEach items="${sidos}" var="sido">
-                            <option value="${sido.sidoCode}">${sido.sidoName}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div class="col-3 m-1">
-                    <select id="search-sigun" class="form-select me-2 shadow">
-                        <option value="0" selected>검색 할 구군</option>
-                    </select>
-                </div>
-                <div class="col-3 mt-1 ms-1">
-                    <select id="search-content-id" class="form-select me-2 shadow bg-gradient"
-                            style="background-color: #fefaea">
-                        <option value="0" selected>컨텐츠 선택</option>
-                        <option value="12">관광지</option>
-                        <option value="14">문화시설</option>
-                        <option value="15">축제공연행사</option>
-                        <option value="25">여행코스</option>
-                        <option value="28">레포츠</option>
-                        <option value="32">숙박</option>
-                        <option value="38">쇼핑</option>
-                        <option value="39">음식점</option>
-                    </select>
 
-                </div>
-                <div class="col-2 mt-1" >
-                    <button id="btn-search" class="btn btn-outline-success shadow" type="button">
-                        Search
-                    </button>
-                </div>
-            </form>
 
-            <!-- kakao map start -->
-            <div id="map" class="mt-3 shadow" style="width: 100%; height: 600px"></div>
-            <!-- kakao map end -->
-            <!-- <div class="row mt-3">
-              <table class="table table-striped" style="display: none">
-                <thead>
-                  <tr>
-                    <th>대표이미지</th>
-                    <th>관광지명</th>
-                    <th>주소</th>
-                    <th>위도</th>
-                    <th>경도</th>
-                  </tr>
-                </thead>
-                <tbody id="trip-list"></tbody>
-              </table>
-            </div> -->
-            <!-- 관광지 검색 end -->
-        </div>
-    </section>
-</center>
+    </div>
+</section>
 <!-- Footer start-->
 <footer class="footer py-4 mt-5">
     <div class="container">
@@ -152,7 +80,6 @@
 <!-- kakao api JS -->
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=65e66ed3a412cb73e32b300c2f3a1803&libraries=services,clusterer,drawing"></script>
-<script src="resources/static/assets/js/search_place.js"></script>
 </body>
 
 </html>

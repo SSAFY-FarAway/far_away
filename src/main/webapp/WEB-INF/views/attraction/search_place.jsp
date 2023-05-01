@@ -4,49 +4,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>LTW</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="resources/static/assets/favicon.ico" />
-    <!-- service Key -->
-    <!-- <script src="./js/key.js"></script> -->
-    <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet"
-          type="text/css" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="resources/static/assets/css/style.css" rel="stylesheet" />
-    <link href="resources/static/assets/css/map.css" rel="stylesheet" />
-</head>
+<jsp:include page="../frament/head.jsp"/>
 
 <body id="page-top">
-<!-- Navigation   헤더 -->
-<nav class="shadow navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-    <div class="container">
-        <a class="navbar-brand fs-4" href="${root}">
-            <!-- <img src="assets/img/navbar-logo.svg" alt="..." /> -->
-            Let's Travel Well
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            Menu
-            <i class="fas fa-bars ms-1"></i>
-        </button>
-<%--        <jsp:include page="/fragment/nav.jsp">--%>
-<%--            <jsp:param value="ok" name="flag" />--%>
-<%--        </jsp:include>--%>
-    </div>
-</nav>
+<jsp:include page="../frament/nav.jsp"/>
 <!-- Navigation   헤더 end -->
 
 <header class="masthead">
@@ -152,7 +113,7 @@
 <!-- kakao api JS -->
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=65e66ed3a412cb73e32b300c2f3a1803&libraries=services,clusterer,drawing"></script>
-<script src="resources/static/assets/js/search_place.js"></script>
+<script src="resources/static/assets/js/attraction/search_place.js"></script>
 </body>
 
 </html>
