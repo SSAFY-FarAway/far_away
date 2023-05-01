@@ -1,7 +1,7 @@
 let root = "/faraway";
 
 const logout = () => {
-    const url = root + "/member/auth"
+    const url = root + "/member/logout"
     fetch(url).then(res => {
         handleLogoutRes(res);
     });

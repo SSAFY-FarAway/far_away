@@ -21,7 +21,7 @@ const login = () => {
     }
 
     let form = document.getElementById("login-form");
-    let url = root + "/member/auth";
+    let url = root + "/member/login";
     // form.setAttribute("action",url);
     // form.submit();
 
