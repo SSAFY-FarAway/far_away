@@ -2,10 +2,12 @@ package com.ssafy.faraway.domain.hotplace.controller;
 
 import com.ssafy.faraway.common.PagingResponse;
 import com.ssafy.faraway.common.SearchCondition;
+import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceCommentSaveRequestDto;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSaveRequestDto;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceUpdateRequestDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceListResponseDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceResponseDto;
+import com.ssafy.faraway.domain.hotplace.service.HotPlaceCommentService;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ import javax.validation.Valid;
 @Api(tags = "hotplace")
 public class HotPlaceController {
     private final HotPlaceService hotPlaceService;
+    private final HotPlaceCommentService hotPlaceCommentService;
 
     @PostMapping("/")
     public ResponseEntity saveHotPlace(@RequestBody @Valid HotPlaceSaveRequestDto hotPlaceSaveRequestDto) {
@@ -87,6 +90,20 @@ public class HotPlaceController {
             if (result == 0) {
                 return ResponseEntity.badRequest().build()
                         ;
+            }
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @PostMapping("/comment")
+    public ResponseEntity saveHotPlaceComment(@RequestBody @Valid HotPlaceCommentSaveRequestDto hotPlaceCommentSaveRequestDto) {
+        try {
+            int result = hotPlaceCommentService.save(hotPlaceCommentSaveRequestDto);
+            if (result == 0) {
+                return ResponseEntity.badRequest().build();
             }
             return ResponseEntity.ok().build();
         } catch (Exception e) {
