@@ -22,7 +22,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="${root}/attraction?action=mvsearch#search-place"
+          <a class="nav-link" href="${root}/search_place#search-place"
             >Search Place</a
           >
         </li>
@@ -38,6 +38,9 @@
         <c:if test="${not empty loginMember}">
           <li class="nav-item">
             <a class="nav-link" href="${root}/myattraction?action=list">My Travel</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="${root}//plan_list?page=1">Plan</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="${root}/article?action=list#article-list-section"
