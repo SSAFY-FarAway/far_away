@@ -30,7 +30,7 @@
                                     My Page
                                 </p>
 
-                                <form class="mx-1 mx-md-4" id="form-modify" method="POST" action="">
+                                <div class="mx-1 mx-md-4" id="form-modify">
                                     <div class="d-flex flex-row mb-4">
                                         <i class="mt-2 fas fa-file-signature fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
@@ -92,12 +92,12 @@
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <a href="${root}/modify?id=${loginMember.id}" type="button"
+                                        <button
                                            class="btn btn-primary btn-lg shadow" id="mv-modify-button">
                                             Modify
-                                        </a>
+                                        </button>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                             <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                                 <img src="${root}/resources/static/assets/img/member/login-section.jpg"

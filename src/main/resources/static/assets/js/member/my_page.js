@@ -1,5 +1,6 @@
 window.onload = () => {
     getLoginMemberInfo();
+    document.getElementById("mv-modify-button").addEventListener("click", mvModify)
 }
 const getLoginMemberInfo = () => {
     // TODO : 자신의 id만 조회할 수 있게 해야하는데, 지금은 url로 접근하면 어떤 id든 접근 가능.
@@ -33,4 +34,22 @@ const displayMemberInfo = (data) => {
     zipcode.value = data.zipcode;
     mainAddress.value = data.mainAddress;
     subAddress.value = data.subAddress;
+}
+
+const mvModify = () => {
+    const urlParams = new URLSearchParams(location.search);
+    const id = urlParams.get("id");
+   const loginPwd = window.prompt("비밀번호를 입력해주세요.")
+    let url = root + "/member/check";
+
+    fetch(url, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            id: id, loginPwd: loginPwd
+            }
+        )
+    }).then(res => console.log(res));
 }
