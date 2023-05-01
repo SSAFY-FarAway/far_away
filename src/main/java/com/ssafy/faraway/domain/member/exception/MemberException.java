@@ -24,7 +24,6 @@ public class MemberException {
         for(FieldError error: errors) {
             result.put(error.getField(),error.getDefaultMessage());
         }
-
         return new ResponseEntity<>(result, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 

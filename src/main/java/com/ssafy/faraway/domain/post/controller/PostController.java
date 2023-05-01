@@ -3,6 +3,7 @@ package com.ssafy.faraway.domain.post.controller;
 import com.ssafy.faraway.common.PagingResponse;
 import com.ssafy.faraway.common.SearchCondition;
 import com.ssafy.faraway.domain.post.dto.req.PostCommentSaveRequestDto;
+import com.ssafy.faraway.domain.post.dto.req.PostCommentUpdateRequestDto;
 import com.ssafy.faraway.domain.post.dto.req.PostSaveRequestDto;
 import com.ssafy.faraway.domain.post.dto.req.PostUpdateRequestDto;
 import com.ssafy.faraway.domain.post.dto.res.PostCommentListResponseDto;
@@ -16,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,7 +29,7 @@ public class PostController {
     private final PostCommentService postCommentService;
 
     @PostMapping(value = "/")
-    public ResponseEntity savePost(@RequestBody PostSaveRequestDto postSaveRequestDto) {
+    public ResponseEntity savePost(@RequestBody @Valid final PostSaveRequestDto postSaveRequestDto) {
         try {
             int result = postService.save(postSaveRequestDto);
             if (result == 0) {
@@ -44,10 +46,7 @@ public class PostController {
     public ResponseEntity<PagingResponse<PostListResponseDto>> findAllPost(@ModelAttribute SearchCondition searchCondition) {
         PagingResponse<PostListResponseDto> pagingResponse = null;
         try {
-//            list = postService.findAllByCondition(searchCondition);
-            System.out.println(searchCondition);
             pagingResponse = postService.findAllByCondition(searchCondition);
-            System.out.println(pagingResponse);
             if (pagingResponse != null) {
                 return new ResponseEntity<PagingResponse<PostListResponseDto>>(pagingResponse, HttpStatus.OK);
             }
@@ -75,7 +74,7 @@ public class PostController {
     }
 
     @PutMapping(value = "/")
-    public ResponseEntity updatePost(@RequestBody PostUpdateRequestDto postUpdateRequestDto) {
+    public ResponseEntity updatePost(@RequestBody @Valid final PostUpdateRequestDto postUpdateRequestDto) {
         try {
             int result = postService.update(postUpdateRequestDto);
             if (result == 0) {
@@ -103,7 +102,7 @@ public class PostController {
     }
 
     @PostMapping(value = "/comment")
-    public ResponseEntity savePostComment(@RequestBody PostCommentSaveRequestDto postCommentSaveRequestDto) {
+    public ResponseEntity savePostComment(@RequestBody @Valid final PostCommentSaveRequestDto postCommentSaveRequestDto) {
         try {
             int result = postCommentService.save(postCommentSaveRequestDto);
             if (result == 0) {
@@ -129,5 +128,34 @@ public class PostController {
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+    @PutMapping(value = "/comment")
+    public ResponseEntity updateComment(@RequestBody @Valid final PostCommentUpdateRequestDto postCommentUpdateRequestDto) {
+        try {
+            int result = postCommentService.update(postCommentUpdateRequestDto);
+            if (result == 0) {
+                return ResponseEntity.badRequest().build();
+            }
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @DeleteMapping(value = "/comment/{id}")
+    public ResponseEntity deleteComment(@PathVariable Long id) {
+        try {
+            int result = postCommentService.delete(id);
+            if (result == 0) {
+                return ResponseEntity.badRequest().build();
+            }
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+
     }
 }
