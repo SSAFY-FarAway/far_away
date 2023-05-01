@@ -1,22 +1,43 @@
-var root = "/ltw";
+var root = "http://localhost/faraway";
+
+
+window.onload = function () {
+    makeSidoList();
+}
+
+function makeSidoList() {
+    fetch(root+"/attraction/sido")
+        .then((response) => {
+            if(response.status != 200) {
+                alert("에러 발생");
+                location.href=root+"/";
+            }
+            response.json().then((datas) => makeSidoSelect(datas));
+        });
+}
+
+function makeSidoSelect(datas) {
+    var searchArea = document.getElementById("search-area");
+    datas.forEach(data => {
+        let child = document.createElement("option");
+        child.value = data['sidoCode'];
+        child.innerText = data['sidoName'];
+        searchArea.appendChild(child);
+    })
+}
+
+
+
+
+// 지역 이 선택된 경우
 let sel = document.getElementById("search-sigun");
-function makeOptionForSigun(data) {
-  let option = "";
-    data.forEach((area) => {
-      option += "<option value=" + area['gugunCode'] + ">" + area['gugunName'] + "</option>";
-    });
-    sel.innerHTML = option;
-  }
-
-
-// 지역 이 선택된 경우 
 document.getElementById("search-area").addEventListener("change", function () {
 // 지역이 변경된 경우 
   let areaCode = document.getElementById("search-area").value;
 
   if (areaCode != 0) {
-    let sigunAreaUrl = root + "/attraction?action=guguns&sidoCode=" + areaCode;
-  fetch(sigunAreaUrl, { method: 'GET' })
+    let sigunAreaUrl = root + "/attraction/gugun/"+areaCode;
+    fetch(sigunAreaUrl, { method: 'GET' })
     .then((response) => response.json())
     .then((data) => {
       makeOptionForSigun(data);
@@ -26,20 +47,28 @@ document.getElementById("search-area").addEventListener("change", function () {
   }
 })
 
+function makeOptionForSigun(data) {
+    let option = "";
+    data.forEach((area) => {
+        option += "<option value=" + area['gugunCode'] + ">" + area['gugunName'] + "</option>";
+    });
+    sel.innerHTML = option;
+}
+
 // search 버튼이 눌린경우 
     // 검색 버튼을 누르면..
     // 지역, 유형, 검색어 얻기.
     // 위 데이터를 가지고 공공데이터에 요청.
     // 받은 데이터를 이용하여 화면 구성.
     document.getElementById("btn-search").addEventListener("click", () => {
-      let searchUrl = root + "/attraction?action=search";
+      let searchUrl = root + "/attraction/";
       
       let sidoCode = document.getElementById("search-area").value;
       let gugunCode = document.getElementById("search-sigun").value;
       let contentTypeId = document.getElementById("search-content-id").value;
   
       if (parseInt(sidoCode)) {
-          searchUrl += `&sidoCode=${sidoCode}`;
+          searchUrl += `?sidoCode=${sidoCode}`;
       } else {
           alert("지역을 선택해주세요.");
       }
@@ -53,11 +82,11 @@ document.getElementById("search-area").addEventListener("change", function () {
       } else {
           alert('컨텐츠를 선택해주세요.');
       }    
-  
+      console.log(searchUrl);
       fetch(searchUrl)
         .then((response) => response.json())
         .then((data) => {
-          makeList(data)
+            makeList(data)
         }
       );
   });
@@ -67,12 +96,10 @@ document.getElementById("search-area").addEventListener("change", function () {
     //  응답받은 json data = > postion
       let trips = data; // trips => 여행지 정보들 출력 
       positions = [];
-      console.log(data);
     trips.forEach((area) => {
           // title, addr1, zipcode, firstImage, latitude, longitude, 
           let markerInfo = {
             contentId: area.contentId,
-            like: area.scrap,
             title: area.title,
             addr1: area.addr1,
             zipcode: area.zipcode,
@@ -106,6 +133,9 @@ var markerList = [];
 function displayMarker() {
   // 마커 이미지의 이미지 주소입니다
 
+    for (var i = 0; i < ovList.length; i++) {
+        ovList[i].setMap(null);
+    }
   for (var i = 0; i < positions.length; i++) {
   
     // 마커를 생성합니다
@@ -118,29 +148,25 @@ function displayMarker() {
     let content= '<div class="wrap">' + 
     '    <div class="info  shadow ">' + 
     '        <div class="bg-primary ">' +
-    '        		<div class="text-light font-weight-bold p-1 d-flex justify-content-between">' + 
+    '        		<div class="text-light font-weight-bold p-1 d-flex justify-content-between">' +
     					      positions[i].title +
     '         		<div class="far fa-times-circle fa-lg" onclick="closeOverlay('+i+')" title="닫기"></div>' + 
     '        		</div>'+
     '		   </div>' + 
     '        <div class="body">' + 
-    '            <div class="img">' +
-    '                <img src="'+positions[i].firstImage+'" width="73" height="70">' +
-    '           </div>' + 
+    '            <div class="img">' ;
+    if(positions[i].firstImage == '') {
+        content += '<img src="resources/static/assets/img/default.jpg" width="73" height="70">';
+    } else {
+        content += '<img src="'+positions[i].firstImage+'" width="73" height="70">';
+    }
+    content +=
+    '           </div>' +
     '            <div class="desc">' + 
     '                <div class="ellipsis">'+positions[i].addr1+'</div>' + 
     '                <div class="jibun ellipsis">(우)'+positions[i].zipcode+'</div>' +
-    '                <div class="d-flex justify-content-end">';
-    
-    if(user != "" && positions[i].like == false) {
-    	content += '<button id="btn-scrap" class="btn btn-outline-warning d-flex justify-content-center p-1 m-2" type="button" onclick="like('+i+')"> like </button>';
-    } else if(user != "" && positions[i].like == true) {
-    	marker.setImage(markerImage);
-    	content += '<button id="btn-scrap" class="btn btn-outline-danger d-flex justify-content-center p-1 m-2" type="button" onclick="like('+i+')"> dislike </button>';
-    }
-      
-    content +=     
-    	'                </div>' + 
+    '                <div class="d-flex justify-content-end">' +
+    	'                </div>' +
     	'            </div>' + 
     	'        </div>' + 
     	'    </div>' +    
@@ -170,101 +196,6 @@ function closeOverlay(i) {
     ovList[i].setMap(null);     
 }
 
-// 좋아요 버튼 클릭
-
-function like(i) {
-  
-
-  var url = root + "/myattraction?action=like&contentId=" + positions[i].contentId;
-  console.log(url);
-  
-  //likeToUnlike(i);
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      if (data == true) {
-        likeToUnlike(i);
-      } else {
-    	  unlikeToLike(i);
-      }
-    }
-  );
-}
-
-function unlikeToLike(i) {
-    markerList[i].setImage(null);
-    
-    let content = '<div class="wrap">' + 
-      '    <div class="info  shadow ">' + 
-      '        <div class="bg-primary ">' +
-      '        		<div class="text-light font-weight-bold p-1 d-flex justify-content-between">' + 
-      					        positions[i].title +
-      '         		<div class="far fa-times-circle fa-lg" onclick="closeOverlay('+i+')" title="닫기"></div>' + 
-      '        		</div>'+
-      '		   </div>' + 
-      '        <div class="body">' + 
-      '            <div class="img">' +
-      '                <img src="'+positions[i].firstImage+'" width="73" height="70">' +
-      '           </div>' + 
-      '            <div class="desc">' + 
-      '                <div class="ellipsis">'+positions[i].addr1+'</div>' + 
-      '                <div class="jibun ellipsis">(우)'+positions[i].zipcode+'</div>' +
-      '                <div class="d-flex justify-content-end">' + 
-      '				   <button id="btn-scrap" class="btn btn-outline-warning d-flex justify-content-center p-1 m-2" type="button" onclick="like('+i+')"> like </button>' +
-      '                </div>' + 
-      '            </div>' + 
-      '        </div>' + 
-      '    </div>' +    
-      '</div>';
-    
-      // 마커 위에 커스텀오버레이를 표시합니다
-    // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-    ovList[i].setContent(content);
-
-    
-//    kakao.maps.event.addListener(markerList[i], 'click', function () {
-//    	ovList[i].setMap(map);
-//    });
-}
-
-function likeToUnlike(i) {
 
 
-	
-    markerList[i].setImage(markerImage);
-    
-    let content = '<div class="wrap">' + 
-      '    <div class="info  shadow ">' + 
-      '        <div class="bg-primary ">' +
-      '        		<div class="text-light font-weight-bold p-1 d-flex justify-content-between">' + 
-      					        positions[i].title +
-      '         		<div class="far fa-times-circle fa-lg" onclick="closeOverlay('+i+')" title="닫기"></div>' + 
-      '        		</div>'+
-      '		   </div>' + 
-      '        <div class="body">' + 
-      '            <div class="img">' +
-      '                <img src="'+positions[i].firstImage+'" width="73" height="70">' +
-      '           </div>' + 
-      '            <div class="desc">' + 
-      '                <div class="ellipsis">'+positions[i].addr1+'</div>' + 
-      '                <div class="jibun ellipsis">(우)'+positions[i].zipcode+'</div>' +
-      '                <div class="d-flex justify-content-end">' + 
-      '				   <button id="btn-scrap" class="btn btn-outline-danger d-flex justify-content-center p-1 m-2" type="button" onclick="like('+i+')"> dislike </button>' +
-      '                </div>' + 
-      '            </div>' + 
-      '        </div>' + 
-      '    </div>' +    
-      '</div>';
-    
-      // 마커 위에 커스텀오버레이를 표시합니다
-    // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-    ovList[i].setContent(content);
-
-    
-//    kakao.maps.event.addListener(markerList[i], 'click', function () {
-//    	ovList[i].setMap(map);
-//    });
-
-}
 
