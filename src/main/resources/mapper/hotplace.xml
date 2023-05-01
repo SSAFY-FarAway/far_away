@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.faraway.domain.hotplace.repository.HotPlaceRepository">
+    <insert id="save" parameterType="HotPlace">
+        insert into hotplace (member_id, title, content, zipcode, main_address, sub_address, rating)
+        values (#{memberId}, #{title}, #{content}, #{zipcode}, #{mainAddress}, #{subAddress}, #{rating})
+    </insert>
+</mapper>
