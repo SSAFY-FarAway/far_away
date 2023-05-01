@@ -1,8 +1,9 @@
 package com.ssafy.faraway;
 
-import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
@@ -32,7 +33,22 @@ public class MainController {
     }
 
     @GetMapping("/modify")
-    public String mvModify () {
+    public String mvModify() {
         return "member/modify";
+    }
+
+    @GetMapping("/search_place")
+    public String searchPlace() {
+        return "attraction/search_place";
+    }
+
+    @GetMapping("/plan_list")
+    public String planList(@RequestParam int page,@RequestParam(required = false) String key, @RequestParam(required = false) String word, Model model) {
+        model.addAttribute("page",page);
+        model.addAttribute("key",key);
+        model.addAttribute("word",word);
+
+        return "plan/list";
+
     }
 }

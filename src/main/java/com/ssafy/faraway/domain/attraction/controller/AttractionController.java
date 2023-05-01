@@ -38,7 +38,7 @@ public class AttractionController {
     }
 
 
-    @GetMapping("/gugun/{sidoCode}}")
+    @GetMapping("/gugun/{sidoCode}")
     public ResponseEntity<List<GugunGetResponseDto>> findAllGugun(@PathVariable int sidoCode) {
         List<GugunGetResponseDto> list = null;
         try {
@@ -53,16 +53,17 @@ public class AttractionController {
 
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<AttractionGetResponseDto>> findAttractionBySidoCodeAndGugunCodeAndContentTypeId(
             AttractionGetRequestDto attractionGetRequestDto) {
-
+        System.out.println(attractionGetRequestDto);
         List<AttractionGetResponseDto> list = null;
         try {
             list = attractionService.findAttractionBySidoCodeAndGugunCodeAndContentTypeId(attractionGetRequestDto);
             if(list == null || list.size() == 0) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
+            System.out.println(list);
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();

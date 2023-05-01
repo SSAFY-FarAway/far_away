@@ -31,6 +31,7 @@ CREATE TABLE `plan` (
 
 DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member` (
+
                           `id`	bigint	AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
                           `login_id`	varchar(20)	NOT NULL UNIQUE	COMMENT 'String',
                           `login_pwd`	varchar(255)	NOT NULL	COMMENT 'String',

@@ -3,12 +3,13 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
-  <jsp:include page="./frament/head.jsp" />
-  <body id="page-top">
-    <jsp:include page="./frament/nav.jsp" />
-    <!-- Masthead-->
-    <header class="masthead">
-      <div class="container">
+<jsp:include page="./frament/head.jsp"/>
+<body id="page-top">
+<jsp:include page="./frament/nav.jsp"/>
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container">
+
         <div class="masthead-subheading">Wherever You Go</div>
         <div class="masthead-heading text-uppercase">FAR AWAY</div>
         <a
@@ -50,9 +51,10 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
               <i class="far fa-tired fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="my-3">You get Tired?</h4>
-            <p class="text-muted">피곤에 찌든 자여 여행을 떠나라~</p>
-          </div>
+
+                <h4 class="my-3">You get Tired?</h4>
+                <p class="text-muted">피곤에 찌든 자여 여행을 떠나라~</p>
+            </div>
         </div>
       </div>
     </section>
@@ -417,10 +419,11 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         </div>
       </div>
     </div>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-    <!-- Core theme JS-->
-    <script src="resources/static/assets/js/script.js"></script>
-  </body>
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+<!-- Core theme JS-->
+<script src="resources/static/assets/js/script.js"></script>
+</body>
 </html>
