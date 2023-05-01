@@ -54,7 +54,7 @@ public class PlanController {
         }
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<PagingResponse<PlanGetResponseDto>> findAllByCondition(@ModelAttribute SearchCondition searchCondition) {
         PagingResponse<PlanGetResponseDto> pagingResponse = null;
         try {

@@ -42,7 +42,68 @@
         <h3 class="section-subheading text-muted">
             원하는 여행경로를 공유해보세요.
         </h3>
-
+        <div class="container" id="article-list-section">
+            <div class="row align-self-center mb-2">
+                <div class="col-md-2 text-start">
+                    <button type="button" id="btn-mv-register" class="btn btn-outline-primary btn shadow-sm">
+                        글쓰기
+                    </button>
+                </div>
+                <div class="col-md-7 offset-3">
+                    <form class="d-flex ">
+                        <select id="key"
+                                class="font-weight-bold shadow-sm form-select form-select-sm ms-5 me-1 w-50"
+                                aria-label="검색조건">
+                            <option selected>검색조건</option>
+                            <option value="articleno">글번호</option>
+                            <option value="subject">제목</option>
+                            <option value="userid">작성자</option>
+                        </select>
+                        <div class="input-group shadow-sm">
+                            <input type="text" name="word" id="word" class="form-control" value="${word}" placeholder="검색어..." />
+                            <button class="btn btn-primary" type="button">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <table class="table table-hover shadow rounded" id="plan-table">
+                <thead>
+                <tr class="text-center table-warning">
+                    <th scope="col">경로번호</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">작성자</th>
+                    <th scope="col">조회수</th>
+                    <th scope="col">작성일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="article" items="${articles}">
+                    <tr class="text-center">
+                        <th scope="row">${article.id}</th>
+                        <td class="text-start">
+                            <a href="#" class="article-title link-dark" data-no="${article.id}"
+                               style="text-decoration: none">
+                                    ${article.subject}
+                            </a>
+                        </td>
+                        <td>${article.memberName}</td>
+                        <td>${article.hit}</td>
+                        <td>${article.createdDate}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation" class="row" id="navigation">
+                <div style="display:none" id="currentPage">${page}</div>
+            </nav>
+        </div>
+        <form id="form-param" method="get" action="">
+            <input type="hidden" id="p-action" name="action" value="">
+            <input type="hidden" id="p-pgno" name="pgno" value="">
+            <input type="hidden" id="p-key" name="key" value="">
+            <input type="hidden" id="p-word" name="word" value="">
+        </form>
+    </div>
 
 
     </div>
@@ -75,6 +136,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="resources/static/assets/js/script.js"></script>
+<script src="resources/static/assets/js/plan/list.js"></script>
 
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 <!-- kakao api JS -->

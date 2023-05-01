@@ -17,7 +17,7 @@ public class SearchCondition {
 
     public SearchCondition() {
         this.page = 1;
-        this.recordSize = 10;
+        this.recordSize = 3;
         this.pageSize = 10;
     }
 

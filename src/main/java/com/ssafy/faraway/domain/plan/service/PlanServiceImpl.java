@@ -32,7 +32,6 @@ public class PlanServiceImpl implements PlanService{
     @Override
     public PagingResponse<PlanGetResponseDto> findAllByCondition(SearchCondition searchCondition) throws Exception {
         int count = planRepository.getTotalCount(searchCondition);
-        System.out.println(count);
         if (count < 1) {
             return new PagingResponse<>(Collections.emptyList(), null);
         }
