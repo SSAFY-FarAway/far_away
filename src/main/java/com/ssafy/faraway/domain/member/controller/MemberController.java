@@ -127,7 +127,7 @@ public class MemberController {
     }
 
     @GetMapping("/check/{loginId}") //countByLoginId
-    public ResponseEntity<?> loginIdCheck(@PathVariable("loginId") String loginId) throws Exception {
+    public ResponseEntity<?> loginIdCheck(@PathVariable("loginId") String loginId) {
         try {
             int cnt = memberService.loginIdCheck(loginId);
             return new ResponseEntity<>(cnt + "", HttpStatus.OK);
@@ -137,7 +137,19 @@ public class MemberController {
         }
     }
 
-
+    @PostMapping("/check")
+    public ResponseEntity<?> loginPwdCheck(@RequestParam Long id, @RequestParam String loginPwd) {
+        try {
+            if(!memberService.loginPwdCheck(id, loginPwd)){ // different
+                return new ResponseEntity<>("비밀번호가 올바르지 않습니다.", HttpStatus.UNAUTHORIZED);
+            }
+            List<MemberListResponseDto> list = memberService.findAll();
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return exceptionHandling(e);
+        }
+    }
 
     private ResponseEntity<String> exceptionHandling(Exception e) {
         e.printStackTrace();

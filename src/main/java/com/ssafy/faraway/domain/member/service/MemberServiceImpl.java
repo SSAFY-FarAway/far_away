@@ -75,6 +75,11 @@ public class MemberServiceImpl implements MemberService{
     public Integer loginIdCheck(String loginId) throws SQLException {
         return memberRepository.loginIdCheck(loginId);
     }
+    @Transactional(readOnly = true)
+    @Override
+    public boolean loginPwdCheck(Long id, String loginPwd) throws SQLException {
+        return checkPwd(id, loginPwd);
+    }
 
     public boolean checkPwd(Long id, String loginPwd){
         String originalLoginPwd = memberRepository.findLoginPwdById(id);

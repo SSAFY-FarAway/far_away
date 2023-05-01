@@ -26,4 +26,5 @@ public interface MemberService {
     MemberLoginResponseDto findByLoginIdAndLoginPwd(MemberLoginRequestDto memberLoginRequestDto) throws SQLException;
 
     Integer loginIdCheck(String loginId) throws SQLException;
+    boolean loginPwdCheck(Long id, String loginPwd) throws SQLException;
 }
