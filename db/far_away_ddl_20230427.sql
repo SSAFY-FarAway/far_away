@@ -78,16 +78,16 @@ CREATE TABLE `plan_like` (
                              `created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime'
 );
 
-DROP TABLE IF EXISTS `file`;
+DROP TABLE IF EXISTS `file_info`;
 
-CREATE TABLE IF NOT EXISTS `file` (
+CREATE TABLE IF NOT EXISTS `file_info` (
   `id` bigint AUTO_INCREMENT PRIMARY KEY COMMENT 'Long',
   `hotplace_id` bigint NOT NULL COMMENT 'Long',
   `save_folder` VARCHAR(45) NOT NULL COMMENT 'String',
   `original_file` VARCHAR(50) NOT NULL COMMENT 'String',
   `save_file` VARCHAR(50) NOT NULL COMMENT 'String',
   `created_date`	timestamp	NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT 'LocalDateTime',
-  CONSTRAINT `FK_file_hotplace_id_TO_hotplace_id`
+  CONSTRAINT `FK_file_info_hotplace_id_TO_hotplace_id`
     FOREIGN KEY (`hotplace_id`)
     REFERENCES `hotplace` (`id`)
     ON DELETE NO ACTION
