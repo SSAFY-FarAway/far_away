@@ -3,6 +3,7 @@ package com.ssafy.faraway.domain.hotplace.controller;
 import com.ssafy.faraway.common.PagingResponse;
 import com.ssafy.faraway.common.SearchCondition;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceCommentSaveRequestDto;
+import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceCommentUpdateRequestDto;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSaveRequestDto;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceUpdateRequestDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceCommentListResponseDto;
@@ -122,6 +123,20 @@ public class HotPlaceController {
                 return ResponseEntity.noContent().build();
             }
             return new ResponseEntity<List<HotPlaceCommentListResponseDto>>(list, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @PutMapping("/comment")
+    public ResponseEntity updateComment(@RequestBody @Valid HotPlaceCommentUpdateRequestDto hotPlaceCommentUpdateRequestDto) {
+        try {
+            int result = hotPlaceCommentService.update(hotPlaceCommentUpdateRequestDto);
+            if (result == 0) {
+                return ResponseEntity.badRequest().build();
+            }
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();

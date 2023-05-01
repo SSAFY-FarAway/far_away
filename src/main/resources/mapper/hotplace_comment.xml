@@ -16,4 +16,10 @@
         on hc.member_id = m.id
         and hc.hotplace_id = #{id}
     </select>
+
+    <update id="update" parameterType="HotPlaceCommentUpdateRequestDto">
+        update hotplace_comment
+        set content = #{content}
+        where id = #{id} and hotplace_id = #{hotPlaceId} and member_id = #{memberId}
+    </update>
 </mapper>

@@ -1,5 +1,6 @@
 package com.ssafy.faraway.domain.hotplace.repository;
 
+import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceCommentUpdateRequestDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceCommentListResponseDto;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlaceComment;
 import org.apache.ibatis.annotations.Mapper;
@@ -11,4 +12,5 @@ import java.util.List;
 public interface HotPlaceCommentRepository {
     Integer save(HotPlaceComment hotPlaceComment) throws SQLException;
     List<HotPlaceCommentListResponseDto> findAllByHotPlaceId(Long id) throws SQLException;
+    Integer update(HotPlaceCommentUpdateRequestDto hotPlaceCommentUpdateRequestDto) throws SQLException;
 }
