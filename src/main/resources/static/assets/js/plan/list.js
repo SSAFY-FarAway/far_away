@@ -3,10 +3,12 @@ window.onload = function() {
 
     initList();
 }
-const currentPage = document.getElementById("currentPage").innerText;
-
+const urlParams = new URLSearchParams(location.search);
+const currentPage = urlParams.get("page");
+const key = urlParams.get("key");
+const word = urlParams.get("word");
 function initList() {
-    fetch(root+"/plan?page="+currentPage)
+    fetch(root+"/plan?page="+currentPage+"&key="+key+"&word="+word)
         .then((response) => {
             response.json().then((data) => {
                 makeList(data)
@@ -68,13 +70,13 @@ function makeNavigation(pagination) {
 
     for(let i = pagination.startPage;i<=pagination.endPage;i++) {
         if(i == currentPage) {
-            content += '<li class="page-item active"><a class="page-link" href="' + root + '/plan_list?page=' + i + '">'+i+'</a></li>';
+            content += '<li class="page-item active"><a class="page-link" href="' + root + '/plan_list?page=' + i +'&key='+key+'&word='+word+'">'+i+'</a></li>';
         } else {
             content += '<li class="page-item"><a class="page-link" href="' + root + '/plan_list?page=' + i + '">'+i+'</a></li>';
         }
     }
 
-    if(pagination.endPage == pagination.totalPageCount) {
+    if(pagination.endPage == pagination.totalRecordCount) {
         content += '<li class ="page-item disabled"><a class="page-link" href="#"> Next </a></li>';
     } else {
         content += '<li class ="page-item"><a class="page-link" href="'+ root+'/plan_list?page=' + pagination.endPage
@@ -84,3 +86,9 @@ function makeNavigation(pagination) {
     navigation.innerHTML = content;
 
 }
+
+document.getElementById("btn-search").addEventListener("click", () => {
+    // 검색 버튼클릭시
+    // key와 word와 currentPage를 가지고 이동
+
+})

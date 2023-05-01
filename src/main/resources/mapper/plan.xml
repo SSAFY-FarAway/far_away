@@ -13,7 +13,7 @@
         select p.id, p.title, m.login_id, p.hit, p.created_date
         from plan p, member m
         where p.member_id = m.id
-        <if test='key != null and !key.equals("none")'>
+        <if test='key != null and !key.equals("none") and !key.equals("")'>
             and ${key} like concat('%', #{word}, '%')
         </if>
         <if test='orderBy != null and !orderBy.equals("none")'>

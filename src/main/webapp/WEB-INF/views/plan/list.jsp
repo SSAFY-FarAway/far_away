@@ -50,18 +50,19 @@
                     </button>
                 </div>
                 <div class="col-md-7 offset-3">
-                    <form class="d-flex ">
+                    <form class="d-flex" id="search-form">
+                        <input type="hidden" id="key-attribute" value="${key}">
+                        <input type="hidden" id="word-attribute" value="${word}">
                         <select id="key"
                                 class="font-weight-bold shadow-sm form-select form-select-sm ms-5 me-1 w-50"
                                 aria-label="검색조건">
                             <option selected>검색조건</option>
-                            <option value="articleno">글번호</option>
-                            <option value="subject">제목</option>
-                            <option value="userid">작성자</option>
+                            <option value="p.title"}>제목</option>
+                            <option value="m.login_id">작성자</option>
                         </select>
                         <div class="input-group shadow-sm">
                             <input type="text" name="word" id="word" class="form-control" value="${word}" placeholder="검색어..." />
-                            <button class="btn btn-primary" type="button">Search</button>
+                            <button class="btn btn-primary" id="btn-search"type="button">Search</button>
                         </div>
                     </form>
                 </div>
