@@ -16,24 +16,28 @@ public class SearchCondition {
     private Pagination pagination;
 
     public SearchCondition() {
-        this.page = 1;
         this.recordSize = 10;
         this.pageSize = 10;
     }
 
-    public SearchCondition(String key, String word) {
+    public SearchCondition(int page) {
         this();
+        this.page = page;
+    }
+
+    public SearchCondition(int page, String key, String word) {
+        this(page);
         this.key = key;
         this.word = word;
     }
 
-    public SearchCondition(String key, String word, String orderBy) {
-        this(key, word);
+    public SearchCondition(int page, String key, String word, String orderBy) {
+        this(page, key, word);
         this.orderBy = orderBy;
     }
 
-    public SearchCondition(String key, String word, String orderBy, String orderByDir) {
-        this(key, word, orderBy);
+    public SearchCondition(int page, String key, String word, String orderBy, String orderByDir) {
+        this(page, key, word, orderBy);
         this.orderByDir = orderByDir;
     }
 }
