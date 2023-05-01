@@ -6,6 +6,7 @@ import com.ssafy.faraway.domain.member.dto.res.MemberLoginResponseDto;
 import com.ssafy.faraway.domain.member.dto.res.MemberResponseDto;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface MemberRepository {
@@ -20,8 +21,11 @@ public interface MemberRepository {
     Integer findCertifiedById(Long id);
     MemberLoginResponseDto findByLoginIdAndLoginPwd(MemberEncryptedLoginRequestDto memberEncryptedLoginRequestDto);
 
-    Integer idCheck(String loginId);
+    Integer loginIdCheck(String loginId);
 
+    Integer loginPwdCheck(Map<String, Object> map); // null == not equal
+
+    String findLoginPwdById(Long id); // 암호화 된 pwd
 
 
 }

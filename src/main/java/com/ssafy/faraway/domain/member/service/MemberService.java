@@ -21,9 +21,9 @@ public interface MemberService {
 
     Integer update(MemberUpdateRequestDto memberUpdateRequestDto) throws SQLException;
 
-    Integer delete(Long id) throws SQLException;
+    Integer delete(Long id, String loginPwd) throws SQLException;
 
     MemberLoginResponseDto findByLoginIdAndLoginPwd(MemberLoginRequestDto memberLoginRequestDto) throws SQLException;
 
-    Integer idCheck(String loginId) throws SQLException;
+    Integer loginIdCheck(String loginId) throws SQLException;
 }

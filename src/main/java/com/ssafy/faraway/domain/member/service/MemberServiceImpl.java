@@ -49,7 +49,13 @@ public class MemberServiceImpl implements MemberService{
 
     @Transactional
     @Override
-    public Integer delete(Long id) throws SQLException {
+    public Integer delete(Long id, String loginPwd) throws SQLException {
+        // 원본 암호화 패스워드
+        String originalLoginPwd = memberRepository.findLoginPwdById(id);
+        String encryptedLoginPwd = encrypt(loginPwd, memberRepository.findSaltById(id));
+        if(originalLoginPwd != encryptedLoginPwd){
+            return null; // 실패
+        }
         return memberRepository.delete(id);
     }
 
@@ -68,8 +74,8 @@ public class MemberServiceImpl implements MemberService{
 
     @Transactional(readOnly = true)
     @Override
-    public Integer idCheck(String loginId) throws SQLException {
-        return memberRepository.idCheck(loginId);
+    public Integer loginIdCheck(String loginId) throws SQLException {
+        return memberRepository.loginIdCheck(loginId);
     }
 
 

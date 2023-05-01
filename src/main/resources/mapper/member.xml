@@ -66,10 +66,22 @@
         where login_id = #{loginId} and login_pwd = #{loginPwd}
     </select>
     
-    <select id="idCheck" parameterType="String" resultType="Integer">
+    <select id="loginIdCheck" parameterType="String" resultType="Integer">
         select count(login_id)
         from member
         where login_id = #{loginId};
+    </select>
+
+    <select id="findLoginPwdById" parameterType="Long" resultType="String">
+        select login_pwd
+        from member
+        where id = #{id}
+    </select>
+
+    <select id="loginPwdCheck" parameterMap="map" resultType="Long">
+        select id
+        from member
+        where login_id = #{id} and login_pwd = #{loginPwd}
     </select>
 
 

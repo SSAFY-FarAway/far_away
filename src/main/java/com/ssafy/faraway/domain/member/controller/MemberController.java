@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/member")
@@ -80,9 +82,11 @@ public class MemberController {
     }
 
     @DeleteMapping("/")
-    public ResponseEntity<?> delete(@RequestBody Long id) {
+    public ResponseEntity<?> delete(@RequestBody Long id, @RequestBody String loginPwd) {
         try {
-            memberService.delete(id);
+            if(memberService.delete(id, loginPwd) == null){
+                return new ResponseEntity<>("비밀번호가 올바르지 않습니다.", HttpStatus.UNAUTHORIZED);
+            }
             List<MemberListResponseDto> list = memberService.findAll();
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
@@ -107,7 +111,6 @@ public class MemberController {
         }
     }
 
-
     @GetMapping("/logout")
     public ResponseEntity<?> logout(HttpSession session) {
         try {
@@ -125,15 +128,17 @@ public class MemberController {
     }
 
     @GetMapping("/check/{loginId}") //countByLoginId
-    public ResponseEntity<?>  idCheck(@PathVariable("loginId") String loginId) throws Exception {
+    public ResponseEntity<?> loginIdCheck(@PathVariable("loginId") String loginId) throws Exception {
         try {
-            int cnt = memberService.idCheck(loginId);
+            int cnt = memberService.loginIdCheck(loginId);
             return new ResponseEntity<>(cnt + "", HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return exceptionHandling(e);
         }
     }
+
+
 
     private ResponseEntity<String> exceptionHandling(Exception e) {
         e.printStackTrace();
