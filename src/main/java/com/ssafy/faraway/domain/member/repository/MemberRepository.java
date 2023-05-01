@@ -11,16 +11,16 @@ import java.util.List;
 
 @Mapper
 public interface MemberRepository {
-    MemberResponseDto find(Long id);
+    MemberResponseDto findById(Long id);
     List<MemberListResponseDto> findAll();
     Integer save(MemberSaveRequestDto memberSaveRequestDto);
 
     Integer update(MemberUpdateRequestDto memberUpdateRequestDto) ;
     Integer delete(Long id);
-    String salt(Long id);
-    Long id(String loginId);
-    int certified(Long id);
-    MemberLoginResponseDto login(MemberLoginRequestDto memberLoginRequestDto);
+    String findSaltById(Long id);
+    Long findIdByLoginId(String loginId);
+    int findCertifiedById(Long id);
+    MemberLoginResponseDto findByLoginIdAndLoginPwd(MemberLoginRequestDto memberLoginRequestDto);
 
 
 

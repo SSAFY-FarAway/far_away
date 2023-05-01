@@ -35,8 +35,8 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public MemberResponseDto find(Long id) throws SQLException {
-        return memberRepository.find(id);
+    public MemberResponseDto findById(Long id) throws SQLException {
+        return memberRepository.findById(id);
     }
     @Override
     public List<MemberListResponseDto> findAll() throws SQLException {
@@ -56,14 +56,14 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public MemberLoginResponseDto login(MemberLoginRequestDto memberLoginRequestDto) throws SQLException {
-        Long id = memberRepository.id(memberLoginRequestDto.getLoginId());
+    public MemberLoginResponseDto findByLoginIdAndLoginPwd(MemberLoginRequestDto memberLoginRequestDto) throws SQLException {
+        Long id = memberRepository.findIdByLoginId(memberLoginRequestDto.getLoginId());
 //        if(memberRepository.certified(id) == 0){  // 이메일 인증 완료 후 주석 처리 해제 !!
 //            return null;
 //        }
-        String salt = memberRepository.salt(id);
+        String salt = memberRepository.findSaltById(id);
         memberLoginRequestDto.setLoginPwd(encrypt(memberLoginRequestDto.getLoginPwd(), salt));
-        return memberRepository.login(memberLoginRequestDto);
+        return memberRepository.findByLoginIdAndLoginPwd(memberLoginRequestDto);
     }
 
 

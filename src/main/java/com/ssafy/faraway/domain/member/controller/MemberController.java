@@ -25,9 +25,9 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> find(@PathVariable("id") Long id) {
+    public ResponseEntity<?> findById(@PathVariable("id") Long id) {
         try {
-            MemberResponseDto memberResponseDto = memberService.find(id);
+            MemberResponseDto memberResponseDto = memberService.findById(id);
             if (memberResponseDto != null)
                 return new ResponseEntity<>(memberResponseDto, HttpStatus.OK);
             else
@@ -90,11 +90,11 @@ public class MemberController {
     }
 
     @PostMapping("/auth")
-    public ResponseEntity<?> login(@RequestBody @Valid MemberLoginRequestDto memberLoginRequestDto, HttpSession session) {
+    public ResponseEntity<?> findByLoginIdAndLoginPwd(@RequestBody @Valid MemberLoginRequestDto memberLoginRequestDto, HttpSession session) {
         try {
-            MemberLoginResponseDto memberLoginResponseDto = memberService.login(memberLoginRequestDto);
+            MemberLoginResponseDto memberLoginResponseDto = memberService.findByLoginIdAndLoginPwd(memberLoginRequestDto);
             if(memberLoginResponseDto != null){
-                session.setAttribute("memberInfo", memberLoginResponseDto);
+                session.setAttribute("loginMember", memberLoginResponseDto);
                 return new ResponseEntity<>(memberLoginResponseDto, HttpStatus.OK);
             }else{
                 return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
@@ -109,7 +109,7 @@ public class MemberController {
     @GetMapping("/auth")
     public ResponseEntity<?> logout(HttpSession session) {
         try {
-            MemberLoginResponseDto memberLoginResponseDto = (MemberLoginResponseDto) session.getAttribute("memberInfo");
+            MemberLoginResponseDto memberLoginResponseDto = (MemberLoginResponseDto) session.getAttribute("loginMember");
             if(memberLoginResponseDto == null){
                 return new ResponseEntity<>("로그인 정보가 없습니다.", HttpStatus.OK);
             }
