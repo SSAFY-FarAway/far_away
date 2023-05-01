@@ -18,7 +18,7 @@
             order by ${orderBy} ${orderByDir}
         </if>
         <if test='orderBy.equals("none")'>
-            order by p.modified_date ${orderByDir}
+            order by hp.modified_date ${orderByDir}
         </if>
         limit #{pagination.limitStart}, #{recordSize}
     </select>
