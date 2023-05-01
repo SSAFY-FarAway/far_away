@@ -1,6 +1,7 @@
 package com.ssafy.faraway.domain.plan.service;
 
 import com.ssafy.faraway.domain.plan.dto.req.PlanCommentSaveRequestDto;
+import com.ssafy.faraway.domain.plan.dto.req.PlanCommentUpdateRequestDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanCommentListResponseDto;
 import com.ssafy.faraway.domain.plan.repository.PlanCommentRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,10 @@ public class PlanCommentServiceImpl implements PlanCommentService{
     @Override
     public List<PlanCommentListResponseDto> findCommentByPlanId(Long id) throws Exception {
         return planCommentRepository.findCommentByPlanId(id);
+    }
+
+    @Override
+    public int update(PlanCommentUpdateRequestDto planCommentUpdateRequestDto) throws Exception {
+        return planCommentRepository.update(planCommentUpdateRequestDto);
     }
 }

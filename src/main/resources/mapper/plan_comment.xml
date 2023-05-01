@@ -18,4 +18,10 @@
         where p.member_id = m.id
         and p.plan_id = #{id};
     </select>
+
+    <update id="update" parameterType="PlanCommentUpdateRequestDto">
+        update plan_comment
+        set content = #{content}
+        where id = #{id};
+    </update>
 </mapper>

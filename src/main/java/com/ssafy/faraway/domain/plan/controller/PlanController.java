@@ -6,6 +6,7 @@ import com.ssafy.faraway.domain.attraction.dto.res.AttractionGetResponseDto;
 import com.ssafy.faraway.domain.attraction.service.AttractionService;
 import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.plan.dto.req.PlanCommentSaveRequestDto;
+import com.ssafy.faraway.domain.plan.dto.req.PlanCommentUpdateRequestDto;
 import com.ssafy.faraway.domain.plan.dto.req.PlanSaveRequestDto;
 import com.ssafy.faraway.domain.plan.dto.req.PlanUpdateRequestDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanCommentListResponseDto;
@@ -175,6 +176,21 @@ public class PlanController {
                 return new ResponseEntity<>(list, HttpStatus.OK);
             }
             return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @PutMapping("/comment")
+    public ResponseEntity updateComment(@RequestBody PlanCommentUpdateRequestDto planCommentUpdateRequestDto) {
+        // TODO: 세션 ID와 comment 의 member_id 비교 로직 필요
+        try {
+            int result =  planCommentService.update(planCommentUpdateRequestDto);
+            if(result != 0) {
+                return ResponseEntity.ok().build();
+            }
+            return ResponseEntity.badRequest().build();
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
