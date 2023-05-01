@@ -8,6 +8,7 @@ import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.plan.dto.req.PlanCommentSaveRequestDto;
 import com.ssafy.faraway.domain.plan.dto.req.PlanSaveRequestDto;
 import com.ssafy.faraway.domain.plan.dto.req.PlanUpdateRequestDto;
+import com.ssafy.faraway.domain.plan.dto.res.PlanCommentListResponseDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetDetailDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetDetailResponseDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetResponseDto;
@@ -159,6 +160,21 @@ public class PlanController {
                 return ResponseEntity.ok().build();
             }
             return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @GetMapping("/{id}/comment")
+    public ResponseEntity<List<PlanCommentListResponseDto>> findCommentByPlanId(@PathVariable Long id) {
+        List<PlanCommentListResponseDto> list = null;
+        try {
+            list = planCommentService.findCommentByPlanId(id);
+            if(list != null) {
+                return new ResponseEntity<>(list, HttpStatus.OK);
+            }
+            return ResponseEntity.noContent().build();
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
