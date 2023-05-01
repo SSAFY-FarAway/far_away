@@ -1,6 +1,8 @@
 package com.ssafy.faraway.domain.plan.controller;
 
+import com.ssafy.faraway.common.PagingResponse;
 import com.ssafy.faraway.common.PlanSearchCondition;
+import com.ssafy.faraway.common.SearchCondition;
 import com.ssafy.faraway.domain.attraction.dto.req.AttractionGetRequestDto;
 import com.ssafy.faraway.domain.attraction.dto.res.AttractionGetResponseDto;
 import com.ssafy.faraway.domain.attraction.service.AttractionService;
@@ -52,16 +54,15 @@ public class PlanController {
         }
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<PlanGetResponseDto>> findAllByCondition(PlanSearchCondition planSearchCondition) {
-        List<PlanGetResponseDto> list = null;
-        System.out.println(planSearchCondition);
+    @GetMapping()
+    public ResponseEntity<PagingResponse<PlanGetResponseDto>> findAllByCondition(@ModelAttribute SearchCondition searchCondition) {
+        PagingResponse<PlanGetResponseDto> pagingResponse = null;
         try {
-            list = planService.findAllByCondition(planSearchCondition);
-            if(list == null) {
+            pagingResponse = planService.findAllByCondition(searchCondition);
+            if(pagingResponse == null) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>(list,HttpStatus.OK);
+            return new ResponseEntity<>(pagingResponse,HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

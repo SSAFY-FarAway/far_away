@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.faraway.domain.hotplace.repository.HotPlaceRepository">
+    <insert id="save" parameterType="HotPlace">
+        insert into hotplace (member_id, title, content, zipcode, main_address, sub_address, rating)
+        values (#{memberId}, #{title}, #{content}, #{zipcode}, #{mainAddress}, #{subAddress}, #{rating})
+        <selectKey resultType="long" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <select id="getLastInsertId" resultType="long">
+        select last_insert_id()
+    </select>
+
+    <select id="findById" parameterType="long" resultType="HotPlaceResponseDto">
+        select hp.id, hp.member_id, m.login_id, hp.title, hp.content, hp.hit, hp.zipcode, hp.main_address, hp.sub_address, hp.rating, hp.modified_date
+        from hotplace hp join member m
+        on hp.member_id = m.id
+        and hp.id = #{id}
+    </select>
+
+    <update id="updateHit" parameterType="long">
+        update hotplace
+        set hit = hit + 1
+        where id = #{id}
+    </update>
+
+    <select id="findAllByCondition" parameterType="SearchCondition" resultType="HotPlaceListResponseDto">
+        select hp.id, hp.member_id, m.login_id, hp.title, hp.hit, hp.main_address, hp.rating, hp.modified_date
+        from hotplace hp join member m
+        on hp.member_id = m.id
+        <if test='key != null and !key.equals("none")'>
+            and ${key} like concat('%', #{word}, '%')
+        </if>
+        <if test='orderBy != null and !orderBy.equals("none")'>
+            order by ${orderBy} ${orderByDir}
+        </if>
+        <if test='orderBy.equals("none")'>
+            order by hp.modified_date ${orderByDir}
+        </if>
+        limit #{pagination.limitStart}, #{recordSize}
+    </select>
+
+    <select id="getTotalCount" parameterType="SearchCondition" resultType="int">
+        select count(*)
+        from hotplace hp join member m
+        on hp.member_id = m.id
+        <if test='key != null and !key.equals("none")'>
+            and ${key} like concat('%', #{word}, '%')
+        </if>
+    </select>
+
+    <update id="update" parameterType="HotPlaceUpdateRequestDto">
+        update hotplace
+        set title        = #{title},
+            content      = #{content},
+            zipcode      = #{zipcode},
+            main_address = #{mainAddress},
+            sub_address  = #{subAddress},
+            rating = #{rating}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="long">
+        delete
+        from hotplace
+        where id = #{id}
+    </delete>
+</mapper>

@@ -1,6 +1,7 @@
 package com.ssafy.faraway.domain.member.service;
 
 import com.ssafy.faraway.domain.member.dto.req.MemberLoginRequestDto;
+import com.ssafy.faraway.domain.member.dto.req.MemberLoginPwdUpdateRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberSaveRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberUpdateRequestDto;
 import com.ssafy.faraway.domain.member.dto.res.MemberListResponseDto;
@@ -14,14 +15,21 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface MemberService {
-    MemberResponseDto find(Long id) throws SQLException;
+    MemberResponseDto findById(Long id) throws SQLException;
 
     List<MemberListResponseDto> findAll() throws SQLException;
     Integer save(MemberSaveRequestDto memberSaveRequestDto)throws SQLException;
 
     Integer update(MemberUpdateRequestDto memberUpdateRequestDto) throws SQLException;
 
-    Integer delete(Long id) throws SQLException;
+    Integer loginPwdUpdate(MemberLoginPwdUpdateRequestDto memberLoginPwdUpdateRequestDto) throws SQLException;
 
-    MemberLoginResponseDto login(MemberLoginRequestDto memberLoginRequestDto) throws SQLException;
+    Integer delete(Long id, String loginPwd) throws SQLException;
+
+    MemberLoginResponseDto findByLoginIdAndLoginPwd(MemberLoginRequestDto memberLoginRequestDto) throws SQLException;
+
+    Integer loginIdCheck(String loginId) throws SQLException;
+    boolean loginPwdCheck(Long id, String loginPwd) throws SQLException;
+
+
 }

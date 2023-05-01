@@ -4,14 +4,17 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Builder
 public class HotPlaceLike {
     private long hotPlaceId;
     private long memberId;
     private LocalDateTime createdDate;
+
+    @Builder
+    public HotPlaceLike(long hotPlaceId, long memberId) {
+        this.hotPlaceId = hotPlaceId;
+        this.memberId = memberId;
+    }
 }

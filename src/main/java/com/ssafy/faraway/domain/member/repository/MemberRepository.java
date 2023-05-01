@@ -1,8 +1,6 @@
 package com.ssafy.faraway.domain.member.repository;
 
-import com.ssafy.faraway.domain.member.dto.req.MemberLoginRequestDto;
-import com.ssafy.faraway.domain.member.dto.req.MemberSaveRequestDto;
-import com.ssafy.faraway.domain.member.dto.req.MemberUpdateRequestDto;
+import com.ssafy.faraway.domain.member.dto.req.*;
 import com.ssafy.faraway.domain.member.dto.res.MemberListResponseDto;
 import com.ssafy.faraway.domain.member.dto.res.MemberLoginResponseDto;
 import com.ssafy.faraway.domain.member.dto.res.MemberResponseDto;
@@ -11,17 +9,20 @@ import java.util.List;
 
 @Mapper
 public interface MemberRepository {
-    MemberResponseDto find(Long id);
+    MemberResponseDto findById(Long id);
     List<MemberListResponseDto> findAll();
-    Integer save(MemberSaveRequestDto memberSaveRequestDto);
+    Integer save(MemberSaveRequestDto MemberSaveRequestDto);
 
     Integer update(MemberUpdateRequestDto memberUpdateRequestDto) ;
     Integer delete(Long id);
-    String salt(Long id);
-    Long id(String loginId);
-    int certified(Long id);
-    MemberLoginResponseDto login(MemberLoginRequestDto memberLoginRequestDto);
+    String findSaltById(Long id);
+    Long findIdByLoginId(String loginId);
+    Integer findCertifiedById(Long id);
+    MemberLoginResponseDto findByLoginIdAndLoginPwd(MemberLoginRequestDto memberLoginRequestDto);
 
+    Integer loginIdCheck(String loginId);
 
+    String findLoginPwdById(Long id); // 암호화 된 pwd
 
+    Integer loginPwdUpdate(MemberLoginPwdUpdateRequestDto memberLoginPwdUpdateRequestDto);
 }
