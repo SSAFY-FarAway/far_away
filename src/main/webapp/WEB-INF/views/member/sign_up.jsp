@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- Head -->
-<jsp:include page="../frament/head.jsp"/>
+<jsp:include page="../fragment/head.jsp"/>
 
 <body id="page-top">
 <!-- Navigation -->
-<jsp:include page="../frament/nav.jsp"/>
+<jsp:include page="../fragment/nav.jsp"/>
 
 <!-- Masthead-->
 <header class="masthead">
@@ -130,7 +130,7 @@
         </div>
     </div>
 </section>
-<jsp:include page="../frament/footer.jsp"/>
+<jsp:include page="../fragment/footer.jsp"/>
 
 <!-- JS Imports -->
 <!-- Bootstrap core JS-->

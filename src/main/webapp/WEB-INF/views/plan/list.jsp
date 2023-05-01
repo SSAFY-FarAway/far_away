@@ -28,9 +28,9 @@
     <link href="resources/static/assets/css/style.css" rel="stylesheet" />
     <link href="resources/static/assets/css/map.css" rel="stylesheet" />
 </head>
-<jsp:include page="../frament/head.jsp"/>
+<jsp:include page="../fragment/head.jsp"/>
 <body id="page-top">
-<jsp:include page="../frament/nav.jsp"/>
+<jsp:include page="../fragment/nav.jsp"/>
 
 <header class="masthead">
     <div class="masthead-subheading">Share Wherever Your Plan</div>

@@ -3,9 +3,9 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
-<jsp:include page="./frament/head.jsp"/>
+<jsp:include page="./fragment/head.jsp"/>
 <body id="page-top">
-<jsp:include page="./frament/nav.jsp"/>
+<jsp:include page="./fragment/nav.jsp"/>
 <!-- Masthead-->
 <header class="masthead">
     <div class="container">

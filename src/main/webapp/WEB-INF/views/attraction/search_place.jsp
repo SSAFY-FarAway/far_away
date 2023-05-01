@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<jsp:include page="../frament/head.jsp"/>
+<jsp:include page="../fragment/head.jsp"/>
 
 <body id="page-top">
-<jsp:include page="../frament/nav.jsp"/>
+<jsp:include page="../fragment/nav.jsp"/>
 <!-- Navigation   헤더 end -->
 
 <header class="masthead">
