@@ -1,5 +1,6 @@
 package com.ssafy.faraway.domain.member.service;
 
+import com.ssafy.faraway.domain.member.dto.req.MemberEncryptedSaveRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberLoginRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberSaveRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberUpdateRequestDto;
@@ -29,9 +30,8 @@ public class MemberServiceImpl implements MemberService{
     public Integer save(MemberSaveRequestDto memberSaveRequestDto){ //이메일 인증 추가 예정 !
         String salt = getSalt();
         String encodedPwd = encrypt(memberSaveRequestDto.getLoginPwd(), salt);
-        memberSaveRequestDto.setSalt(salt);
-        memberSaveRequestDto.setLoginPwd(encodedPwd);
-        return memberRepository.save(memberSaveRequestDto);
+        MemberEncryptedSaveRequestDto memberEncryptedSaveRequestDto = new MemberEncryptedSaveRequestDto().toDto(memberSaveRequestDto,encodedPwd, salt);
+        return memberRepository.save(memberEncryptedSaveRequestDto);
     }
 
     @Override

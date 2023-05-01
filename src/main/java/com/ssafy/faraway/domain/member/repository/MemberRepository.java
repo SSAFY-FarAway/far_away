@@ -1,5 +1,6 @@
 package com.ssafy.faraway.domain.member.repository;
 
+import com.ssafy.faraway.domain.member.dto.req.MemberEncryptedSaveRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberLoginRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberSaveRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberUpdateRequestDto;
@@ -13,7 +14,7 @@ import java.util.List;
 public interface MemberRepository {
     MemberResponseDto findById(Long id);
     List<MemberListResponseDto> findAll();
-    Integer save(MemberSaveRequestDto memberSaveRequestDto);
+    Integer save(MemberEncryptedSaveRequestDto memberEncryptedSaveRequestDto);
 
     Integer update(MemberUpdateRequestDto memberUpdateRequestDto) ;
     Integer delete(Long id);

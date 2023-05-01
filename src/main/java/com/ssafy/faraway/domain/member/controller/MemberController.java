@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
@@ -55,6 +56,7 @@ public class MemberController {
     @PostMapping("/")
     public ResponseEntity<?> save(@RequestBody @Valid final MemberSaveRequestDto memberSaveRequestDto) {
         try {
+            System.out.println(memberSaveRequestDto);
             memberService.save(memberSaveRequestDto);
             List<MemberListResponseDto> list = memberService.findAll();
             return new ResponseEntity<>(list, HttpStatus.OK);
