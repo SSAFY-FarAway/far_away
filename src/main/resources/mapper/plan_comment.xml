@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.faraway.domain.plan.repository.PlanCommentRepository">
+    <insert id="save" parameterType="PlanCommentSaveRequestDto">
+        insert plan_comment(plan_id, member_id, content)
+        values (#{planId},#{memberId},#{content});
+    </insert>
+
+    <delete id="delete" parameterType="long">
+        delete from plan_comment
+        where id = #{id};
+    </delete>
+
+</mapper>

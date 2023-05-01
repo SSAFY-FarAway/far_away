@@ -5,11 +5,13 @@ import com.ssafy.faraway.domain.attraction.dto.req.AttractionGetRequestDto;
 import com.ssafy.faraway.domain.attraction.dto.res.AttractionGetResponseDto;
 import com.ssafy.faraway.domain.attraction.service.AttractionService;
 import com.ssafy.faraway.domain.member.entity.Member;
+import com.ssafy.faraway.domain.plan.dto.req.PlanCommentSaveRequestDto;
 import com.ssafy.faraway.domain.plan.dto.req.PlanSaveRequestDto;
 import com.ssafy.faraway.domain.plan.dto.req.PlanUpdateRequestDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetDetailDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetDetailResponseDto;
 import com.ssafy.faraway.domain.plan.dto.res.PlanGetResponseDto;
+import com.ssafy.faraway.domain.plan.service.PlanCommentService;
 import com.ssafy.faraway.domain.plan.service.PlanService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +30,7 @@ import java.util.List;
 public class PlanController {
     private final PlanService planService;
     private final AttractionService attractionService;
+    private final PlanCommentService planCommentService;
 
     @PostMapping("/")
     public ResponseEntity savePlan(@RequestBody PlanSaveRequestDto planSaveRequestDto, HttpSession session) {
@@ -131,4 +134,36 @@ public class PlanController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
+
+    @PostMapping("/comment")
+    public ResponseEntity savePlanComment(@RequestBody PlanCommentSaveRequestDto planCommentSaveRequestDto) {
+        //TODO: 세션 ID와 해당 댓글의 MEMBER_ID 일치하는지 확인
+        try {
+            int result = planCommentService.save(planCommentSaveRequestDto);
+            if(result != 0) {
+                return ResponseEntity.ok().build();
+            }
+            return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @DeleteMapping("/comment/{id}")
+    public ResponseEntity deletePlanComment(@PathVariable Long id) {
+        try {
+            int result = planCommentService.delete(id);
+            if(result != 0) {
+                return ResponseEntity.ok().build();
+            }
+            return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+
 }

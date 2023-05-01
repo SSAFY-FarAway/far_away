@@ -20,4 +20,5 @@ public interface PlanService {
     int updatePlan(PlanUpdateRequestDto planUpdateRequestDto) throws Exception;
 
     int deletePlan(Long id) throws Exception;
+
 }
