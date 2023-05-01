@@ -11,4 +11,9 @@ public class MainController {
     public String index() {
         return "index";
     }
+
+    @GetMapping("/member/login")
+    public String mvLogin () {
+        return "member/login";
+    }
 }
