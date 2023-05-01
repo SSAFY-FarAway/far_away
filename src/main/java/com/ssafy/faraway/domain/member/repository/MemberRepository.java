@@ -1,9 +1,6 @@
 package com.ssafy.faraway.domain.member.repository;
 
-import com.ssafy.faraway.domain.member.dto.req.MemberEncryptedSaveRequestDto;
-import com.ssafy.faraway.domain.member.dto.req.MemberLoginRequestDto;
-import com.ssafy.faraway.domain.member.dto.req.MemberSaveRequestDto;
-import com.ssafy.faraway.domain.member.dto.req.MemberUpdateRequestDto;
+import com.ssafy.faraway.domain.member.dto.req.*;
 import com.ssafy.faraway.domain.member.dto.res.MemberListResponseDto;
 import com.ssafy.faraway.domain.member.dto.res.MemberLoginResponseDto;
 import com.ssafy.faraway.domain.member.dto.res.MemberResponseDto;
@@ -21,7 +18,7 @@ public interface MemberRepository {
     String findSaltById(Long id);
     Long findIdByLoginId(String loginId);
     int findCertifiedById(Long id);
-    MemberLoginResponseDto findByLoginIdAndLoginPwd(MemberLoginRequestDto memberLoginRequestDto);
+    MemberLoginResponseDto findByLoginIdAndLoginPwd(MemberEncryptedLoginRequestDto memberEncryptedLoginRequestDto);
 
 
 

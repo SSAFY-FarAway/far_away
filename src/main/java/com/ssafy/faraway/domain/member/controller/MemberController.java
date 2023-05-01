@@ -91,7 +91,7 @@ public class MemberController {
         }
     }
 
-    @PostMapping("/auth")
+    @PostMapping("/login")
     public ResponseEntity<?> findByLoginIdAndLoginPwd(@RequestBody @Valid MemberLoginRequestDto memberLoginRequestDto, HttpSession session) {
         try {
             MemberLoginResponseDto memberLoginResponseDto = memberService.findByLoginIdAndLoginPwd(memberLoginRequestDto);
@@ -108,7 +108,7 @@ public class MemberController {
     }
 
 
-    @GetMapping("/auth")
+    @GetMapping("/logout")
     public ResponseEntity<?> logout(HttpSession session) {
         try {
             MemberLoginResponseDto memberLoginResponseDto = (MemberLoginResponseDto) session.getAttribute("loginMember");

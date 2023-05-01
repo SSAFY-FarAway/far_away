@@ -1,9 +1,6 @@
 package com.ssafy.faraway.domain.member.service;
 
-import com.ssafy.faraway.domain.member.dto.req.MemberEncryptedSaveRequestDto;
-import com.ssafy.faraway.domain.member.dto.req.MemberLoginRequestDto;
-import com.ssafy.faraway.domain.member.dto.req.MemberSaveRequestDto;
-import com.ssafy.faraway.domain.member.dto.req.MemberUpdateRequestDto;
+import com.ssafy.faraway.domain.member.dto.req.*;
 import com.ssafy.faraway.domain.member.dto.res.MemberListResponseDto;
 import com.ssafy.faraway.domain.member.dto.res.MemberLoginResponseDto;
 import com.ssafy.faraway.domain.member.dto.res.MemberResponseDto;
@@ -62,8 +59,9 @@ public class MemberServiceImpl implements MemberService{
 //            return null;
 //        }
         String salt = memberRepository.findSaltById(id);
-        memberLoginRequestDto.setLoginPwd(encrypt(memberLoginRequestDto.getLoginPwd(), salt));
-        return memberRepository.findByLoginIdAndLoginPwd(memberLoginRequestDto);
+        String encodedPwd = encrypt(memberLoginRequestDto.getLoginPwd(), salt);
+        MemberEncryptedLoginRequestDto memberEncryptedLoginRequestDto = new MemberEncryptedLoginRequestDto().toDto(memberLoginRequestDto,encodedPwd);
+        return memberRepository.findByLoginIdAndLoginPwd(memberEncryptedLoginRequestDto);
     }
 
 
