@@ -1,5 +1,7 @@
-package com.ssafy.faraway.domain.post.dto.req;
+package com.ssafy.faraway.domain.hotplace.dto.req;
 
+
+import com.ssafy.faraway.domain.hotplace.entity.HotPlaceComment;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,21 +13,26 @@ import javax.validation.constraints.NotNull;
 @Getter
 @NoArgsConstructor
 @ToString
-public class PostCommentUpdateRequestDto {
-    @NotNull(message = "댓글 정보가 없습니다.")
-    private long id;
+public class HotPlaceCommentSaveRequestDto {
     @NotNull(message = "게시글 정보가 없습니다.")
-    private long postId;
+    private long hotPlaceId;
     @NotNull(message = "사용자 정보가 없습니다.")
     private long memberId;
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
 
     @Builder
-    public PostCommentUpdateRequestDto(long id, long postId, long memberId, String content) {
-        this.id = id;
-        this.postId = postId;
+    public HotPlaceCommentSaveRequestDto(long hotPlaceId, long memberId, String content) {
+        this.hotPlaceId = hotPlaceId;
         this.memberId = memberId;
         this.content = content;
+    }
+
+    public HotPlaceComment toEntity() {
+        return HotPlaceComment.builder()
+                .hotPlaceId(hotPlaceId)
+                .memberId(memberId)
+                .content(content)
+                .build();
     }
 }

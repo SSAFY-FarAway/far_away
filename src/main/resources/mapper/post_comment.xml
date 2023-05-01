@@ -15,4 +15,15 @@
         on pc.member_id = m.id
         and pc.post_id = #{postId}
     </select>
+
+    <update id="update" parameterType="PostCommentUpdateRequestDto">
+        update post_comment
+        set content = #{content}
+        where id = #{id} and post_id = #{postId} and member_id = #{memberId};
+    </update>
+
+    <delete id="delete" parameterType="long">
+        delete from post_comment
+        where id = #{id}
+    </delete>
 </mapper>

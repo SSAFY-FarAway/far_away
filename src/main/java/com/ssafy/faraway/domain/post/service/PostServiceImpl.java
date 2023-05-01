@@ -23,15 +23,8 @@ public class PostServiceImpl implements PostService {
     @Transactional
     @Override
     public Integer save(PostSaveRequestDto postSaveRequestDto) throws Exception {
-        System.out.println(postSaveRequestDto);
         return postRepository.save(postSaveRequestDto.toEntity());
     }
-
-//    @Transactional(readOnly = true)
-//    @Override
-//    public List<PostListResponseDto> findAllByCondition(SearchCondition searchCondition) throws Exception {
-//        return postRepository.findAllByCondition(searchCondition);
-//    }
 
     @Transactional(readOnly = true)
     @Override

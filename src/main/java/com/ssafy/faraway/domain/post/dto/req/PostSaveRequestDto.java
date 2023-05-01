@@ -6,13 +6,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 @Getter
 @NoArgsConstructor
 @ToString
 public class PostSaveRequestDto {
+    @NotNull(message = "사용자 정보가 없습니다.")
     private long memberId;
+    @NotBlank(message = "카테고리를 입력해주세요.")
+    @Size(max = 20, message = "카테고리는 20자 이하입니다.")
     private String category;
+    @NotBlank(message = "제목을 입력해주세요.")
+    @Size(max = 30, message = "제목을 30자 이하입니다.")
     private String title;
+    @NotBlank(message = "내용을 입력해주세요.")
     private String content;
 
     @Builder

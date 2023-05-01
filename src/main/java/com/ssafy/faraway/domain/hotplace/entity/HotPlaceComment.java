@@ -1,20 +1,21 @@
 package com.ssafy.faraway.domain.hotplace.entity;
 
-import lombok.*;
+import lombok.Builder;
 
 import java.time.LocalDateTime;
 
-@Getter
-@NoArgsConstructor
-@ToString
-public class HotPlaceLike {
+public class HotPlaceComment {
+    private long id;
     private long hotPlaceId;
     private long memberId;
+    private String content;
     private LocalDateTime createdDate;
+    private LocalDateTime modifiedDate;
 
     @Builder
-    public HotPlaceLike(long hotPlaceId, long memberId) {
+    public HotPlaceComment(long hotPlaceId, long memberId, String content) {
         this.hotPlaceId = hotPlaceId;
         this.memberId = memberId;
+        this.content = content;
     }
 }
