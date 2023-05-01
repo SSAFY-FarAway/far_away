@@ -55,4 +55,10 @@
             rating = #{rating}
         where id = #{id}
     </update>
+
+    <delete id="delete" parameterType="long">
+        delete
+        from hotplace
+        where id = #{id}
+    </delete>
 </mapper>

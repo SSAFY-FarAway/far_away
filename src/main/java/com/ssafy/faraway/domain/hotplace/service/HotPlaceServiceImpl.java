@@ -53,8 +53,15 @@ public class HotPlaceServiceImpl implements HotPlaceService {
         return new PagingResponse<>(list, pagination);
     }
 
+    @Transactional
     @Override
     public Integer update(HotPlaceUpdateRequestDto hotPlaceUpdateRequestDto) throws Exception {
         return hotPlaceRepository.update(hotPlaceUpdateRequestDto);
+    }
+
+    @Transactional
+    @Override
+    public Integer delete(Long id) throws Exception {
+        return hotPlaceRepository.delete(id);
     }
 }

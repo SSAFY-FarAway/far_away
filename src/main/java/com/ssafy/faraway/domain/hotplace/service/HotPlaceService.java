@@ -13,4 +13,5 @@ public interface HotPlaceService {
     Integer updateHit(Long id) throws Exception;
     PagingResponse<HotPlaceListResponseDto> findAllByCondition(SearchCondition searchCondition) throws Exception;
     Integer update(HotPlaceUpdateRequestDto hotPlaceUpdateRequestDto) throws Exception;
+    Integer delete(Long id) throws Exception;
 }

@@ -18,4 +18,5 @@ public interface HotPlaceRepository {
     List<HotPlaceListResponseDto> findAllByCondition(SearchCondition searchCondition) throws SQLException;
     Integer getTotalCount(SearchCondition searchCondition) throws SQLException;
     Integer update(HotPlaceUpdateRequestDto hotPlaceUpdateRequestDto) throws SQLException;
+    Integer delete(Long id) throws SQLException;
 }

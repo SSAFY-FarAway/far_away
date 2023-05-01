@@ -79,4 +79,19 @@ public class HotPlaceController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteHotPlace(@PathVariable Long id) {
+        try {
+            int result = hotPlaceService.delete(id);
+            if (result == 0) {
+                return ResponseEntity.badRequest().build()
+                        ;
+            }
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
 }
