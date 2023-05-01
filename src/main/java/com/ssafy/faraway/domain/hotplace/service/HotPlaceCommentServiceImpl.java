@@ -30,4 +30,9 @@ public class HotPlaceCommentServiceImpl implements HotPlaceCommentService {
     public Integer update(HotPlaceCommentUpdateRequestDto hotPlaceCommentUpdateRequestDto) throws Exception {
         return hotPlaceCommentRepository.update(hotPlaceCommentUpdateRequestDto);
     }
+
+    @Override
+    public Integer delete(Long id) throws Exception {
+        return hotPlaceCommentRepository.delete(id);
+    }
 }

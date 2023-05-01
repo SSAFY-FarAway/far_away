@@ -22,4 +22,9 @@
         set content = #{content}
         where id = #{id} and hotplace_id = #{hotPlaceId} and member_id = #{memberId}
     </update>
+
+    <delete id="delete" parameterType="long">
+        delete from hotplace_comment
+        where id = #{id}
+    </delete>
 </mapper>

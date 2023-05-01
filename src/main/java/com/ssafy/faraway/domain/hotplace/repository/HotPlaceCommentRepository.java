@@ -13,4 +13,5 @@ public interface HotPlaceCommentRepository {
     Integer save(HotPlaceComment hotPlaceComment) throws SQLException;
     List<HotPlaceCommentListResponseDto> findAllByHotPlaceId(Long id) throws SQLException;
     Integer update(HotPlaceCommentUpdateRequestDto hotPlaceCommentUpdateRequestDto) throws SQLException;
+    Integer delete(Long id) throws SQLException;
 }

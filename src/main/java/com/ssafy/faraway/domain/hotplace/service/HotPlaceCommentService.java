@@ -10,4 +10,5 @@ public interface HotPlaceCommentService {
     Integer save(HotPlaceCommentSaveRequestDto hotPlaceCommentSaveRequestDto) throws Exception;
     List<HotPlaceCommentListResponseDto> findAllByHotPlaceId(Long id) throws Exception;
     Integer update(HotPlaceCommentUpdateRequestDto hotPlaceCommentUpdateRequestDto) throws Exception;
+    Integer delete(Long id) throws Exception;
 }
