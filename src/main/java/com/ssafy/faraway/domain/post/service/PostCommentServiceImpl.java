@@ -32,4 +32,10 @@ public class PostCommentServiceImpl implements PostCommentService {
     public Integer update(PostCommentUpdateRequestDto postCommentUpdateRequestDto) throws Exception {
         return postCommentRepository.update(postCommentUpdateRequestDto);
     }
+
+    @Transactional
+    @Override
+    public Integer delete(Long id) throws Exception {
+        return postCommentRepository.delete(id);
+    }
 }

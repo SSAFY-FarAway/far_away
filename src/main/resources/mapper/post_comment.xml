@@ -21,4 +21,9 @@
         set content = #{content}
         where id = #{id} and post_id = #{postId} and member_id = #{memberId};
     </update>
+
+    <delete id="delete" parameterType="long">
+        delete from post_comment
+        where id = #{id}
+    </delete>
 </mapper>

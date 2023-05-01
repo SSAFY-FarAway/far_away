@@ -147,4 +147,19 @@ public class PostController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
+    @DeleteMapping("/comment/{id}")
+    public ResponseEntity deleteComment(@PathVariable Long id) {
+        try {
+            int result = postCommentService.delete(id);
+            if (result == 0) {
+                return ResponseEntity.badRequest().build();
+            }
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+
+    }
 }

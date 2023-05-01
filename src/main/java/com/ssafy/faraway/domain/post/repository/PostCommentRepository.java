@@ -13,4 +13,5 @@ public interface PostCommentRepository {
     Integer save(PostComment postComment) throws SQLException;
     List<PostCommentListResponseDto> findAllByPostId(long postId) throws SQLException;
     Integer update(PostCommentUpdateRequestDto postCommentUpdateRequestDto) throws SQLException;
+    Integer delete(Long id) throws SQLException;
 }

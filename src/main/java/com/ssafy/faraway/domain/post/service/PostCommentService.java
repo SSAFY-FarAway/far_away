@@ -10,4 +10,5 @@ public interface PostCommentService {
     Integer save(PostCommentSaveRequestDto postCommentSaveRequestDto) throws Exception;
     List<PostCommentListResponseDto> findAllByPostId(long postId) throws Exception;
     Integer update(PostCommentUpdateRequestDto postCommentUpdateRequestDto) throws Exception;
+    Integer delete(Long id) throws Exception;
 }
