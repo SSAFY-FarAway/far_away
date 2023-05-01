@@ -26,12 +26,6 @@ public class PostServiceImpl implements PostService {
         return postRepository.save(postSaveRequestDto.toEntity());
     }
 
-//    @Transactional(readOnly = true)
-//    @Override
-//    public List<PostListResponseDto> findAllByCondition(SearchCondition searchCondition) throws Exception {
-//        return postRepository.findAllByCondition(searchCondition);
-//    }
-
     @Transactional(readOnly = true)
     @Override
     public PagingResponse<PostListResponseDto> findAllByCondition(SearchCondition searchCondition) throws Exception {
