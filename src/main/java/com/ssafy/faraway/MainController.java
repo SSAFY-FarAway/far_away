@@ -12,8 +12,19 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/member/login")
+    @GetMapping("/login")
     public String mvLogin () {
         return "member/login";
     }
+
+    @GetMapping("/signUp")
+    public String mvSignUp () {
+        return "member/sign_up";
+    }
+
+    @GetMapping("/myPage")
+    public String mvMyPage () {
+        return "member/my_page";
+    }
+
 }

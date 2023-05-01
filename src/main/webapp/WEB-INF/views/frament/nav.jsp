@@ -30,10 +30,10 @@
 
         <c:if test="${empty userinfo}">
           <li class="nav-item">
-            <a class="nav-link" href="${root}/member/login">login</a>
+            <a class="nav-link" href="${root}/login">login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${root}/member/sign_up.jsp#signup-section">Sign Up</a>
+            <a class="nav-link" href="${root}/signUp">Sign Up</a>
           </li>
         </c:if>
         <c:if test="${not empty userinfo}">
