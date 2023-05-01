@@ -15,11 +15,13 @@ import java.util.List;
 public class HotPlaceCommentServiceImpl implements HotPlaceCommentService {
     private final HotPlaceCommentRepository hotPlaceCommentRepository;
 
+    @Transactional
     @Override
     public Integer save(HotPlaceCommentSaveRequestDto hotPlaceCommentSaveRequestDto) throws Exception {
         return hotPlaceCommentRepository.save(hotPlaceCommentSaveRequestDto.toEntity());
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<HotPlaceCommentListResponseDto> findAllByHotPlaceId(Long id) throws Exception {
         return hotPlaceCommentRepository.findAllByHotPlaceId(id);
@@ -31,6 +33,7 @@ public class HotPlaceCommentServiceImpl implements HotPlaceCommentService {
         return hotPlaceCommentRepository.update(hotPlaceCommentUpdateRequestDto);
     }
 
+    @Transactional
     @Override
     public Integer delete(Long id) throws Exception {
         return hotPlaceCommentRepository.delete(id);
