@@ -6,4 +6,29 @@
         insert into hotplace (member_id, title, content, zipcode, main_address, sub_address, rating)
         values (#{memberId}, #{title}, #{content}, #{zipcode}, #{mainAddress}, #{subAddress}, #{rating})
     </insert>
+
+    <select id="findAllByCondition" parameterType="SearchCondition" resultType="HotPlaceListResponseDto">
+        select hp.id, hp.member_id, m.login_id, hp.title, hp.hit, hp.main_address, hp.rating, hp.modified_date
+        from hotplace hp join member m
+        on hp.member_id = m.id
+        <if test='key != null and !key.equals("none")'>
+            and ${key} like concat('%', #{word}, '%')
+        </if>
+        <if test='orderBy != null and !orderBy.equals("none")'>
+            order by ${orderBy} ${orderByDir}
+        </if>
+        <if test='orderBy.equals("none")'>
+            order by p.modified_date ${orderByDir}
+        </if>
+        limit #{pagination.limitStart}, #{recordSize}
+    </select>
+
+    <select id="getTotalCount" parameterType="SearchCondition" resultType="int">
+        select count(*)
+        from hotplace hp join member m
+        on hp.member_id = m.id
+        <if test='key != null and !key.equals("none")'>
+            and ${key} like concat('%', #{word}, '%')
+        </if>
+    </select>
 </mapper>

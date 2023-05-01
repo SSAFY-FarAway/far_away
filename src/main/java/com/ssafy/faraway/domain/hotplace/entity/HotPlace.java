@@ -12,6 +12,7 @@ public class HotPlace {
     private long memberId;
     private String title;
     private String content;
+    private int hit;
     private String zipcode;
     private String mainAddress;
     private String subAddress;
