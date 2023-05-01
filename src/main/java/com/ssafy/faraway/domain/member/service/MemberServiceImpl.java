@@ -30,11 +30,12 @@ public class MemberServiceImpl implements MemberService{
         MemberEncryptedSaveRequestDto memberEncryptedSaveRequestDto = new MemberEncryptedSaveRequestDto().toDto(memberSaveRequestDto,encodedPwd, salt);
         return memberRepository.save(memberEncryptedSaveRequestDto);
     }
-
+    @Transactional(readOnly = true)
     @Override
     public MemberResponseDto findById(Long id) throws SQLException {
         return memberRepository.findById(id);
     }
+    @Transactional(readOnly = true)
     @Override
     public List<MemberListResponseDto> findAll() throws SQLException {
         return memberRepository.findAll();
@@ -52,6 +53,7 @@ public class MemberServiceImpl implements MemberService{
         return memberRepository.delete(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public MemberLoginResponseDto findByLoginIdAndLoginPwd(MemberLoginRequestDto memberLoginRequestDto) throws SQLException {
         Long id = memberRepository.findIdByLoginId(memberLoginRequestDto.getLoginId());
@@ -62,6 +64,12 @@ public class MemberServiceImpl implements MemberService{
         String encodedPwd = encrypt(memberLoginRequestDto.getLoginPwd(), salt);
         MemberEncryptedLoginRequestDto memberEncryptedLoginRequestDto = new MemberEncryptedLoginRequestDto().toDto(memberLoginRequestDto,encodedPwd);
         return memberRepository.findByLoginIdAndLoginPwd(memberEncryptedLoginRequestDto);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Integer idCheck(String loginId) throws SQLException {
+        return memberRepository.idCheck(loginId);
     }
 
 

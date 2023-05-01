@@ -124,6 +124,17 @@ public class MemberController {
         }
     }
 
+    @GetMapping("/check/{loginId}") //countByLoginId
+    public ResponseEntity<?>  idCheck(@PathVariable("loginId") String loginId) throws Exception {
+        try {
+            int cnt = memberService.idCheck(loginId);
+            return new ResponseEntity<>(cnt + "", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return exceptionHandling(e);
+        }
+    }
+
     private ResponseEntity<String> exceptionHandling(Exception e) {
         e.printStackTrace();
         return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

@@ -65,6 +65,12 @@
         from member
         where login_id = #{loginId} and login_pwd = #{loginPwd}
     </select>
+    
+    <select id="idCheck" parameterType="String" resultType="Integer">
+        select count(login_id)
+        from member
+        where login_id = #{loginId};
+    </select>
 
 
 </mapper>

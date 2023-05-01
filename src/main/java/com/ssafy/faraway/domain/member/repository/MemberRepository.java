@@ -17,8 +17,10 @@ public interface MemberRepository {
     Integer delete(Long id);
     String findSaltById(Long id);
     Long findIdByLoginId(String loginId);
-    int findCertifiedById(Long id);
+    Integer findCertifiedById(Long id);
     MemberLoginResponseDto findByLoginIdAndLoginPwd(MemberEncryptedLoginRequestDto memberEncryptedLoginRequestDto);
+
+    Integer idCheck(String loginId);
 
 
 
