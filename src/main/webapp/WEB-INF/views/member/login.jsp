@@ -90,8 +90,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- JS files-->
-<script src="${root}/assets/js/script.js"></script>
-<script src='${root}/assets/js/login.js'></script>
+<script src="${root}/resources/static/assets/js/script.js"></script>
+<script src='${root}/resources/static/assets/js/login.js'></script>
 
 </body>
 

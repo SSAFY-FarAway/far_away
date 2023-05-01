@@ -1,5 +1,8 @@
-var root = "/ltw";
-document.getElementById("login-button").addEventListener("click", () => {
+window.onload = () => {
+    document.getElementById("login-button").addEventListener("click", loginSubmit);
+}
+
+const loginSubmit = () => {
     let loginId = document.getElementById("loginId");
     let loginPw = document.getElementById("loginPw");
 
@@ -16,7 +19,15 @@ document.getElementById("login-button").addEventListener("click", () => {
     }
 
     let form = document.getElementById("login-form");
-    let url = root + "/member";
-    form.setAttribute("action",url);
-    form.submit();
-})
+    let url = root + "/member/auth";
+    // form.setAttribute("action",url);
+    // form.submit();
+
+    fetch(url, {
+        method: "post",
+        body: JSON.stringify({
+                loginId: loginId, loginPwd: loginPw
+            }
+        )
+    }).then(res => console.log(res));
+}
