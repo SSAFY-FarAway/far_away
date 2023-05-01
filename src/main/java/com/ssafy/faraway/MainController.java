@@ -11,4 +11,9 @@ public class MainController {
     public String index() {
         return "index";
     }
+
+    @GetMapping("/search_place")
+    public String searchPlace() {
+        return "attraction/search_place";
+    }
 }
