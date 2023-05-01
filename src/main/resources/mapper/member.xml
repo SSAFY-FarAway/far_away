@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.faraway.domain.member.repository.MemberRepository">
+    <select id="find" parameterType="Long" resultType="MemberResponseDto">
+        select id, login_id loginId, last_name lastName, first_name firstName, birth, email, zipcode, main_address mainAddress, sub_address subAddress, mileage, certified,`role`, created_date createdDate
+        from member
+        where id = #{id}
+    </select>
+
+    <select id="findAll"  resultType="MemberListResponseDto">
+        select id, login_id loginId, last_name lastName, first_name firstName, birth, email, mileage, `role`, certified
+        from member
+    </select>
+
+    <!-- regist new member-->
+    <insert id="save" parameterType="MemberSaveRequestDto">
+        insert into member (login_id, login_pwd, last_name, first_name, birth, email, zipcode, main_address,
+        sub_address,salt)
+        values (#{loginId}, #{loginPwd}, #{lastName}, #{firstName}, #{birth}, #{email}, #{zipcode}, #{mainAddress}, #{subAddress}, #{salt})
+    </insert>
+
+    <!-- modify member-->
+    <update id="update" parameterType="MemberUpdateRequestDto">
+        update member
+        <trim prefix="set" suffixOverrides=",">
+            <if test="firstName != null">first_name = #{firstName},</if>
+            <if test="lastName != null">last_name = #{lastName},</if>
+            <if test="birth != null">birth = #{birth},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="zipcode != null">zipcode = #{zipcode},</if>
+            <if test="mainAddress != null">main_address = #{mainAddress},</if>
+            <if test="subAddress != null">sub_address = #{subAddress},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <!-- delete member-->
+    <delete id="delete" parameterType="Long">
+        delete from member
+        where id = #{id}
+    </delete>
+
+    <select id="salt" parameterType="Long" resultType="String">
+        select salt
+        from member
+        where id = #{id}
+    </select>
+
+    <select id="id" parameterType="String" resultType="Long">
+        select id
+        from member
+        where login_id = #{loginId}
+    </select>
+
+    <select id="certified" parameterType="Long" resultType="Integer">
+        select certified
+        from meber
+        where id = #{id}
+    </select>
+
+    <select id="login" parameterType="MemberLoginRequestDto" resultType="MemberLoginResponseDto">
+        select id, login_id loginId, last_name lastName, first_name firstName, mileage, `role`
+        from member
+        where login_id = #{loginId} and login_pwd = #{loginPwd}
+    </select>
+
+
+</mapper>

@@ -1,27 +1,27 @@
 package com.ssafy.faraway.domain.post.entity;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
 @ToString
-public class Post {
+public class PostComment {
     private long id;
+    private long postId;
     private long memberId;
-    private String category;
-    private String title;
     private String content;
-    private long hit;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
     @Builder
-    public Post(long memberId, String category, String title, String content) {
+    public PostComment(long postId, long memberId, String content) {
+        this.postId = postId;
         this.memberId = memberId;
-        this.category = category;
-        this.title = title;
         this.content = content;
     }
 }

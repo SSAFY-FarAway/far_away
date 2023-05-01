@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.faraway.domain.plan.repository.PlanRepository">
+    <insert id="save" parameterType="PlanSaveRequestDto">
+        insert into plan(member_id, title, content, plan)
+        values (#{memberId},#{title},#{content},#{plan});
+    </insert>
+
+
+    <select id="findAllByCondition" parameterType="PlanSearchCondition" resultType="PlanGetResponseDto">
+        select p.id, p.title, m.login_id, p.hit, p.created_date
+        from plan p, member m
+        where p.member_id = m.id
+        <if test="!key.equals('none')">
+            and ${key} like concat('%', #{word}, '%')
+        </if>
+        <if test="!orderBy.equals('none')">
+            order by ${orderBy} ${orderByDir}
+        </if>
+        <if test="orderBy.equals('none')">
+            order by p.modified_date ${orderByDir}
+        </if>
+        ;
+    </select>
+
+    <select id="findById" parameterType="long" resultType="PlanGetDetailDto">
+        select p.id,p.title,p.content,p.hit, m.login_id,p.plan
+        from plan p, member m
+        where p.member_id = m.id
+        and p.id = #{id};
+    </select>
+
+    <update id="updateHit" parameterType="long">
+        update plan
+        set hit = hit+1
+        where id = #{id};
+    </update>
+
+    <update id="updatePlan" parameterType="PlanUpdateRequestDto">
+        update plan
+        set title = #{title}, content = #{content}, plan = #{plan}
+        where id = #{id};
+    </update>
+
+    <delete id="deletePlan" parameterType="long">
+        delete from plan
+        where id = #{id};
+    </delete>
+</mapper>
