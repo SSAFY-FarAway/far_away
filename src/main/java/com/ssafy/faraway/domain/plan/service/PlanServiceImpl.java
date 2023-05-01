@@ -66,6 +66,7 @@ public class PlanServiceImpl implements PlanService{
         return planRepository.deletePlan(id);
     }
 
+
     private double[][] makeMap(List<AttractionGetResponseDto> attractionList) {
         int size = attractionList.size();
         double[][] map = new double[size][size];

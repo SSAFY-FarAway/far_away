@@ -21,4 +21,5 @@ public interface PlanRepository {
     int updatePlan(PlanUpdateRequestDto planUpdateRequestDto) throws SQLException;
 
     int deletePlan(Long id) throws SQLException;
+
 }
