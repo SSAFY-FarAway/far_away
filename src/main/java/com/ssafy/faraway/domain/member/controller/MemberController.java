@@ -58,7 +58,6 @@ public class MemberController {
     @PostMapping("/")
     public ResponseEntity<?> save(@RequestBody @Valid final MemberSaveRequestDto memberSaveRequestDto) {
         try {
-            System.out.println(memberSaveRequestDto);
             memberService.save(memberSaveRequestDto);
             List<MemberListResponseDto> list = memberService.findAll();
             return new ResponseEntity<>(list, HttpStatus.OK);
@@ -82,7 +81,7 @@ public class MemberController {
     }
 
     @DeleteMapping("/")
-    public ResponseEntity<?> delete(@RequestBody Long id, @RequestBody String loginPwd) {
+    public ResponseEntity<?> delete(@RequestParam Long id, @RequestParam String loginPwd) {
         try {
             if(memberService.delete(id, loginPwd) == null){
                 return new ResponseEntity<>("비밀번호가 올바르지 않습니다.", HttpStatus.UNAUTHORIZED);

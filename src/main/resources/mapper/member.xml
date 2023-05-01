@@ -15,7 +15,7 @@
     </select>
 
     <!-- regist new member-->
-    <insert id="save" parameterType="MemberEncryptedSaveRequestDto">
+    <insert id="save" parameterType="MemberSaveRequestDto">
         insert into member (login_id, login_pwd, last_name, first_name, birth, email, zipcode, main_address,
         sub_address,salt)
         values (#{loginId}, #{loginPwd}, #{lastName}, #{firstName}, #{birth}, #{email}, #{zipcode}, #{mainAddress}, #{subAddress}, #{salt})
@@ -76,12 +76,6 @@
         select login_pwd
         from member
         where id = #{id}
-    </select>
-
-    <select id="loginPwdCheck" parameterMap="map" resultType="Long">
-        select id
-        from member
-        where login_id = #{id} and login_pwd = #{loginPwd}
     </select>
 
 

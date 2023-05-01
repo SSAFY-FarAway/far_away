@@ -27,7 +27,8 @@ public class MemberServiceImpl implements MemberService{
     public Integer save(MemberSaveRequestDto memberSaveRequestDto){ //이메일 인증 추가 예정 !
         String salt = getSalt();
         String encodedPwd = encrypt(memberSaveRequestDto.getLoginPwd(), salt);
-        MemberEncryptedSaveRequestDto memberEncryptedSaveRequestDto = new MemberEncryptedSaveRequestDto().toDto(memberSaveRequestDto,encodedPwd, salt);
+        MemberSaveRequestDto memberEncryptedSaveRequestDto = new MemberSaveRequestDto().toDto(memberSaveRequestDto,encodedPwd, salt);
+        System.out.println(memberEncryptedSaveRequestDto);
         return memberRepository.save(memberEncryptedSaveRequestDto);
     }
     @Transactional(readOnly = true)
@@ -50,11 +51,8 @@ public class MemberServiceImpl implements MemberService{
     @Transactional
     @Override
     public Integer delete(Long id, String loginPwd) throws SQLException {
-        // 원본 암호화 패스워드
-        String originalLoginPwd = memberRepository.findLoginPwdById(id);
-        String encryptedLoginPwd = encrypt(loginPwd, memberRepository.findSaltById(id));
-        if(originalLoginPwd != encryptedLoginPwd){
-            return null; // 실패
+        if(!checkPwd(id, loginPwd)){ // 같지 않으면
+            return null;
         }
         return memberRepository.delete(id);
     }
@@ -78,6 +76,14 @@ public class MemberServiceImpl implements MemberService{
         return memberRepository.loginIdCheck(loginId);
     }
 
+    public boolean checkPwd(Long id, String loginPwd){
+        String originalLoginPwd = memberRepository.findLoginPwdById(id);
+        String encryptedLoginPwd = encrypt(loginPwd, memberRepository.findSaltById(id));
+        if(!originalLoginPwd.equals(encryptedLoginPwd)){
+            return false; // different
+        }
+        return true; // same
+    }
 
     public String getSalt() {
         String salt="";

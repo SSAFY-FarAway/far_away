@@ -12,7 +12,7 @@ import java.util.Map;
 public interface MemberRepository {
     MemberResponseDto findById(Long id);
     List<MemberListResponseDto> findAll();
-    Integer save(MemberEncryptedSaveRequestDto memberEncryptedSaveRequestDto);
+    Integer save(MemberSaveRequestDto MemberSaveRequestDto);
 
     Integer update(MemberUpdateRequestDto memberUpdateRequestDto) ;
     Integer delete(Long id);
@@ -23,7 +23,6 @@ public interface MemberRepository {
 
     Integer loginIdCheck(String loginId);
 
-    Integer loginPwdCheck(Map<String, Object> map); // null == not equal
 
     String findLoginPwdById(Long id); // 암호화 된 pwd
 
