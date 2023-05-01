@@ -44,4 +44,15 @@
             and ${key} like concat('%', #{word}, '%')
         </if>
     </select>
+
+    <update id="update" parameterType="HotPlaceUpdateRequestDto">
+        update hotplace
+        set title        = #{title},
+            content      = #{content},
+            zipcode      = #{zipcode},
+            main_address = #{mainAddress},
+            sub_address  = #{subAddress},
+            rating = #{rating}
+        where id = #{id}
+    </update>
 </mapper>

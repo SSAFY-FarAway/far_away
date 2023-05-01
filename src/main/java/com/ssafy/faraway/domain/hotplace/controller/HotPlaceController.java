@@ -3,6 +3,7 @@ package com.ssafy.faraway.domain.hotplace.controller;
 import com.ssafy.faraway.common.PagingResponse;
 import com.ssafy.faraway.common.SearchCondition;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSaveRequestDto;
+import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceUpdateRequestDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceListResponseDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceResponseDto;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceService;
@@ -59,6 +60,20 @@ public class HotPlaceController {
                 return ResponseEntity.noContent().build();
             }
             return new ResponseEntity<PagingResponse<HotPlaceListResponseDto>>(pagingResponse, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @PutMapping("/")
+    public ResponseEntity updateHotPlace(@RequestBody @Valid HotPlaceUpdateRequestDto hotPlaceUpdateRequestDto) {
+        try {
+            int result = hotPlaceService.update(hotPlaceUpdateRequestDto);
+            if (result == 0) {
+                return ResponseEntity.badRequest().build();
+            }
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();

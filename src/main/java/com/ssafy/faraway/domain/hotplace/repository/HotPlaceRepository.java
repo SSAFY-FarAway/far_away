@@ -1,6 +1,7 @@
 package com.ssafy.faraway.domain.hotplace.repository;
 
 import com.ssafy.faraway.common.SearchCondition;
+import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceUpdateRequestDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceListResponseDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceResponseDto;
 import com.ssafy.faraway.domain.hotplace.entity.HotPlace;
@@ -16,4 +17,5 @@ public interface HotPlaceRepository {
     Integer updateHit(Long id) throws SQLException;
     List<HotPlaceListResponseDto> findAllByCondition(SearchCondition searchCondition) throws SQLException;
     Integer getTotalCount(SearchCondition searchCondition) throws SQLException;
+    Integer update(HotPlaceUpdateRequestDto hotPlaceUpdateRequestDto) throws SQLException;
 }

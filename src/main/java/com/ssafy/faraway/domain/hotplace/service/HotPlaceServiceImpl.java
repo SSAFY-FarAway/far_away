@@ -4,6 +4,7 @@ import com.ssafy.faraway.common.Pagination;
 import com.ssafy.faraway.common.PagingResponse;
 import com.ssafy.faraway.common.SearchCondition;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSaveRequestDto;
+import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceUpdateRequestDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceListResponseDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceResponseDto;
 import com.ssafy.faraway.domain.hotplace.repository.HotPlaceRepository;
@@ -50,5 +51,10 @@ public class HotPlaceServiceImpl implements HotPlaceService {
 
         List<HotPlaceListResponseDto> list = hotPlaceRepository.findAllByCondition(searchCondition);
         return new PagingResponse<>(list, pagination);
+    }
+
+    @Override
+    public Integer update(HotPlaceUpdateRequestDto hotPlaceUpdateRequestDto) throws Exception {
+        return hotPlaceRepository.update(hotPlaceUpdateRequestDto);
     }
 }
