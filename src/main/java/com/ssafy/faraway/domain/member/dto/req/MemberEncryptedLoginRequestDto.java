@@ -6,12 +6,11 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class MemberEncryptedLoginRequestDto extends MemberLoginRequestDto{
+public class MemberEncryptedLoginRequestDto{
 
 
     @Builder
     public MemberEncryptedLoginRequestDto(String loginId, String encryptedLoginPwd) {
-        super(loginId, encryptedLoginPwd);
     }
 
     public MemberEncryptedLoginRequestDto toDto(MemberLoginRequestDto memberLoginRequestDto, String encodedPwd){

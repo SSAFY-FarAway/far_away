@@ -66,7 +66,7 @@ public class MemberServiceImpl implements MemberService{
 //        }
         String salt = memberRepository.findSaltById(id);
         String encodedPwd = encrypt(memberLoginRequestDto.getLoginPwd(), salt);
-        MemberEncryptedLoginRequestDto memberEncryptedLoginRequestDto = new MemberEncryptedLoginRequestDto().toDto(memberLoginRequestDto,encodedPwd);
+        MemberLoginRequestDto memberEncryptedLoginRequestDto = new MemberLoginRequestDto().toDto(memberLoginRequestDto,encodedPwd);
         return memberRepository.findByLoginIdAndLoginPwd(memberEncryptedLoginRequestDto);
     }
 

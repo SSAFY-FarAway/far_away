@@ -19,10 +19,9 @@ public interface MemberRepository {
     String findSaltById(Long id);
     Long findIdByLoginId(String loginId);
     Integer findCertifiedById(Long id);
-    MemberLoginResponseDto findByLoginIdAndLoginPwd(MemberEncryptedLoginRequestDto memberEncryptedLoginRequestDto);
+    MemberLoginResponseDto findByLoginIdAndLoginPwd(MemberLoginRequestDto memberLoginRequestDto);
 
     Integer loginIdCheck(String loginId);
-
 
     String findLoginPwdById(Long id); // 암호화 된 pwd
 

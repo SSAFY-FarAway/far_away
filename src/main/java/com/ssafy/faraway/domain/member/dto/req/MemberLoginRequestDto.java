@@ -21,10 +21,17 @@ public class MemberLoginRequestDto {
     private String loginPwd;
 
 
-
+    @Builder
     public MemberLoginRequestDto(String loginId, String loginPwd) {
         this.loginId = loginId;
         this.loginPwd = loginPwd;
+    }
+
+    public MemberLoginRequestDto toDto(MemberLoginRequestDto memberLoginRequestDto, String encodedPwd){
+        return MemberLoginRequestDto.builder()
+                .loginId(memberLoginRequestDto.getLoginId())
+                .loginPwd(encodedPwd)
+                .build();
     }
 }
 

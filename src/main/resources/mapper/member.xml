@@ -60,7 +60,7 @@
         where id = #{id}
     </select>
 
-    <select id="findByLoginIdAndLoginPwd" parameterType="MemberEncryptedLoginRequestDto" resultType="MemberLoginResponseDto">
+    <select id="findByLoginIdAndLoginPwd" parameterType="MemberLoginRequestDto" resultType="MemberLoginResponseDto">
         select id, login_id loginId, last_name lastName, first_name firstName, mileage, `role`
         from member
         where login_id = #{loginId} and login_pwd = #{loginPwd}
