@@ -1,5 +1,6 @@
 package com.ssafy.faraway.domain.member.controller;
 
+import com.ssafy.faraway.domain.member.dto.req.MemberLoginPwdUpdateRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberLoginRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberSaveRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberUpdateRequestDto;
@@ -25,9 +26,12 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> find(@PathVariable("id") Long id) {
+    public ResponseEntity<?> findById(@PathVariable("id") Long id) {
         try {
-            MemberResponseDto memberResponseDto = memberService.find(id);
+            // session 을 가지고와
+            // session 가지고 있는 id랑 id 같은지 비교 -> 같으면 return 정상적으로 / 같지 않으면 비정상적인 접근
+
+            MemberResponseDto memberResponseDto = memberService.findById(id);
             if (memberResponseDto != null)
                 return new ResponseEntity<>(memberResponseDto, HttpStatus.OK);
             else
@@ -77,10 +81,26 @@ public class MemberController {
         }
     }
 
-    @DeleteMapping("/")
-    public ResponseEntity<?> delete(@RequestBody Long id) {
+    @PutMapping("/password")
+    public ResponseEntity<?> loginPwdUpdate(@RequestBody @Valid MemberLoginPwdUpdateRequestDto memberLoginPwdUpdateRequestDto) {
         try {
-            memberService.delete(id);
+            if(memberService.loginPwdUpdate(memberLoginPwdUpdateRequestDto) == null){
+                return new ResponseEntity<>("비밀번호가 올바르지 않습니다.", HttpStatus.UNAUTHORIZED);
+            }
+            MemberResponseDto memberResponseDto = memberService.findById(memberLoginPwdUpdateRequestDto.getId());
+            return new ResponseEntity<>(memberResponseDto, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return exceptionHandling(e);
+        }
+    }
+
+    @DeleteMapping("/")
+    public ResponseEntity<?> delete(@RequestParam Long id, @RequestParam String loginPwd) {
+        try {
+            if(memberService.delete(id, loginPwd) == null){
+                return new ResponseEntity<>("비밀번호가 올바르지 않습니다.", HttpStatus.UNAUTHORIZED);
+            }
             List<MemberListResponseDto> list = memberService.findAll();
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
@@ -89,11 +109,10 @@ public class MemberController {
         }
     }
 
-    @PostMapping("/auth")
-    public ResponseEntity<?> login(@RequestBody @Valid MemberLoginRequestDto memberLoginRequestDto, HttpSession session) {
+    @PostMapping("/login")
+    public ResponseEntity<?> findByLoginIdAndLoginPwd(@RequestBody @Valid MemberLoginRequestDto memberLoginRequestDto, HttpSession session) {
         try {
-            System.out.println("auth 포스트매핑");
-            MemberLoginResponseDto memberLoginResponseDto = memberService.login(memberLoginRequestDto);
+            MemberLoginResponseDto memberLoginResponseDto = memberService.findByLoginIdAndLoginPwd(memberLoginRequestDto);
             if(memberLoginResponseDto != null){
                 session.setAttribute("loginMember", memberLoginResponseDto);
                 return new ResponseEntity<>(memberLoginResponseDto, HttpStatus.OK);
@@ -106,8 +125,7 @@ public class MemberController {
         }
     }
 
-
-    @GetMapping("/auth")
+    @GetMapping("/logout")
     public ResponseEntity<?> logout(HttpSession session) {
         try {
             MemberLoginResponseDto memberLoginResponseDto = (MemberLoginResponseDto) session.getAttribute("loginMember");
@@ -118,6 +136,31 @@ public class MemberController {
             return new ResponseEntity<>("로그아웃 성공.", HttpStatus.OK);
 
         } catch (Exception e) {
+            e.printStackTrace();
+            return exceptionHandling(e);
+        }
+    }
+
+    @GetMapping("/check/{loginId}") //countByLoginId
+    public ResponseEntity<?> loginIdCheck(@PathVariable("loginId") String loginId) {
+        try {
+            int cnt = memberService.loginIdCheck(loginId);
+            return new ResponseEntity<>(cnt + "", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return exceptionHandling(e);
+        }
+    }
+
+    @PostMapping("/check")
+    public ResponseEntity<?> loginPwdCheck(@RequestParam Long id, @RequestParam String loginPwd) {
+        try {
+            if(!memberService.loginPwdCheck(id, loginPwd)){ // different
+                return new ResponseEntity<>("비밀번호가 올바르지 않습니다.", HttpStatus.UNAUTHORIZED);
+            }
+            List<MemberListResponseDto> list = memberService.findAll();
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception e){
             e.printStackTrace();
             return exceptionHandling(e);
         }

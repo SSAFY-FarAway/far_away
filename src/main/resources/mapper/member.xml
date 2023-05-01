@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.faraway.domain.member.repository.MemberRepository">
-    <select id="find" parameterType="Long" resultType="MemberResponseDto">
+    <select id="findById" parameterType="Long" resultType="MemberResponseDto">
         select id, login_id loginId, last_name lastName, first_name firstName, birth, email, zipcode, main_address mainAddress, sub_address subAddress, mileage, certified,`role`, created_date createdDate
         from member
         where id = #{id}
@@ -42,29 +42,46 @@
         where id = #{id}
     </delete>
 
-    <select id="salt" parameterType="Long" resultType="String">
+    <select id="findSaltById" parameterType="Long" resultType="String">
         select salt
         from member
         where id = #{id}
     </select>
 
-    <select id="id" parameterType="String" resultType="Long">
+    <select id="findIdByLoginId" parameterType="String" resultType="Long">
         select id
         from member
         where login_id = #{loginId}
     </select>
 
-    <select id="certified" parameterType="Long" resultType="Integer">
+    <select id="findCertifiedById" parameterType="Long" resultType="Integer">
         select certified
         from meber
         where id = #{id}
     </select>
 
-    <select id="login" parameterType="MemberLoginRequestDto" resultType="MemberLoginResponseDto">
+    <select id="findByLoginIdAndLoginPwd" parameterType="MemberLoginRequestDto" resultType="MemberLoginResponseDto">
         select id, login_id loginId, last_name lastName, first_name firstName, mileage, `role`
         from member
         where login_id = #{loginId} and login_pwd = #{loginPwd}
     </select>
+    
+    <select id="loginIdCheck" parameterType="String" resultType="Integer">
+        select count(login_id)
+        from member
+        where login_id = #{loginId};
+    </select>
 
+    <select id="findLoginPwdById" parameterType="Long" resultType="String">
+        select login_pwd
+        from member
+        where id = #{id}
+    </select>
+    
+    <update id="loginPwdUpdate" parameterType="MemberLoginPwdUpdateRequestDto">
+        update member set
+        login_pwd = #{changeLoginPwd}
+        where id = #{id}
+    </update>
 
 </mapper>
