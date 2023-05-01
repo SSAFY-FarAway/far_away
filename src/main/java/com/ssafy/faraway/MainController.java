@@ -16,4 +16,10 @@ public class MainController {
     public String searchPlace() {
         return "attraction/search_place";
     }
+
+    @GetMapping("/plan_list")
+    public String planList() {
+        return "plan/list";
+
+    }
 }
