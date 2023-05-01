@@ -1,6 +1,7 @@
 package com.ssafy.faraway.domain.member.service;
 
 import com.ssafy.faraway.domain.member.dto.req.MemberLoginRequestDto;
+import com.ssafy.faraway.domain.member.dto.req.MemberLoginPwdUpdateRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberSaveRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberUpdateRequestDto;
 import com.ssafy.faraway.domain.member.dto.res.MemberListResponseDto;
@@ -21,10 +22,14 @@ public interface MemberService {
 
     Integer update(MemberUpdateRequestDto memberUpdateRequestDto) throws SQLException;
 
+    Integer loginPwdUpdate(MemberLoginPwdUpdateRequestDto memberLoginPwdUpdateRequestDto) throws SQLException;
+
     Integer delete(Long id, String loginPwd) throws SQLException;
 
     MemberLoginResponseDto findByLoginIdAndLoginPwd(MemberLoginRequestDto memberLoginRequestDto) throws SQLException;
 
     Integer loginIdCheck(String loginId) throws SQLException;
     boolean loginPwdCheck(Long id, String loginPwd) throws SQLException;
+
+
 }

@@ -6,7 +6,6 @@ import com.ssafy.faraway.domain.member.dto.res.MemberLoginResponseDto;
 import com.ssafy.faraway.domain.member.dto.res.MemberResponseDto;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface MemberRepository {
@@ -25,5 +24,5 @@ public interface MemberRepository {
 
     String findLoginPwdById(Long id); // 암호화 된 pwd
 
-
+    Integer loginPwdUpdate(MemberLoginPwdUpdateRequestDto memberLoginPwdUpdateRequestDto);
 }

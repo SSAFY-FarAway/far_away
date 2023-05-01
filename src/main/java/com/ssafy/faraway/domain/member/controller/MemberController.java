@@ -1,5 +1,6 @@
 package com.ssafy.faraway.domain.member.controller;
 
+import com.ssafy.faraway.domain.member.dto.req.MemberLoginPwdUpdateRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberLoginRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberSaveRequestDto;
 import com.ssafy.faraway.domain.member.dto.req.MemberUpdateRequestDto;
@@ -30,6 +31,9 @@ public class MemberController {
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Long id) {
         try {
+            // session 을 가지고와
+            // session 가지고 있는 id랑 id 같은지 비교 -> 같으면 return 정상적으로 / 같지 않으면 비정상적인 접근
+
             MemberResponseDto memberResponseDto = memberService.findById(id);
             if (memberResponseDto != null)
                 return new ResponseEntity<>(memberResponseDto, HttpStatus.OK);
@@ -74,6 +78,20 @@ public class MemberController {
             memberService.update(memberUpdateRequestDto);
             List<MemberListResponseDto> list = memberService.findAll();
             return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return exceptionHandling(e);
+        }
+    }
+
+    @PutMapping("/password")
+    public ResponseEntity<?> loginPwdUpdate(@RequestBody @Valid MemberLoginPwdUpdateRequestDto memberLoginPwdUpdateRequestDto) {
+        try {
+            if(memberService.loginPwdUpdate(memberLoginPwdUpdateRequestDto) == null){
+                return new ResponseEntity<>("비밀번호가 올바르지 않습니다.", HttpStatus.UNAUTHORIZED);
+            }
+            MemberResponseDto memberResponseDto = memberService.findById(memberLoginPwdUpdateRequestDto.getId());
+            return new ResponseEntity<>(memberResponseDto, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return exceptionHandling(e);

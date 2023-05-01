@@ -77,6 +77,11 @@
         from member
         where id = #{id}
     </select>
-
+    
+    <update id="loginPwdUpdate" parameterType="MemberLoginPwdUpdateRequestDto">
+        update member set
+        login_pwd = #{changeLoginPwd}
+        where id = #{id}
+    </update>
 
 </mapper>

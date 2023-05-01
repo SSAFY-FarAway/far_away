@@ -48,6 +48,26 @@ public class MemberServiceImpl implements MemberService{
         return memberRepository.update(memberUpdateRequestDto);
     }
 
+    @Override
+    public Integer loginPwdUpdate(MemberLoginPwdUpdateRequestDto memberLoginPwdUpdateRequestDto) throws SQLException {
+        // 암호화된 원래 비밀번호
+        String encodedOriginalLoginPwd = memberRepository.findLoginPwdById(memberLoginPwdUpdateRequestDto.getId());
+
+        // 1. 원래 비밀번호가 맞는지 체크
+        if(!checkPwd(memberLoginPwdUpdateRequestDto.getId(), memberLoginPwdUpdateRequestDto.getOriginalLoginPwd())){
+            return null; // 원래 비밀번호 안맞으면 null 리턴
+        }
+        // salt
+        String salt = memberRepository.findSaltById(memberLoginPwdUpdateRequestDto.getId());
+        // 새로운 비밀번호 암호화
+        String encodedChangeLoginPwd = encrypt(memberLoginPwdUpdateRequestDto.getChangeLoginPwd(), salt);
+
+        // 멤버변수에 암호화된 비밀번호를 넣은 DTO
+        MemberLoginPwdUpdateRequestDto memberEncryptedLoginPwdUpdateRequestDto = new MemberLoginPwdUpdateRequestDto()
+                .toDto(memberLoginPwdUpdateRequestDto, encodedOriginalLoginPwd, encodedChangeLoginPwd);
+        return memberRepository.loginPwdUpdate(memberEncryptedLoginPwdUpdateRequestDto);
+    }
+
     @Transactional
     @Override
     public Integer delete(Long id, String loginPwd) throws SQLException {
@@ -82,6 +102,7 @@ public class MemberServiceImpl implements MemberService{
     }
 
     public boolean checkPwd(Long id, String loginPwd){
+        //원래 비밀번호
         String originalLoginPwd = memberRepository.findLoginPwdById(id);
         String encryptedLoginPwd = encrypt(loginPwd, memberRepository.findSaltById(id));
         if(!originalLoginPwd.equals(encryptedLoginPwd)){
