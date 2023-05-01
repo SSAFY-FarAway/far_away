@@ -5,7 +5,14 @@
     <insert id="save" parameterType="HotPlace">
         insert into hotplace (member_id, title, content, zipcode, main_address, sub_address, rating)
         values (#{memberId}, #{title}, #{content}, #{zipcode}, #{mainAddress}, #{subAddress}, #{rating})
+        <selectKey resultType="long" order="AFTER">
+            select last_insert_id()
+        </selectKey>
     </insert>
+
+    <select id="getLastInsertId" resultType="long">
+        select last_insert_id()
+    </select>
 
     <select id="findById" parameterType="long" resultType="HotPlaceResponseDto">
         select hp.id, hp.member_id, m.login_id, hp.title, hp.content, hp.hit, hp.zipcode, hp.main_address, hp.sub_address, hp.rating, hp.modified_date

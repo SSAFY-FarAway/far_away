@@ -6,7 +6,7 @@
         insert into file_info (hotplace_id, save_folder, original_file, save_file)
         values
             <foreach collection="java.util.List" item="file" separator=" , ">
-                (#{file.hotPlaceId}, #{file.saveFolder}, #{file.originalFile}, #{file.saveFile})
+                (select last_insert_id(), #{file.saveFolder}, #{file.originalFile}, #{file.saveFile})
             </foreach>
     </insert>
 </mapper>

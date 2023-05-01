@@ -12,7 +12,8 @@ import java.util.List;
 
 @Mapper
 public interface HotPlaceRepository {
-    Integer save(HotPlace hotPlace) throws SQLException;
+    Long save(HotPlace hotPlace) throws SQLException;
+    Long getLastInsertId() throws SQLException;
     HotPlaceResponseDto findById(Long id) throws SQLException;
     Integer updateHit(Long id) throws SQLException;
     List<HotPlaceListResponseDto> findAllByCondition(SearchCondition searchCondition) throws SQLException;

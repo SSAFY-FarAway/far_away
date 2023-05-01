@@ -41,18 +41,18 @@ public class HotPlaceController {
 
 
     @PostMapping("/")
-    public ResponseEntity saveHotPlace(@RequestBody @Valid HotPlaceSaveRequestDto hotPlaceSaveRequestDto, @RequestParam("uploadFiles") MultipartFile[] files) {
+    public ResponseEntity saveHotPlace(@RequestBody @Valid final HotPlaceSaveRequestDto hotPlaceSaveRequestDto, @RequestParam(value = "uploadFiles", required = false) MultipartFile[] files) {
         try {
-            if (!files[0].isEmpty()) {
+            Long hotPlaceId = hotPlaceService.save(hotPlaceSaveRequestDto);
+            if (hotPlaceId == 0) {
+                return ResponseEntity.badRequest().build();
+            }
+            if (files != null && !files[0].isEmpty()) {
                 String today = new SimpleDateFormat("yyMMdd").format(new Date());
                 String saveFolder = uploadPath + File.separator + today;
                 File folder = getFolder(saveFolder);
-                List<FileInfoSaveRequestDto> fileInfoSaveRequestDtos = getFileInfoSaveRequestDtos(files, today, folder);
-                int result = hotPlaceService.save(hotPlaceSaveRequestDto);
+                List<FileInfoSaveRequestDto> fileInfoSaveRequestDtos = getFileInfoSaveRequestDtos(hotPlaceId, files, today, folder);
                 fileService.save(fileInfoSaveRequestDtos);
-                if (result == 0) {
-                    return ResponseEntity.badRequest().build();
-                }
             }
             return ResponseEntity.ok().build();
         } catch (Exception e) {
@@ -69,7 +69,7 @@ public class HotPlaceController {
         return folder;
     }
 
-    private static List<FileInfoSaveRequestDto> getFileInfoSaveRequestDtos(MultipartFile[] files, String today, File folder) throws IOException {
+    private static List<FileInfoSaveRequestDto> getFileInfoSaveRequestDtos(Long hotPlaceId, MultipartFile[] files, String today, File folder) throws IOException {
         List<FileInfoSaveRequestDto> fileInfoSaveRequestDtos = new ArrayList<>();
         for (MultipartFile file : files) {
             FileInfoSaveRequestDto fileInfoSaveRequestDto = new FileInfoSaveRequestDto();
@@ -77,6 +77,7 @@ public class HotPlaceController {
             if (!originalFileName.isEmpty()) {
                 String saveFileName = UUID.randomUUID() + originalFileName.substring(originalFileName.lastIndexOf('.'));
                 fileInfoSaveRequestDto = FileInfoSaveRequestDto.builder()
+                        .hotPlaceId(hotPlaceId)
                         .saveFolder(today)
                         .originalFile(originalFileName)
                         .saveFile(saveFileName)
@@ -119,7 +120,7 @@ public class HotPlaceController {
     }
 
     @PutMapping("/")
-    public ResponseEntity updateHotPlace(@RequestBody @Valid HotPlaceUpdateRequestDto hotPlaceUpdateRequestDto) {
+    public ResponseEntity updateHotPlace(@RequestBody @Valid final HotPlaceUpdateRequestDto hotPlaceUpdateRequestDto) {
         try {
             int result = hotPlaceService.update(hotPlaceUpdateRequestDto);
             if (result == 0) {
@@ -148,7 +149,7 @@ public class HotPlaceController {
     }
 
     @PostMapping("/comment")
-    public ResponseEntity saveHotPlaceComment(@RequestBody @Valid HotPlaceCommentSaveRequestDto hotPlaceCommentSaveRequestDto) {
+    public ResponseEntity saveHotPlaceComment(@RequestBody @Valid final HotPlaceCommentSaveRequestDto hotPlaceCommentSaveRequestDto) {
         try {
             int result = hotPlaceCommentService.save(hotPlaceCommentSaveRequestDto);
             if (result == 0) {
@@ -176,7 +177,7 @@ public class HotPlaceController {
     }
 
     @PutMapping("/comment")
-    public ResponseEntity updateComment(@RequestBody @Valid HotPlaceCommentUpdateRequestDto hotPlaceCommentUpdateRequestDto) {
+    public ResponseEntity updateComment(@RequestBody @Valid final HotPlaceCommentUpdateRequestDto hotPlaceCommentUpdateRequestDto) {
         try {
             int result = hotPlaceCommentService.update(hotPlaceCommentUpdateRequestDto);
             if (result == 0) {

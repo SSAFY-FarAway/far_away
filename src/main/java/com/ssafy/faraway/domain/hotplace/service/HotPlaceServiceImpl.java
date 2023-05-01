@@ -22,8 +22,10 @@ public class HotPlaceServiceImpl implements HotPlaceService {
 
     @Transactional
     @Override
-    public Integer save(HotPlaceSaveRequestDto hotPlaceSaveRequestDto) throws Exception {
-        return hotPlaceRepository.save(hotPlaceSaveRequestDto.toEntity());
+    public Long save(HotPlaceSaveRequestDto hotPlaceSaveRequestDto) throws Exception {
+//        return hotPlaceRepository.save(hotPlaceSaveRequestDto.toEntity());
+        hotPlaceRepository.save(hotPlaceSaveRequestDto.toEntity());
+        return hotPlaceRepository.getLastInsertId();
     }
 
     @Transactional(readOnly = true)
