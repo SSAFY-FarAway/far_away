@@ -22,8 +22,8 @@
 </header>
 
 <!-- Login Section -->
-<section>
-    <div class="container" id="login-section">
+<section id="login-section">
+    <div class="container">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-lg-12 col-xl-11">
                 <div class="card text-black shadow" style="border-radius: 25px">
@@ -35,7 +35,6 @@
                                 </p>
 
                                 <form class="mx-1 mx-md-4" id='login-form'>
-                                    <input type='hidden' name='action' value='login'/>
                                     <div class="d-flex flex-row mb-4">
                                         <i class="mt-3 fas fa-envelope fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
@@ -91,7 +90,7 @@
 
 <!-- JS files-->
 <script src="${root}/resources/static/assets/js/script.js"></script>
-<script src='${root}/resources/static/assets/js/login.js'></script>
+<script src='${root}/resources/static/assets/js/member/login.js'></script>
 
 </body>
 

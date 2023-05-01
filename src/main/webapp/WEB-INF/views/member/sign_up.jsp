@@ -18,8 +18,8 @@
 </header>
 
 <!-- signup section -->
-<section>
-    <div class="container" id="signup-section">
+<section id="signup-section">
+    <div class="container">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-lg-12 col-xl-11">
                 <div class="card text-black shadow" style="border-radius: 25px">
@@ -31,16 +31,15 @@
                                 </p>
 
                                 <form class="mx-1 mx-md-4" id="form-join" method="POST" action="">
-                                    <input type="hidden" name="action" value="join">
                                     <div class="d-flex flex-row mb-4">
                                         <i class="mt-2 fas fa-file-signature fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0 me-3">
-                                            <input type="text" id="loginId" name="loginId" class="form-control" />
-                                            <label class="form-label" for="loginId">Your Id</label>
+                                            <input type="text" id="login-id" name="loginId" class="form-control" />
+                                            <label class="form-label" for="login-id">ID</label>
                                         </div>
                                         <!-- 아이디 중복 버튼  -->
                                         <div class="col-2">
-                                            <button id="idCheck" class="btn btn-outline-success shadow" type="button">
+                                            <button id="id-check-btn" class="btn btn-outline-success shadow" type="button">
                                                 check
                                             </button>
                                         </div>
@@ -52,26 +51,35 @@
                                     <div class="d-flex flex-row mb-4">
                                         <i class=" mt-2 fas fa-lock fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="loginPw" name="loginPw" class="form-control" />
-                                            <label class="form-label" for="loginPw">Password</label>
+                                            <input type="password" id="login-pwd" name="loginPwd" class="form-control" />
+                                            <label class="form-label" for="login-pwd">Password</label>
                                         </div>
                                     </div>
 
                                     <div class="d-flex flex-row  mb-4">
                                         <i class="mt-2 fas fa-key fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="loginPwConfirm" class="form-control" />
-                                            <label class="form-label" for="loginPwConfirm">Repeat your password</label> </br>
-                                            <span id="passwordConfirmSpan"> </span>
+                                            <input type="password" id="login-pwd-confirm" class="form-control" />
+                                            <label class="form-label" for="login-pwd-confirm">Repeat your password</label> </br>
+                                            <span id="loginPwdConfirmMsg"> </span>
                                         </div>
                                     </div>
-
 
                                     <div class="d-flex flex-row mb-4">
                                         <i class="mt-2 fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="text" id="username" name='username' class="form-control" />
-                                            <label class="form-label" for="username">Your Name</label>
+                                            <input type="text" id="last-name" name='lastName' class="form-control" />
+                                            <label class="form-label" for="last-name">Last Name</label>
+                                            <input type="text" id="first-name" name='firstName' class="form-control" />
+                                            <label class="form-label" for="first-name">First Name</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row mb-4">
+                                        <i class="mt-2 fas fa-birthday-cake fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" id="birth" name="birth" class="form-control" />
+                                            <label class="form-label" for="birth">Your Birth (ex. 990101)</label>
                                         </div>
                                     </div>
 
@@ -82,16 +90,29 @@
                                             <label class="form-label" for="email">Your Email</label>
                                         </div>
                                     </div>
-
                                     <div class="d-flex flex-row mb-4">
-                                        <i class="mt-2 fas fa-phone  fa-lg me-3 fa-fw"></i>
+                                        <i class="mt-2 fas fa-home fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="tel" id="phone" name="phone" class="form-control"
-                                                   pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
-                                            <label class="form-label" for="phone">Your Phone</label> </br>
-                                            <small>Format: 010-1234-7890</small>
+                                            <input type="text" id="zipcode" name="zipcode" class="form-control" />
+                                            <label class="form-label" for="zipcode">Your Zipcode (ex. 90000)</label>
+                                            <input type="text" id="main-address" name="mainAddress" class="form-control" />
+                                            <label class="form-label" for="main-address">Your Main Address</label>
+                                            <input type="text" id="sub-address" name="subAddress" class="form-control" />
+                                            <label class="form-label" for="sub-address">Your Sub Address</label>
                                         </div>
+
                                     </div>
+
+                                    <%-- 전화번호 폼--%>
+<%--                                    <div class="d-flex flex-row mb-4">--%>
+<%--                                        <i class="mt-2 fas fa-phone  fa-lg me-3 fa-fw"></i>--%>
+<%--                                        <div class="form-outline flex-fill mb-0">--%>
+<%--                                            <input type="tel" id="phone" name="phone" class="form-control"--%>
+<%--                                                   pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>--%>
+<%--                                            <label class="form-label" for="phone">Your Phone</label> </br>--%>
+<%--                                            <small>Format: 010-1234-7890</small>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                         <button type="button" class="btn btn-primary btn-lg shadow" id="register-button">
                                             Register
@@ -118,8 +139,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- JS files-->
-<script src="${root}/assets/js/script.js"></script>
-<script src='${root}/assets/js/signup.js'></script>
+<script src="${root}/resources/static/assets/js/script.js"></script>
+<script src='${root}/resources/static/assets/js/member/sign_up.js'></script>
 
 </body>
 

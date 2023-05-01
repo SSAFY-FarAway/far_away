@@ -29,10 +29,10 @@
 
         <c:if test="${empty loginMember}">
           <li class="nav-item">
-            <a class="nav-link" href="${root}/login">login</a>
+            <a class="nav-link" href="${root}/login#login-section">login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${root}/signUp">Sign Up</a>
+            <a class="nav-link" href="${root}/signUp#signup-section">Sign Up</a>
           </li>
         </c:if>
         <c:if test="${not empty loginMember}">
@@ -45,10 +45,10 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${root}/member?action=mypage#mypage-section">My Page</a>
+            <a class="nav-link" href="${root}/myPage?id=${loginMember.id}#mypage-section">My Page</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${root}/member?action=logout">logout</a>
+            <a class="nav-link" onclick="logout()" style="cursor: pointer">logout</a>
           </li>
         </c:if>
       </ul>

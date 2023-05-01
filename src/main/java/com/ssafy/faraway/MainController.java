@@ -17,6 +17,10 @@ public class MainController {
         return "member/login";
     }
 
+    @GetMapping("/logout")
+    public String mvLogout () { return "index";
+    }
+
     @GetMapping("/signUp")
     public String mvSignUp () {
         return "member/sign_up";
@@ -27,4 +31,8 @@ public class MainController {
         return "member/my_page";
     }
 
+    @GetMapping("/modify")
+    public String mvModify () {
+        return "member/modify";
+    }
 }

@@ -92,9 +92,10 @@ public class MemberController {
     @PostMapping("/auth")
     public ResponseEntity<?> login(@RequestBody @Valid MemberLoginRequestDto memberLoginRequestDto, HttpSession session) {
         try {
+            System.out.println("auth 포스트매핑");
             MemberLoginResponseDto memberLoginResponseDto = memberService.login(memberLoginRequestDto);
             if(memberLoginResponseDto != null){
-                session.setAttribute("memberInfo", memberLoginResponseDto);
+                session.setAttribute("loginMember", memberLoginResponseDto);
                 return new ResponseEntity<>(memberLoginResponseDto, HttpStatus.OK);
             }else{
                 return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
@@ -109,9 +110,9 @@ public class MemberController {
     @GetMapping("/auth")
     public ResponseEntity<?> logout(HttpSession session) {
         try {
-            MemberLoginResponseDto memberLoginResponseDto = (MemberLoginResponseDto) session.getAttribute("memberInfo");
+            MemberLoginResponseDto memberLoginResponseDto = (MemberLoginResponseDto) session.getAttribute("loginMember");
             if(memberLoginResponseDto == null){
-                return new ResponseEntity<>("로그인 정보가 없습니다.", HttpStatus.OK);
+                return new ResponseEntity<>("로그인 정보가 없습니다.", HttpStatus.BAD_REQUEST);
             }
             session.invalidate();
             return new ResponseEntity<>("로그아웃 성공.", HttpStatus.OK);
