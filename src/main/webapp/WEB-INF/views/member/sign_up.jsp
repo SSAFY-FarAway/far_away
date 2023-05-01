@@ -32,7 +32,7 @@
 
                                 <form class="mx-1 mx-md-4" id="form-join" method="POST" action="">
                                     <div class="d-flex flex-row mb-4">
-                                        <i class="mt-2 fas fa-file-signature fa-lg me-3 fa-fw"></i>
+                                        <i class="mt-2 fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0 me-3">
                                             <input type="text" id="login-id" name="loginId" class="form-control" />
                                             <label class="form-label" for="login-id">ID</label>
@@ -140,7 +140,7 @@
 
 <!-- JS files-->
 <script src="${root}/resources/static/assets/js/script.js"></script>
-<script src='${root}/resources/static/assets/js/member/sign_up.js'></script>
+<script src='${root}/resources/static/assets/js/member/find.js'></script>
 
 </body>
 

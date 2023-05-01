@@ -36,7 +36,7 @@
 
                                 <form class="mx-1 mx-md-4" id='login-form'>
                                     <div class="d-flex flex-row mb-4">
-                                        <i class="mt-3 fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <i class="mt-3 fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
                                             <input type="text" id="loginId" name="userId" class="form-control"/>
                                             <label class="form-label" for="loginId">Your Id</label>
@@ -62,7 +62,11 @@
                                             Login
                                         </button>
                                     </div>
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <a href="${root}/find">아이디 또는 비밀번호를 분실하셨나요?</a>
+                                    </div>
                                 </form>
+
                             </div>
                             <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                                 <img src="${root}/resources/static/assets/img/member/login-section.jpg" class="img-fluid" alt="Sample image"/>                            </div>
