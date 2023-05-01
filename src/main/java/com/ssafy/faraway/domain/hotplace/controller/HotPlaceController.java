@@ -2,23 +2,30 @@ package com.ssafy.faraway.domain.hotplace.controller;
 
 import com.ssafy.faraway.common.PagingResponse;
 import com.ssafy.faraway.common.SearchCondition;
-import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceCommentSaveRequestDto;
-import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceCommentUpdateRequestDto;
-import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSaveRequestDto;
-import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceUpdateRequestDto;
+import com.ssafy.faraway.domain.hotplace.dto.req.*;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceCommentListResponseDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceListResponseDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceResponseDto;
+import com.ssafy.faraway.domain.hotplace.service.FileInfoService;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceCommentService;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.jni.FileInfo;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -26,20 +33,59 @@ import java.util.List;
 @Api(tags = "hotplace")
 public class HotPlaceController {
     private final HotPlaceService hotPlaceService;
+    private final FileInfoService fileService;
     private final HotPlaceCommentService hotPlaceCommentService;
 
+    @Value("${file.path}")
+    private String uploadPath;
+
+
     @PostMapping("/")
-    public ResponseEntity saveHotPlace(@RequestBody @Valid HotPlaceSaveRequestDto hotPlaceSaveRequestDto) {
+    public ResponseEntity saveHotPlace(@RequestBody @Valid HotPlaceSaveRequestDto hotPlaceSaveRequestDto, @RequestParam("uploadFiles") MultipartFile[] files) {
         try {
-            int result = hotPlaceService.save(hotPlaceSaveRequestDto);
-            if (result == 0) {
-                return ResponseEntity.badRequest().build();
+            if (!files[0].isEmpty()) {
+                String today = new SimpleDateFormat("yyMMdd").format(new Date());
+                String saveFolder = uploadPath + File.separator + today;
+                File folder = getFolder(saveFolder);
+                List<FileInfoSaveRequestDto> fileInfoSaveRequestDtos = getFileInfoSaveRequestDtos(files, today, folder);
+                int result = hotPlaceService.save(hotPlaceSaveRequestDto);
+                fileService.save(fileInfoSaveRequestDtos);
+                if (result == 0) {
+                    return ResponseEntity.badRequest().build();
+                }
             }
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+    private static File getFolder(String saveFolder) {
+        File folder = new File(saveFolder);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+        return folder;
+    }
+
+    private static List<FileInfoSaveRequestDto> getFileInfoSaveRequestDtos(MultipartFile[] files, String today, File folder) throws IOException {
+        List<FileInfoSaveRequestDto> fileInfoSaveRequestDtos = new ArrayList<>();
+        for (MultipartFile file : files) {
+            FileInfoSaveRequestDto fileInfoSaveRequestDto = new FileInfoSaveRequestDto();
+            String originalFileName = file.getOriginalFilename();
+            if (!originalFileName.isEmpty()) {
+                String saveFileName = UUID.randomUUID() + originalFileName.substring(originalFileName.lastIndexOf('.'));
+                fileInfoSaveRequestDto = FileInfoSaveRequestDto.builder()
+                        .saveFolder(today)
+                        .originalFile(originalFileName)
+                        .saveFile(saveFileName)
+                        .build();
+                file.transferTo(new File(folder, saveFileName));
+            }
+            fileInfoSaveRequestDtos.add(fileInfoSaveRequestDto);
+        }
+        return fileInfoSaveRequestDtos;
     }
 
     @GetMapping("/{id}")

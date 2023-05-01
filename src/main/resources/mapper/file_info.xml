@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.faraway.domain.hotplace.repository.FileInfoRepository">
+    <insert id="save" parameterType="java.util.List">
+        insert into file_info (hotplace_id, save_folder, original_file, save_file)
+        values
+            <foreach collection="java.util.List" item="file" separator=" , ">
+                (#{file.hotPlaceId}, #{file.saveFolder}, #{file.originalFile}, #{file.saveFile})
+            </foreach>
+    </insert>
+</mapper>
