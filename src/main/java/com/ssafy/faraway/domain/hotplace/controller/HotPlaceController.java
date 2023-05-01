@@ -5,6 +5,7 @@ import com.ssafy.faraway.common.SearchCondition;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceCommentSaveRequestDto;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceSaveRequestDto;
 import com.ssafy.faraway.domain.hotplace.dto.req.HotPlaceUpdateRequestDto;
+import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceCommentListResponseDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceListResponseDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceResponseDto;
 import com.ssafy.faraway.domain.hotplace.service.HotPlaceCommentService;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -106,6 +108,20 @@ public class HotPlaceController {
                 return ResponseEntity.badRequest().build();
             }
             return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @GetMapping("/{id}/comment")
+    public ResponseEntity findAllCommentByHotPlaceId(@PathVariable Long id) {
+        try {
+            List<HotPlaceCommentListResponseDto> list = hotPlaceCommentService.findAllByHotPlaceId(id);
+            if (list == null) {
+                return ResponseEntity.noContent().build();
+            }
+            return new ResponseEntity<List<HotPlaceCommentListResponseDto>>(list, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
