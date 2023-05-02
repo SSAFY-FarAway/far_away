@@ -37,7 +37,7 @@ public class PlanController {
     private final PlanCommentService planCommentService;
 
     @PostMapping("")
-    public ResponseEntity savePlan(@RequestBody PlanSaveRequestDto planSaveRequestDto, HttpSession session) {
+    public ResponseEntity<Integer> savePlan(@RequestBody PlanSaveRequestDto planSaveRequestDto, HttpSession session) {
         // TODO: session의 loginId를 기반으로 memberId 를 받아오는 로직 필요
         planSaveRequestDto.setMemberId(planSaveRequestDto.getMemberId());
         try {
@@ -45,7 +45,8 @@ public class PlanController {
             if(result == 0) {
                 return ResponseEntity.badRequest().build();
             }
-            return ResponseEntity.ok().build();
+            System.out.println(planSaveRequestDto.getId());
+            return new ResponseEntity(planSaveRequestDto.getId(),HttpStatus.OK);
 
         } catch (Exception e) {
             e.printStackTrace();

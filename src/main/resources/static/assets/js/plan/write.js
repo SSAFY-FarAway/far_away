@@ -224,7 +224,9 @@ document.getElementById("btn-write").addEventListener("click",() => {
                         }),
                 }).then((response) => {
                         if(response.status == 200) {
-                                location.href = root + "/plan_list";
+                                response.json().then((data) => {
+                                        location.href = root + "/plan-view?id=" + data;
+                                })
                         }
                 });
         }
