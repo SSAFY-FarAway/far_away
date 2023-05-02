@@ -82,7 +82,7 @@ let signUp = () => {
         return;
     }
 
-    const url = root + "/member/";
+    const url = root + "/member/sign-up";
     fetch(url, {
         method: "post",
         headers: {
