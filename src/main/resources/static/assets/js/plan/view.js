@@ -42,7 +42,7 @@ function makeModifyButton(writerId) {
             '</button>';
         modifyButtonDiv.innerHTML += content;
         document.getElementById("btn-modify").addEventListener("click", () => {
-            location.href= root + "/plan-modify?id=" + planId;
+            location.href= root + "/plan-modify?id=" + planId + "#share-plan-modify";
         })
     }
 }

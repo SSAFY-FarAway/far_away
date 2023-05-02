@@ -8,7 +8,7 @@ const key = urlParams.get("key") == null?"":urlParams.get("key");
 const word = urlParams.get("word") == null?"":urlParams.get("word");
 
 function initList() {
-    fetch(root+"/plan?page="+currentPage+"&key="+key+"&word="+word)
+    fetch(root+"/plan?page="+currentPage+"&key="+key+"&word="+word + "#share-plan-list")
         .then((response) => {
             response.json().then((data) => {
                 makeList(data)
@@ -32,7 +32,7 @@ function makeList(data) {
         let thTitle = document.createElement("td");
         thTitle.className="text-start";
         let aTag = document.createElement("a");
-        aTag.href = root+"/plan-view?id="+plan['id'];
+        aTag.href = root+"/plan-view?id="+plan['id'] + "#share-plan-view";
         aTag.style="text-decoration: none";
         aTag.innerText = plan['title'];
         thTitle.appendChild(aTag);
@@ -64,21 +64,21 @@ function makeNavigation(pagination) {
     if(pagination.startPage == 1) {
         content += '<li class ="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true"> Previous </a></li>';
     } else {
-        content += '<li class ="page-item"><a class="page-link" href="'+ root+'/plan-list?page=' + pagination.startPage+'&key='+key+'&word='+word+'" tabindex="-1" aria-disabled="true"> Previous </a></li>';
+        content += '<li class ="page-item"><a class="page-link" href="'+ root+'/plan-list?page=' + pagination.startPage+'&key='+key+'&word='+word+ '#share-plan-list" tabindex="-1" aria-disabled="true"> Previous </a></li>';
     }
 
     for(let i = pagination.startPage;i<=pagination.endPage;i++) {
         if(i == currentPage) {
-            content += '<li class="page-item active"><a class="page-link" href="' + root + '/plan-list?page=' + i +'&key='+key+'&word='+word+'">'+i+'</a></li>';
+            content += '<li class="page-item active"><a class="page-link" href="' + root + '/plan-list?page=' + i +'&key='+key+'&word='+word+'#share-plan-list">'+i+'</a></li>';
         } else {
-            content += '<li class="page-item"><a class="page-link" href="' + root + '/plan-list?page=' + i +'&key='+key+'&word='+word+'">'+i+'</a></li>';
+            content += '<li class="page-item"><a class="page-link" href="' + root + '/plan-list?page=' + i +'&key='+key+'&word='+word+'#share-plan-list">'+i+'</a></li>';
         }
     }
 
     if(pagination.endPage == currentPage) {
         content += '<li class ="page-item disabled"><a class="page-link" href="#"> Next </a></li>';
     } else {
-        content += '<li class ="page-item"><a class="page-link" href="'+ root+'/plan-list?page=' + pagination.endPage +'&key='+key+'&word='+word +'"> Next </a></li>';
+        content += '<li class ="page-item"><a class="page-link" href="'+ root+'/plan-list?page=' + pagination.endPage +'&key='+key+'&word='+word +'#share-plan-list"> Next </a></li>';
     }
     content += "</ul>";
     navigation.innerHTML = content;
@@ -98,12 +98,12 @@ document.getElementById("btn-search").addEventListener("click", () => {
         searchWord.value = "";
         searchWord.focus();
     } else {
-        location.href = root + "/plan-list?page="+currentPage + "&key=" + searchKeyValue + "&word=" + searchWord.value;
+        location.href = root + "/plan-list?page="+currentPage + "&key=" + searchKeyValue + "&word=" + searchWord.value +"#share-plan-list";
     }
 
 
 })
 
 document.getElementById("btn-mv-register").addEventListener("click",() => {
-    location.href = root + "/plan-write";
+    location.href = root + "/plan-write#share-plan-write";
 })

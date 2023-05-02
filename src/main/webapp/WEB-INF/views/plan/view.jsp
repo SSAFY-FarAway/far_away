@@ -11,7 +11,7 @@
     <div class="masthead-subheading">Share Wherever Your Plan</div>
 </header>
 
-<section class="page-section p-3 mt-3" id="share-plan-list">
+<section class="page-section p-3 mt-3" id="share-plan-view">
     <div class="text-center fw-bold" role="alert">
         <h2 class="section-heading text-uppercase">Write Travel Plan</h2>
         <h3 class="section-subheading text-muted">

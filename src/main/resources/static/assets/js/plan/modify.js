@@ -511,7 +511,7 @@ document.getElementById("btn-modify").addEventListener("click",() => {
             }),
         }).then((response) => {
             if(response.status == 200) {
-                location.href = root + "/plan-view?id="+planId;
+                location.href = root + "/plan-view?id="+planId + "#share-plan-view";
             }
         });
     }

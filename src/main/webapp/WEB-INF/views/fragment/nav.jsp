@@ -40,7 +40,7 @@
             <a class="nav-link" href="${root}/myattraction?action=list">My Travel</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${root}/plan-list?page=1">Plan</a>
+            <a class="nav-link" href="${root}/plan-list#share-plan-list">Plan</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="${root}/article?action=list#article-list-section"
