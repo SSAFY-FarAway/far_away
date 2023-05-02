@@ -44,16 +44,16 @@ function makeView(data) {
         btnModify.id = "btn-mv-modify";
         btnModify.className = "btn btn-outline-success shadow-sm mb-3 ms-1";
         btnModify.type = "button";
-        btnModify.innerText = "글수정";
-        btnModify.addEventListener("click", ()=>btnMoveOnClick(`/mvPostModify?id=${postId}`));
+        btnModify.innerText = "수정";
+        btnModify.addEventListener("click", ()=>btnModifyOnClick(`post-modify?id=${postId}`));
         btnArea.appendChild(btnModify);
 
         let btnDelete = document.createElement("button");
         btnDelete.id = "btn-delete";
         btnDelete.className = "btn btn-outline-danger shadow-sm mb-3 ms-1";
         btnDelete.type = "button";
-        btnDelete.innerText = "글 삭제";
-        btnDelete.addEventListener("click", btnDeleteOnClick);
+        btnDelete.innerText = "취소";
+        btnDelete.addEventListener("click", ()=>btnMoveOnClick(`/mvPost?id=${postId}`));
         btnArea.appendChild(btnDelete);
     }
     document.getElementById("btn-list").addEventListener("click", ()=>btnMoveOnClick("post-list"));
@@ -65,8 +65,8 @@ const btnMoveOnClick = (url) => {
 }
 
 
-const btnDeleteOnClick = () =>{
-    if (confirm("삭제하시겠습니까?")) {
+const btnModifyOnClick = () =>{
+    if (confirm("수정하시겠습니까?")) {
         let config = {
             method: "DELETE",
             headers: {

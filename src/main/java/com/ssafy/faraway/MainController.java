@@ -69,6 +69,11 @@ public class MainController {
         model.addAttribute("id", id);
         return "post/view";
     }
+    @GetMapping("/mvPostModify")
+    public String mvPostModify(@RequestParam Long id, Model model){
+        model.addAttribute("id", id);
+        return "post/modify";
+    }
 
 
 
@@ -86,5 +91,16 @@ public class MainController {
     public String hotPlaceView() {
         return "hotplace/view";
     }
+
+
+
+    @GetMapping("/post-modify")
+    public String updatePost(@RequestParam Long postId){
+        return "post/modify";
+    }
+
+
+
+
 
 }

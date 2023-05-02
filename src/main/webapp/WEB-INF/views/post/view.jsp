@@ -75,17 +75,11 @@
                                             <div class="divider mb-3 bg-light"></div>
                                             <div id="content"></div>
                                             <div class=" divider mt-3 mb-3"></div>
-                                            <div class="d-flex justify-content-end">
+                                            <div id="btn-area" class="d-flex justify-content-end">
                                                 <button type="button" id="btn-list"
                                                         class="btn btn-outline-primary shadow-sm mb-3">
                                                     글목록
                                                 </button>
-                                                <c:if test="${userinfo.loginId eq article.loginId}">
-                                                    <button type="button" id="btn-mv-modify"
-                                                            class="btn btn-outline-success shadow-sm mb-3 ms-1">
-                                                        글수정
-                                                    </button>
-                                                </c:if>
                                             </div>
                                         </div>
                                     </div>
@@ -96,6 +90,10 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="user" style='display: none;' login-member="${loginMember.id}"></div>
+
     </div>
 </section>
 <!-- Footer start-->
@@ -118,7 +116,7 @@
             </div>
         </div>
     </div>
-    <div id="user" style='display: none;'>${userinfo.id}</div>
+
 </footer>
 <!-- Footer end -->
 
