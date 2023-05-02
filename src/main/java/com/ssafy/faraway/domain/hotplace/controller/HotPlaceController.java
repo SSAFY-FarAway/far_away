@@ -3,6 +3,7 @@ package com.ssafy.faraway.domain.hotplace.controller;
 import com.ssafy.faraway.common.PagingResponse;
 import com.ssafy.faraway.common.SearchCondition;
 import com.ssafy.faraway.domain.hotplace.dto.req.*;
+import com.ssafy.faraway.domain.hotplace.dto.res.FileInfoListResponseDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceCommentListResponseDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceListResponseDto;
 import com.ssafy.faraway.domain.hotplace.dto.res.HotPlaceResponseDto;
@@ -33,14 +34,14 @@ import java.util.UUID;
 @Api(tags = "hotplace")
 public class HotPlaceController {
     private final HotPlaceService hotPlaceService;
-    private final FileInfoService fileService;
+    private final FileInfoService fileInfoService;
     private final HotPlaceCommentService hotPlaceCommentService;
 
     @Value("${file.path}")
     private String uploadPath;
 
 
-    @PostMapping("/")
+    @PostMapping()
     public ResponseEntity saveHotPlace(@RequestBody @Valid final HotPlaceSaveRequestDto hotPlaceSaveRequestDto, @RequestParam(value = "uploadFiles", required = false) MultipartFile[] files) {
         try {
             Long hotPlaceId = hotPlaceService.save(hotPlaceSaveRequestDto);
@@ -52,7 +53,7 @@ public class HotPlaceController {
                 String saveFolder = uploadPath + File.separator + today;
                 File folder = getFolder(saveFolder);
                 List<FileInfoSaveRequestDto> fileInfoSaveRequestDtos = getFileInfoSaveRequestDtos(hotPlaceId, files, today, folder);
-                fileService.save(fileInfoSaveRequestDtos);
+                fileInfoService.save(fileInfoSaveRequestDtos);
             }
             return ResponseEntity.ok().build();
         } catch (Exception e) {
@@ -89,6 +90,34 @@ public class HotPlaceController {
         return fileInfoSaveRequestDtos;
     }
 
+    @GetMapping("/{id}/file")
+    public ResponseEntity<List<FileInfoListResponseDto>> findAllFileInfoByHotPlaceId(@PathVariable Long id) {
+        try {
+            List<FileInfoListResponseDto> list = fileInfoService.findAllFileInfoByHotPlaceId(id);
+            if (list == null || list.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return new ResponseEntity<List<FileInfoListResponseDto>>(list, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @DeleteMapping("/file/{id}")
+    public ResponseEntity deleteFileInfoById(@PathVariable Long id){
+        try {
+            int result = fileInfoService.delete(id);
+            if (result == 0) {
+                return ResponseEntity.badRequest().build();
+            }
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<HotPlaceResponseDto> findHotPlaceById(@PathVariable Long id) {
         try {
@@ -104,7 +133,7 @@ public class HotPlaceController {
         }
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity findAllHotPlace(@ModelAttribute SearchCondition searchCondition) {
         PagingResponse<HotPlaceListResponseDto> pagingResponse = null;
         try {
@@ -119,7 +148,7 @@ public class HotPlaceController {
         }
     }
 
-    @PutMapping("/")
+    @PutMapping()
     public ResponseEntity updateHotPlace(@RequestBody @Valid final HotPlaceUpdateRequestDto hotPlaceUpdateRequestDto) {
         try {
             int result = hotPlaceService.update(hotPlaceUpdateRequestDto);
@@ -137,9 +166,9 @@ public class HotPlaceController {
     public ResponseEntity deleteHotPlace(@PathVariable Long id) {
         try {
             int result = hotPlaceService.delete(id);
+            fileInfoService.deleteFileInfoByHotPlaceId(id);
             if (result == 0) {
-                return ResponseEntity.badRequest().build()
-                        ;
+                return ResponseEntity.badRequest().build();
             }
             return ResponseEntity.ok().build();
         } catch (Exception e) {

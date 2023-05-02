@@ -54,6 +54,7 @@ public class MainController {
         return "plan/list";
 
     }
+
     @GetMapping("/post-list")
     public String post(@RequestParam(defaultValue = "1") int page,@RequestParam(required = false) String key, @RequestParam(required = false) String word, Model model) {
         model.addAttribute("page",page);
@@ -69,5 +70,21 @@ public class MainController {
         return "post/view";
     }
 
+
+
+
+    @GetMapping("/hotplace-list")
+    public String hotPlaceList(@RequestParam(defaultValue = "1") int page,@RequestParam(required = false, defaultValue = "none") String key, @RequestParam(required = false, defaultValue = "none") String word, Model model) {
+        System.out.println("key: " + key + " word: " + word);
+        model.addAttribute("page",page);
+        model.addAttribute("key",key);
+        model.addAttribute("word",word);
+        return "hotplace/list";
+    }
+
+    @GetMapping("/hotplace-view")
+    public String hotPlaceView() {
+        return "hotplace/view";
+    }
 
 }
