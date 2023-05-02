@@ -40,7 +40,7 @@
   - 이메일 형식 (aaa@aaa.com)
   - 우편번호 형식 (5글자)
 
-![signup](./docs/img/mypage.png)
+![signup](./docs/img/signup.png)
 
 ### ✔ 마이페이지 화면
 - 로그인한 회원의 정보를 확인할 수 있습니다.
