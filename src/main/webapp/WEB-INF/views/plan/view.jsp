@@ -53,11 +53,9 @@
                             <%--내용--%>
                         </div>
                     </div>
-                    <div class="ros d-flex justify-content-center">
-                        <%--TODO: 작성한 회원 == 로그인 회원 해당 버튼 띄우기--%>
-                        <button id="btn-modify" class="btn btn-outline-success shadow" type="button">
-                            Modify
-                        </button>
+                    <div class="ros d-flex justify-content-center" id="modify-button">
+                        <div id="loginId" style="display: none">${loginMember.loginId}</div>
+
                     </div>
                 </div>
 

@@ -30,8 +30,19 @@ function makeView(data) {
     makeMyPlan(data.attractionList);
     // 5. 최단 경로
     makeShoretestPlan(data.shortestPathList);
+    // 6. 버튼 표시 여부 확인
+    makeModifyButton(writerId);
 }
-
+function makeModifyButton(writerId) {
+    let loginId = document.getElementById("loginId").innerText;
+    if(loginId == writerId) {
+        let modifyButtonDiv = document.getElementById("modify-button");
+        let content = '<button id = "btn-modify" class="btn btn-outline-success shadow" type="button">' +
+            'Modify' +
+            '</button>';
+        modifyButtonDiv.innerHTML += content;
+    }
+}
 var attractions = [];
 var positions; // marker  배열
 var mapContainer = document.getElementById("map"), // 지도를 표시할 div
