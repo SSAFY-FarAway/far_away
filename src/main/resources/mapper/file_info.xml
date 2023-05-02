@@ -9,4 +9,20 @@
                 (select last_insert_id(), #{file.saveFolder}, #{file.originalFile}, #{file.saveFile})
             </foreach>
     </insert>
+
+    <select id="findAllFileInfoByHotPlaceId" parameterType="long" resultType="FileInfoListResponseDto">
+        select id, save_folder, original_file, save_file
+        from file_info
+        where hotplace_id = #{hotPlaceId}
+    </select>
+
+    <delete id="delete" parameterType="long">
+        delete from file_info
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteFileInfoByHotPlaceId" parameterType="long">
+        delete from file_info
+        where hotplace_id = #{hotPlaceId}
+    </delete>
 </mapper>
