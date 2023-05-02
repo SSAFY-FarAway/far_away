@@ -40,6 +40,9 @@
             <a class="nav-link" href="${root}/plan-list?page=1">Plan</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="${root}/hotplace-list?page=1">HotPlace</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="${root}/post-list?page=1">Community</a>
           </li>
           <li class="nav-item">
