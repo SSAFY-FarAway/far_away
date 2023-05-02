@@ -4,9 +4,7 @@
 <!-- Navigation   헤더 -->
 <nav class="shadow navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
   <div class="container">
-    <a class="navbar-brand fs-4" href="${root}">
-      FAR AWAY
-    </a>
+    <a class="navbar-brand fs-4" href="${root}"> FAR AWAY </a>
     <button
       class="navbar-toggler"
       type="button"
@@ -32,25 +30,29 @@
             <a class="nav-link" href="${root}/login#login-section">login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${root}/sign-up#signup-section">Sign Up</a>
+            <a class="nav-link" href="${root}/sign-up#signup-section"
+              >Sign Up</a
+            >
           </li>
         </c:if>
         <c:if test="${not empty loginMember}">
           <li class="nav-item">
-            <a class="nav-link" href="${root}/myattraction?action=list">My Travel</a>
+            <a class="nav-link" href="${root}/plan-list?page=1">Plan</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${root}/plan-list#share-plan-list">Plan</a>
+            <a class="nav-link" href="${root}/post-list?page=1">Community</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${root}/post-list?page=1">Community</a
+            <a
+              class="nav-link"
+              href="${root}/myPage?id=${loginMember.id}#mypage-section"
+              >My Page</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${root}/myPage?id=${loginMember.id}#mypage-section">My Page</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" onclick="logout()" style="cursor: pointer">logout</a>
+            <a class="nav-link" onclick="logout()" style="cursor: pointer"
+              >logout</a
+            >
           </li>
         </c:if>
       </ul>

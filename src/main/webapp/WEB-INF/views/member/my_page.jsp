@@ -84,20 +84,32 @@
                                             <label class="form-label" for="zipcode">Your Zipcode (ex. 90000)</label>
                                             <input type="text" id="main-address" name="mainAddress"
                                                    class="form-control" readonly/>
-                                            <label class="form-label" for="main-address" >Your Main
+                                            <label class="form-label" for="main-address">Your Main
                                                 Address</label>
-                                            <input type="text" id="sub-address" name="subAddress" class="form-control" readonly/>
-                                            <label class="form-label" for="sub-address" >Your Sub
+                                            <input type="text" id="sub-address" name="subAddress" class="form-control"
+                                                   readonly/>
+                                            <label class="form-label" for="sub-address">Your Sub
                                                 Address</label>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                    <div id="normal-mode-btns" class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                         <button
-                                           class="btn btn-primary btn-lg shadow" id="mv-modify-button">
+                                                class="btn btn-primary btn-lg shadow" id="modify-button">
                                             Modify
                                         </button>
                                     </div>
+                                    <div id="modify-mode-btns" class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button
+                                                class="btn btn-primary btn-lg shadow me-3" id="modify-submit-button">
+                                            Submit
+                                        </button>
+                                        <button
+                                                class="btn btn-secondary btn-lg shadow" id="modify-cancel-button">
+                                            Cancel
+                                        </button>
+                                    </div>
                                 </div>
+
                             </div>
                             <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                                 <img src="${root}/resources/static/assets/img/member/login-section.jpg"
