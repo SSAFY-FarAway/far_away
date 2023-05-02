@@ -2,10 +2,11 @@ window.onload = function() {
     initList();
 }
 const urlParams = new URLSearchParams(location.search);
-const currentPage = urlParams.get("page");
-const key = urlParams.get("key");
-const word = urlParams.get("word");
+const currentPage = urlParams.get("page") == null?1:urlParams.get("page");
+const key = urlParams.get("key") == null?"":urlParams.get("key");
+const word = urlParams.get("word") == null?"":urlParams.get("word");
 function initList() {
+    console.log(root+"/post/list?page="+currentPage+"&key="+key+"&word="+word);
     fetch(root+"/post/list?page="+currentPage+"&key="+key+"&word="+word)
         .then((response) => {
             response.json().then((data) => {
@@ -29,7 +30,7 @@ function makeList(data) {
         let thTitle = document.createElement("td");
         thTitle.className="text-start";
         let aTag = document.createElement("a");
-        aTag.href = root+"/plan_view?id="+plan['id'];
+        aTag.href = root+"/mvPost?id="+post['id'];
         aTag.style="text-decoration: none";
         aTag.innerText = post['title'];
         thTitle.appendChild(aTag);
@@ -48,7 +49,8 @@ function makeList(data) {
         tr.appendChild(thHit);
 
         let thCreated = document.createElement("td");
-        thCreated.innerText = post['createdDate'];
+        let createdDate = post['createdDate'].substring(0, 10);
+        thCreated.innerText = createdDate;
         tr.appendChild(thCreated);
 
 

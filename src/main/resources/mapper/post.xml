@@ -34,7 +34,7 @@
         select p.id, p.member_id, m.login_id, p.category, p.title, p.hit, p.created_date
         from post p join member m
         on p.member_id = m.id
-        <if test='key != null and !key.equals("none")'>
+        <if test='key != null and !key.equals("none") and !key.equals("")'>
             and ${key} like concat('%', #{word}, '%')
         </if>
         <if test='orderBy != null and !orderBy.equals("none")'>
