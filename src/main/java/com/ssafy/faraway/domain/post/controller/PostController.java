@@ -31,6 +31,7 @@ public class PostController {
     @PostMapping(value = "/")
     public ResponseEntity savePost(@RequestBody @Valid final PostSaveRequestDto postSaveRequestDto) {
         try {
+            System.out.println(postSaveRequestDto);
             int result = postService.save(postSaveRequestDto);
             if (result == 0) {
                 return ResponseEntity.badRequest().build();

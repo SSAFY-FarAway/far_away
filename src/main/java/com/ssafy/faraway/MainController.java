@@ -37,6 +37,9 @@ public class MainController {
         return "member/modify";
     }
 
+    @GetMapping("/mvPostWrite")
+    public String mvPostWrite() { return "post/write"; }
+
     @GetMapping("/search_place")
     public String searchPlace() {
         return "attraction/search_place";

@@ -29,7 +29,7 @@
         <div class="container" id="article-list-section">
             <div class="row align-self-center mb-2">
                 <div class="col-md-2 text-start">
-                    <button type="button" id="btn-mv-register" class="btn btn-outline-primary btn shadow-sm">
+                    <button type="button" id="btn-mv-post-write" class="btn btn-outline-primary btn shadow-sm">
                         글쓰기
                     </button>
                 </div>
@@ -131,27 +131,12 @@
 
 
 <script>
-    let titles = document.querySelectorAll(".article-title");
-    titles.forEach(function (title) {
-        title.addEventListener("click", function () {
-            console.log(this.getAttribute("data-no"));
-            location.href = "${root}/article?action=view&articleId=" + this.getAttribute("data-no");
-        });
+
+    document.querySelector("#btn-mv-post-write").addEventListener("click", function () {
+        location.href = "${root}/mvPostWrite";
     });
-    document.querySelector("#btn-mv-register").addEventListener("click", function () {
-        location.href = "${root}/article?action=mvwrite";
-    });
-    let pages = document.querySelectorAll(".page-link");
-    pages.forEach(function (page) {
-        page.addEventListener("click", function () {
-            console.log(this.parentNode.getAttribute("data-pg"));
-            document.querySelector("#p-action").value = "list";
-            document.querySelector("#p-pgno").value = this.parentNode.getAttribute("data-pg");
-            document.querySelector("#p-key").value = "${param.key}";
-            document.querySelector("#p-word").value = "${param.word}";
-            document.querySelector("#form-param").submit();
-        });
-    });
+
+
     document.querySelector("#btn-search").addEventListener("click", function () {
         let form = document.querySelector("#form-search");
         form.setAttribute("action", "${root}/article");
