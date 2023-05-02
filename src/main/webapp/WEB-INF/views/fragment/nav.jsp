@@ -37,9 +37,6 @@
         </c:if>
         <c:if test="${not empty loginMember}">
           <li class="nav-item">
-            <a class="nav-link" href="${root}/myattraction?action=list">My Travel</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="${root}/plan-list?page=1">Plan</a>
           </li>
           <li class="nav-item">
