@@ -37,6 +37,11 @@ public class MainController {
         return "member/modify";
     }
 
+    @GetMapping("/find")
+    public String mvFind() {
+        return "member/find";
+    }
+
     @GetMapping("/search_place")
     public String searchPlace() {
         return "attraction/search_place";
