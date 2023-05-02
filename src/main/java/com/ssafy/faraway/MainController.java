@@ -65,4 +65,9 @@ public class MainController {
     public String hotPlaceView() {
         return "hotplace/view";
     }
+
+    @GetMapping("/hotplace-write")
+    public String hotPlaceWrite() {
+        return "/hotplace/write";
+    }
 }
