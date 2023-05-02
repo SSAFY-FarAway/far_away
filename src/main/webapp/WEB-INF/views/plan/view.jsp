@@ -21,10 +21,12 @@
             <div class="row align-self-center mb-2">
                 <div class="col-4">
                     <%--지도위치--%>
+                    <div class="h4">My Plan</div>
                     <div id="map" class="mt-3 shadow" style="width: 100%; height: 600px"></div>
                 </div>
                 <div class="col-4">
                     <%--지도위치--%>
+                    <div class="h4">Shortest Plan</div>
                     <div id="shortest-map" class="mt-3 shadow" style="width: 100%; height: 600px"></div>
                 </div>
                 <div class="col-3 ms-1">
