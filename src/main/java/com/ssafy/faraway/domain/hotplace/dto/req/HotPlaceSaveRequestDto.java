@@ -50,6 +50,7 @@ public class HotPlaceSaveRequestDto {
                 .zipcode(zipcode)
                 .mainAddress(mainAddress)
                 .subAddress(subAddress)
+                .rating(rating)
                 .build();
     }
 }

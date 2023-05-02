@@ -46,7 +46,7 @@ const btnModifyOnClick = () =>{
         fetch(root + "/hotplace", config)
             .then((response) => {
                 if(response.status == 200) {
-                    location.href = root + `/hotplace-view?${hotPlaceId}`;
+                    location.href = root + `/hotplace-view?id=${hotPlaceId}`;
                 }
             });
     }
