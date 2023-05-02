@@ -66,4 +66,10 @@ public class MainController {
 
     }
 
+    @GetMapping("/plan-modify")
+    public String planModify(@RequestParam Long id, Model model) {
+        model.addAttribute("id",id);
+        return "plan/modify";
+    }
+
 }

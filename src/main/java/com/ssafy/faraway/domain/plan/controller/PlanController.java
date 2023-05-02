@@ -102,7 +102,7 @@ public class PlanController {
     }
 
 
-    @PutMapping("/")
+    @PutMapping("")
     public ResponseEntity updatePlan(@RequestBody PlanUpdateRequestDto planUpdateRequestDto) {
 
         try {

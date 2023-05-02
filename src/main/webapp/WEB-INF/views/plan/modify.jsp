@@ -3,31 +3,6 @@
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>LTW</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="resources/static/assets/favicon.ico" />
-    <!-- service Key -->
-    <!-- <script src="./js/key.js"></script> -->
-    <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet"
-          type="text/css" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="resources/static/assets/css/style.css" rel="stylesheet" />
-    <link href="resources/static/assets/css/map.css" rel="stylesheet" />
-</head>
 <jsp:include page="../fragment/head.jsp"/>
 <body id="page-top">
 <jsp:include page="../fragment/nav.jsp"/>
@@ -38,72 +13,91 @@
 
 <section class="page-section p-3 mt-3" id="share-plan-list">
     <div class="text-center fw-bold" role="alert">
-        <h2 class="section-heading text-uppercase">Travel Plan</h2>
+        <h2 class="section-heading text-uppercase">Modify Travel Plan</h2>
         <h3 class="section-subheading text-muted">
             원하는 여행경로를 공유해보세요.
         </h3>
         <div class="container" id="article-list-section">
             <div class="row align-self-center mb-2">
-                <div class="col-md-2 text-start">
-                    <button type="button" id="btn-mv-register" class="btn btn-outline-primary btn shadow-sm">
-                        글쓰기
-                    </button>
+                <div class="col-4">
+                    <%--지도위치--%>
+                    <div class="h3">My Plan</div>
+                    <div id="map" class="mt-4 shadow" style="width: 100%; height: 600px"></div>
                 </div>
-                <div class="col-md-7 offset-3">
-                    <form class="d-flex" id="search-form">
-                        <input type="hidden" id="key-attribute" value="${key}">
-                        <input type="hidden" id="word-attribute" value="${word}">
-                        <select id="key"
-                                class="font-weight-bold shadow-sm form-select form-select-sm ms-5 me-1 w-50"
-                                aria-label="검색조건">
-                            <option selected>검색조건</option>
-                            <option value="p.title"}>제목</option>
-                            <option value="m.login_id">작성자</option>
-                        </select>
-                        <div class="input-group shadow-sm">
-                            <input type="text" name="word" id="word" class="form-control" value="${word}" placeholder="검색어..." />
-                            <button class="btn btn-primary" id="btn-search"type="button">Search</button>
-                        </div>
-                    </form>
+                <div class="col-4">
+                    <%--지도위치--%>
+                        <form class="mb-4 d-flex justify-content-center" onsubmit="return false;" role="search">
+                            <div class="col-3 m-1 ">
+                                <select id="search-area" class="form-select me-2 shadow">
+                                    <option value="0" selected>시도</option>
+
+                                </select>
+                            </div>
+                            <div class="col-3 m-1">
+                                <select id="search-sigun" class="form-select me-2 shadow">
+                                    <option value="0" selected>구군</option>
+                                </select>
+                            </div>
+                            <div class="col-3 mt-1 ms-1">
+                                <select id="search-content-id" class="form-select me-2 shadow bg-gradient"
+                                        style="background-color: #fefaea">
+                                    <option value="0" selected>컨텐츠</option>
+                                    <option value="12">관광지</option>
+                                    <option value="14">문화시설</option>
+                                    <option value="15">축제공연행사</option>
+                                    <option value="25">여행코스</option>
+                                    <option value="28">레포츠</option>
+                                    <option value="32">숙박</option>
+                                    <option value="38">쇼핑</option>
+                                    <option value="39">음식점</option>
+                                </select>
+
+                            </div>
+                            <div class="col-2 mt-1 ms-1" >
+                                <button id="btn-search" class="btn btn-outline-success shadow" type="button">
+                                    Search
+                                </button>
+                            </div>
+                        </form>
+                    <div id="search-map" class="mt-2 shadow" style="width: 100%; height: 600px"></div>
                 </div>
+                <div class="col-3 ms-1">
+                    <%--글제목,내용 위치--%>
+                    <div class="h2 row d-flex justify-content-around mb-2" >
+                        Travle Plan
+                    </div>
+                    <div class="row d-flex justify-content-end mb-2" id = "writerId">
+                        <%--작성자 --%>
+                    </div>
+                    <div class="h5 row d-flex justify-content-start">
+                        Title
+                    </div>
+                    <div class="row mb-2">
+                        <input type="text" class="p-2 border shadow-sm" id="title">
+                            <%--제목--%>
+                        </input>
+                    </div>
+                    <div class="h5 row d-flex justify-content-start">
+                        Content
+                    </div>
+                    <div class="row mb-2">
+                        <textarea class="p-2 border shadow-sm" rows="10" id="content">
+                            <%--내용--%>
+                        </textarea>
+                    </div>
+                    <div class="ros d-flex justify-content-center" id="modify-button">
+                        <div id="loginId" style="display: none">${loginMember.loginId}</div>
+                        <button id="btn-modify" class="btn btn-outline-success shadow" type="button">
+                            Modify
+                        </button>
+                    </div>
+                </div>
+
             </div>
-            <table class="table table-hover shadow rounded" id="plan-table">
-                <thead>
-                <tr class="text-center table-warning">
-                    <th scope="col">경로번호</th>
-                    <th scope="col">제목</th>
-                    <th scope="col">작성자</th>
-                    <th scope="col">조회수</th>
-                    <th scope="col">작성일</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="article" items="${articles}">
-                    <tr class="text-center">
-                        <th scope="row">${article.id}</th>
-                        <td class="text-start">
-                            <a href="#" class="article-title link-dark" data-no="${article.id}"
-                               style="text-decoration: none">
-                                    ${article.subject}
-                            </a>
-                        </td>
-                        <td>${article.memberName}</td>
-                        <td>${article.hit}</td>
-                        <td>${article.createdDate}</td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-            <nav aria-label="Page navigation" class="row" id="navigation">
-                <div style="display:none" id="currentPage">${page}</div>
-            </nav>
+
+
         </div>
-        <form id="form-param" method="get" action="">
-            <input type="hidden" id="p-action" name="action" value="">
-            <input type="hidden" id="p-pgno" name="pgno" value="">
-            <input type="hidden" id="p-key" name="key" value="">
-            <input type="hidden" id="p-word" name="word" value="">
-        </form>
+
     </div>
 
 
@@ -137,12 +131,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="resources/static/assets/js/script.js"></script>
-<script src="resources/static/assets/js/plan/list.js"></script>
 
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 <!-- kakao api JS -->
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=65e66ed3a412cb73e32b300c2f3a1803&libraries=services,clusterer,drawing"></script>
+<script src="resources/static/assets/js/plan/modify.js"></script>
+
 </body>
 
 </html>

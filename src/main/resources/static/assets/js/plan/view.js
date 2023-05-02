@@ -41,6 +41,9 @@ function makeModifyButton(writerId) {
             'Modify' +
             '</button>';
         modifyButtonDiv.innerHTML += content;
+        document.getElementById("btn-modify").addEventListener("click", () => {
+            location.href= root + "/plan-modify?id=" + planId;
+        })
     }
 }
 var attractions = [];
@@ -124,7 +127,7 @@ function addLine(markers) {
     var polyline = new kakao.maps.Polyline({
         path: linePath,
         strokeWeight: 2,
-        strokeColor: 'red',
+        strokeColor: 'orange',
         strokeOpacity: 0.7,
         strokeStlye: 'solid'
     });
@@ -217,7 +220,7 @@ function addShortestPathLine(markers) {
     var polyline = new kakao.maps.Polyline({
         path: linePath,
         strokeWeight: 2,
-        strokeColor: 'red',
+        strokeColor: 'orange',
         strokeOpacity: 0.7,
         strokeStlye: 'solid'
     });
@@ -225,3 +228,5 @@ function addShortestPathLine(markers) {
     polyline.setMap(shortestMap);
     lines.push(polyline);
 }
+
+
