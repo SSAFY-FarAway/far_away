@@ -75,6 +75,7 @@
                                             <p id="address"></p>
                                             <div class="divider mb-3 bg-light"></div>
                                             <div id="content"></div>
+                                            <ul id="fileInfos"></ul>
                                             <div class=" divider mt-3 mb-3"></div>
                                             <div id="btn-area" class="d-flex justify-content-end">
                                                 <button type="button" id="btn-list"
