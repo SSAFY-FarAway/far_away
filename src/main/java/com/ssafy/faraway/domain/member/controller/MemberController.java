@@ -162,11 +162,14 @@ public class MemberController {
     @PostMapping("/check")
     public ResponseEntity<?> loginPwdCheck(@RequestParam Long id, @RequestParam String loginPwd) {
         try {
+            Map<String,String> resultMap = new HashMap<>();
             if(!memberService.loginPwdCheck(id, loginPwd)){ // different
-                return new ResponseEntity<>("비밀번호가 올바르지 않습니다.", HttpStatus.UNAUTHORIZED);
+                resultMap.put("success", String.valueOf(false));
+                resultMap.put("errorMsg", "비밀번호가 올바르지 않습니다.");
+                return new ResponseEntity<>(resultMap, HttpStatus.UNAUTHORIZED);
             }
-            List<MemberListResponseDto> list = memberService.findAll();
-            return new ResponseEntity<>(list, HttpStatus.OK);
+            resultMap.put("success", String.valueOf(true));
+            return new ResponseEntity<>(resultMap, HttpStatus.OK);
         } catch (Exception e){
             e.printStackTrace();
             return exceptionHandling(e);
