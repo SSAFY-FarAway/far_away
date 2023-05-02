@@ -63,7 +63,7 @@
                                         </button>
                                     </div>
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <a href="${root}/find">아이디 또는 비밀번호를 분실하셨나요?</a>
+                                        <a href="${root}/find#login-section">아이디 또는 비밀번호를 분실하셨나요?</a>
                                     </div>
                                 </form>
 

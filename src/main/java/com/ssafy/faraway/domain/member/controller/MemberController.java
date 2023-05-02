@@ -174,15 +174,22 @@ public class MemberController {
     @GetMapping("/login-id")
     public ResponseEntity<?> findLoginIdByEmailAndBirth(@RequestParam @NotEmpty(message = "loginId ust not be empty") @Email String email,
                                                         @RequestParam @NotEmpty @Size(min=6, max=6, message = "birth's size must not be 6") String birth){
+        System.out.println("login-id 호출");
         try{
             Map<String, String> map = new HashMap<>();
+            Map<String, String> resultMap = new HashMap<>();
             map.put("email", email);
             map.put("birth", birth);
             String loginId = memberService.findLoginIdByEmailAndBirth(map);
+
             if(loginId == null){
-                return new ResponseEntity<>("이메일과 생년월일을 정확히 입력해 주세요.", HttpStatus.UNAUTHORIZED);
+                resultMap.put("success", String.valueOf(false));
+                resultMap.put("errorMsg","이메일과 생년월일을 정확히 입력해 주세요.");
+                return new ResponseEntity<>(resultMap, HttpStatus.UNAUTHORIZED);
             }
-            return new ResponseEntity<>(loginId, HttpStatus.OK);
+            resultMap.put("success", String.valueOf(true));
+            resultMap.put("loginId",loginId);
+            return new ResponseEntity<>(resultMap, HttpStatus.OK);
         } catch (Exception e){
             e.printStackTrace();
             return exceptionHandling(e);
