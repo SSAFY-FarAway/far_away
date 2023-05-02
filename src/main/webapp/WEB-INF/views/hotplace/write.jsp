@@ -52,7 +52,7 @@
                                         </h2>
                                     </div>
                                     <div class="col-lg-8 col-md-10 col-sm-12">
-                                        <form id="form-register" method="POST" action="">
+                                        <form id="form-save" method="POST" action="">
                                             <input type="hidden" name="action" value="write">
                                             <div class="mb-3">
                                                 <label for="title" class="form-label fw-bolder">제목 :
@@ -89,6 +89,10 @@
                                                 </label>
                                                 <input type="text" class="form-control" id="rating"
                                                        name="rating" placeholder="평점..." />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="upload-file" class="form-label">파일:</label>
+                                                <input type="file" class="form-control border" id="upload-file" name="upload-file" multiple="multiple">
                                             </div>
                                             <div class="col-auto text-center">
                                                 <button type="button" id="btn-save"
