@@ -18,9 +18,9 @@ public class LoginInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession(false);
 
         // member 제외 모든 GET 요청 허용
-        if (!requestURI.contains("member") && requestMethod.equals("GET")) {
-            return true;
-        }
+//        if (!requestURI.contains("member") && requestMethod.equals("GET")) {
+//            return true;
+//        }
 
         if (session == null || session.getAttribute("loginMember") == null) {
             if (isAjaxRequest(request)) {
