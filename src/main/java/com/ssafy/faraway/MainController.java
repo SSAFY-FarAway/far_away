@@ -117,8 +117,8 @@ public class MainController {
         return "/hotplace/write";
     }
 
-    @GetMapping("/hotplace-modify/{id}")
-    public String hotPlaceModify(@PathVariable Long id, Model model) {
+    @GetMapping("/hotplace-modify")
+    public String hotPlaceModify(@RequestParam Long id, Model model) {
         model.addAttribute("id", id);
         return "/hotplace/modify";
     }

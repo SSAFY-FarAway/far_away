@@ -15,26 +15,13 @@ function initView() {
 }
 
 function makeView(data) {
-
     document.getElementById("title").value = data['title'];
     document.getElementById("content").value = data['content'];
     document.getElementById("zipcode").value = data['zipcode'];
     document.getElementById("main-address").value = data['mainAddress'];
     document.getElementById("sub-address").value = data['subAddress'];
     document.getElementById("rating").value = data['rating'];
-
-    let btnArea = document.getElementById("btn-area");
-    let loginMemberId = document.getElementById("user").getAttribute("login-member");
-
-    if (data['memberId'].toString() === loginMemberId) {
-        let btnModify = document.createElement("button");
-        btnModify.id = "btn-mv-modify";
-        btnModify.className = "btn btn-outline-success shadow-sm mb-3 ms-1";
-        btnModify.type = "button";
-        btnModify.innerText = "수정";
-        btnModify.addEventListener("click", ()=>btnModifyOnClick());
-        btnArea.appendChild(btnModify);
-    }
+    document.getElementById("btn-modify").addEventListener("click", btnModifyOnClick);
 }
 
 const btnModifyOnClick = () =>{
@@ -59,7 +46,7 @@ const btnModifyOnClick = () =>{
         fetch(root + "/hotplace", config)
             .then((response) => {
                 if(response.status == 200) {
-                    location.href = root + "/hotplace-view/" + hotPlaceId;
+                    location.href = root + `/hotplace-view?${hotPlaceId}`;
                 }
             });
     }

@@ -56,7 +56,7 @@ function makeView(data) {
         btnModify.className = "btn btn-outline-success shadow-sm mb-3 ms-1";
         btnModify.type = "button";
         btnModify.innerText = "글수정";
-        btnModify.addEventListener("click", ()=>btnMoveOnClick(`/hotplace-modify/${hotPlaceId}`));
+        btnModify.addEventListener("click", ()=>btnMoveOnClick(`/hotplace-modify?id=${hotPlaceId}`));
         btnArea.appendChild(btnModify);
 
         let btnDelete = document.createElement("button");
