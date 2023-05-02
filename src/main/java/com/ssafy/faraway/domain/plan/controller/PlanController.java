@@ -39,8 +39,7 @@ public class PlanController {
     @PostMapping("")
     public ResponseEntity savePlan(@RequestBody PlanSaveRequestDto planSaveRequestDto, HttpSession session) {
         // TODO: session의 loginId를 기반으로 memberId 를 받아오는 로직 필요
-        Long memberId = 1L;
-        planSaveRequestDto.setMemberId(memberId);
+        planSaveRequestDto.setMemberId(planSaveRequestDto.getMemberId());
         try {
             int result = planService.save(planSaveRequestDto);
             if(result == 0) {
@@ -79,7 +78,6 @@ public class PlanController {
     public ResponseEntity<PlanGetDetailResponseDto> findPlanById(@PathVariable Long id) {
         PlanGetDetailDto plan = null;
         try {
-
             plan = planService.findById(id);
             if(plan == null) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);

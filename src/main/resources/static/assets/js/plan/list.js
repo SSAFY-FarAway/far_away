@@ -3,7 +3,7 @@ window.onload = function() {
     initList();
 }
 const urlParams = new URLSearchParams(location.search);
-const currentPage = urlParams.get("page");
+const currentPage = urlParams.get("page") == null?1:urlParams.get("page");
 const key = urlParams.get("key") == null?"":urlParams.get("key");
 const word = urlParams.get("word") == null?"":urlParams.get("word");
 
@@ -32,7 +32,7 @@ function makeList(data) {
         let thTitle = document.createElement("td");
         thTitle.className="text-start";
         let aTag = document.createElement("a");
-        aTag.href = root+"/plan_view?id="+plan['id'];
+        aTag.href = root+"/plan-view?id="+plan['id'];
         aTag.style="text-decoration: none";
         aTag.innerText = plan['title'];
         thTitle.appendChild(aTag);
@@ -75,7 +75,7 @@ function makeNavigation(pagination) {
         }
     }
 
-    if(pagination.endPage == pagination.totalRecordCount) {
+    if(pagination.endPage == currentPage) {
         content += '<li class ="page-item disabled"><a class="page-link" href="#"> Next </a></li>';
     } else {
         content += '<li class ="page-item"><a class="page-link" href="'+ root+'/plan_list?page=' + pagination.endPage +'&key='+key+'&word='+word +'"> Next </a></li>';
@@ -102,4 +102,8 @@ document.getElementById("btn-search").addEventListener("click", () => {
     }
 
 
+})
+
+document.getElementById("btn-mv-register").addEventListener("click",() => {
+    location.href = root + "/plan_write";
 })

@@ -43,7 +43,10 @@ public class MainController {
     }
 
     @GetMapping("/plan_list")
-    public String planList(@RequestParam int page,@RequestParam(required = false) String key, @RequestParam(required = false) String word, Model model) {
+    public String planList(@RequestParam(required = false, defaultValue = "1") int page,
+                           @RequestParam(required = false) String key,
+                           @RequestParam(required = false) String word,
+                           Model model) {
         model.addAttribute("page",page);
         model.addAttribute("key",key);
         model.addAttribute("word",word);
@@ -55,4 +58,12 @@ public class MainController {
     public String planWrite() {
         return "plan/write";
     }
+
+    @GetMapping("/plan-view")
+    public String planView(@RequestParam Long id, Model model) {
+        model.addAttribute("id", id);
+        return "plan/view";
+
+    }
+
 }

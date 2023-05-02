@@ -116,11 +116,6 @@ var mapContainer = document.getElementById("map"), // 지도를 표시할 div
 
 var map = new kakao.maps.Map(mapContainer, mapOption);
 
-var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-var imageSize = new kakao.maps.Size(24, 35);
-var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-var user = document.getElementById("user").innerText;
-
 var ovList= [];
 var markerList = [];
 
@@ -227,7 +222,11 @@ document.getElementById("btn-write").addEventListener("click",() => {
                                 memberId: document.getElementById("memberId").innerText,
                                 plan: chooseContentIdList.toString()
                         }),
-                }).then((response) => console.log(response));
+                }).then((response) => {
+                        if(response.status == 200) {
+                                location.href = root + "/plan_list";
+                        }
+                });
         }
 
 
