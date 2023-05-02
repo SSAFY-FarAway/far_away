@@ -36,7 +36,7 @@ public class PlanController {
     private final AttractionService attractionService;
     private final PlanCommentService planCommentService;
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity savePlan(@RequestBody PlanSaveRequestDto planSaveRequestDto, HttpSession session) {
         // TODO: session의 loginId를 기반으로 memberId 를 받아오는 로직 필요
         Long memberId = 1L;

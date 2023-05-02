@@ -78,20 +78,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="article" items="${articles}">
-                    <tr class="text-center">
-                        <th scope="row">${article.id}</th>
-                        <td class="text-start">
-                            <a href="#" class="article-title link-dark" data-no="${article.id}"
-                               style="text-decoration: none">
-                                    ${article.subject}
-                            </a>
-                        </td>
-                        <td>${article.memberName}</td>
-                        <td>${article.hit}</td>
-                        <td>${article.createdDate}</td>
-                    </tr>
-                </c:forEach>
+
                 </tbody>
             </table>
             <nav aria-label="Page navigation" class="row" id="navigation">

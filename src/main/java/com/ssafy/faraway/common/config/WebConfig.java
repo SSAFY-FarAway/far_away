@@ -13,6 +13,9 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(1)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/",
+                        "/member/login",
+                        "/member/",
+                        "/member/check/**",
                         "/login",
                         "/signUp",
                         "/resources/static/**",
