@@ -2,7 +2,7 @@ window.onload = function() {
     initList();
 }
 const urlParams = new URLSearchParams(location.search);
-const currentPage = urlParams.get("page") == null?1:urlParams.get("page");
+const currentPage = urlParams.get("page") == null? 1:urlParams.get("page");
 const key = urlParams.get("key") == null ? "" : urlParams.get("key");
 const word = urlParams.get("word") == null ? "" : urlParams.get("word");
 function initList() {
