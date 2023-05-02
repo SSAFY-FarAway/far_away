@@ -31,6 +31,7 @@ public class PostController {
     @PostMapping(value = "/")
     public ResponseEntity savePost(@RequestBody @Valid final PostSaveRequestDto postSaveRequestDto) {
         try {
+            System.out.println(postSaveRequestDto);
             int result = postService.save(postSaveRequestDto);
             if (result == 0) {
                 return ResponseEntity.badRequest().build();
@@ -42,8 +43,9 @@ public class PostController {
         }
     }
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/list")
     public ResponseEntity<PagingResponse<PostListResponseDto>> findAllPost(@ModelAttribute SearchCondition searchCondition) {
+        System.out.println("come in sibal");
         PagingResponse<PostListResponseDto> pagingResponse = null;
         try {
             pagingResponse = postService.findAllByCondition(searchCondition);

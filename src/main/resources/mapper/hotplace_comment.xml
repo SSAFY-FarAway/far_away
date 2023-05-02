@@ -8,13 +8,14 @@
     </insert>
 
     <select id="findAllByHotPlaceId" parameterType="long" resultType="HotPlaceCommentListResponseDto">
-        select hc.id, hc.member_id, m.login_id, hc.content, hc.modified_date
+        select hc.id, hc.member_id, m.login_id, hc.content, hc.created_date
         from hotplace_comment hc
         join hotplace h
         on hc.hotplace_id = h.id
         join member m
         on hc.member_id = m.id
         and hc.hotplace_id = #{id}
+        order by hc.created_date
     </select>
 
     <update id="update" parameterType="HotPlaceCommentUpdateRequestDto">

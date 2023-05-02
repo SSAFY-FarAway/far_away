@@ -17,10 +17,10 @@ public class HotPlaceResponseDto {
     private String mainAddress;
     private String subAddress;
     private int rating;
-    private LocalDateTime modifiedDate;
+    private LocalDateTime createdDate;
 
     @Builder
-    public HotPlaceResponseDto(long id, long memberId, String loginId, String title, String content, int hit, String zipcode, String mainAddress, String subAddress, int rating, LocalDateTime modifiedDate) {
+    public HotPlaceResponseDto(long id, long memberId, String loginId, String title, String content, int hit, String zipcode, String mainAddress, String subAddress, int rating, LocalDateTime createdDate) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;
@@ -31,6 +31,6 @@ public class HotPlaceResponseDto {
         this.mainAddress = mainAddress;
         this.subAddress = subAddress;
         this.rating = rating;
-        this.modifiedDate = modifiedDate;
+        this.createdDate = createdDate;
     }
 }

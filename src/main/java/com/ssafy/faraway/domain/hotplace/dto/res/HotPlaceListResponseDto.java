@@ -14,10 +14,10 @@ public class HotPlaceListResponseDto {
     private int hit;
     private String mainAddress;
     private int rating;
-    private LocalDateTime modifiedDate;
+    private LocalDateTime createdDate;
 
     @Builder
-    public HotPlaceListResponseDto(long id, long memberId, String loginId, String title, int hit, String mainAddress, int rating, LocalDateTime modifiedDate) {
+    public HotPlaceListResponseDto(long id, long memberId, String loginId, String title, int hit, String mainAddress, int rating, LocalDateTime createdDate) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;
@@ -25,6 +25,6 @@ public class HotPlaceListResponseDto {
         this.hit = hit;
         this.mainAddress = mainAddress;
         this.rating = rating;
-        this.modifiedDate = modifiedDate;
+        this.createdDate = createdDate;
     }
 }

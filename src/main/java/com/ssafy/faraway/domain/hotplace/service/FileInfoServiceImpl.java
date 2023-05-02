@@ -1,6 +1,7 @@
 package com.ssafy.faraway.domain.hotplace.service;
 
 import com.ssafy.faraway.domain.hotplace.dto.req.FileInfoSaveRequestDto;
+import com.ssafy.faraway.domain.hotplace.dto.res.FileInfoListResponseDto;
 import com.ssafy.faraway.domain.hotplace.entity.FileInfo;
 import com.ssafy.faraway.domain.hotplace.repository.FileInfoRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +22,20 @@ public class FileInfoServiceImpl implements FileInfoService {
             files.add(fileSaveRequestDto.toEntity());
         }
         return fileInfoRepository.save(files);
+    }
+
+    @Override
+    public List<FileInfoListResponseDto> findAllFileInfoByHotPlaceId(long hotPlaceId) throws Exception {
+        return fileInfoRepository.findAllFileInfoByHotPlaceId(hotPlaceId);
+    }
+
+    @Override
+    public Integer delete(long id) throws Exception {
+        return fileInfoRepository.delete(id);
+    }
+
+    @Override
+    public Integer deleteFileInfoByHotPlaceId(long hotPlaceId) throws Exception {
+        return fileInfoRepository.deleteFileInfoByHotPlaceId(hotPlaceId);
     }
 }

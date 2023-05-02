@@ -16,10 +16,10 @@ public class PostResponseDto {
     private String title;
     private String content;
     private long hit;
-    private LocalDateTime modifiedDate;
+    private LocalDateTime createdDate;
 
     @Builder
-    public PostResponseDto(long id, long memberId, String loginId, String category, String title, String content, long hit, LocalDateTime modifiedDate) {
+    public PostResponseDto(long id, long memberId, String loginId, String category, String title, String content, long hit, LocalDateTime createdDate) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;
@@ -27,6 +27,6 @@ public class PostResponseDto {
         this.title = title;
         this.content = content;
         this.hit = hit;
-        this.modifiedDate = modifiedDate;
+        this.createdDate = createdDate;
     }
 }

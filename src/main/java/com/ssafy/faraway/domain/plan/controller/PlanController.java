@@ -59,6 +59,7 @@ public class PlanController {
         PagingResponse<PlanGetResponseDto> pagingResponse = null;
         try {
             pagingResponse = planService.findAllByCondition(searchCondition);
+            System.out.println(pagingResponse);
             if(pagingResponse == null) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }

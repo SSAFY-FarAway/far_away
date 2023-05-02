@@ -11,14 +11,14 @@ public class HotPlaceCommentListResponseDto {
     private long memberId;
     private String loginId;
     private String content;
-    private LocalDateTime modifiedDate;
+    private LocalDateTime createdDate;
 
     @Builder
-    public HotPlaceCommentListResponseDto(long id, long memberId, String loginId, String content, LocalDateTime modifiedDate) {
+    public HotPlaceCommentListResponseDto(long id, long memberId, String loginId, String content, LocalDateTime createdDate) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;
         this.content = content;
-        this.modifiedDate = modifiedDate;
+        this.createdDate = createdDate;
     }
 }
