@@ -47,7 +47,7 @@ public class MainController {
         return "attraction/search_place";
     }
 
-    @GetMapping("/plan_list")
+    @GetMapping("/plan-list")
     public String planList(@RequestParam(required = false, defaultValue = "1") int page,
                            @RequestParam(required = false) String key,
                            @RequestParam(required = false) String word,
@@ -59,7 +59,7 @@ public class MainController {
         return "plan/list";
     }
 
-    @GetMapping("/plan_write")
+    @GetMapping("/plan-write")
     public String planWrite() {
         return "plan/write";
     }
