@@ -56,7 +56,7 @@ public class MemberController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/")
+    @PostMapping("/sign-up")
     public ResponseEntity<?> save(@RequestBody @Valid final MemberSaveRequestDto memberSaveRequestDto) {
         try {
             memberService.save(memberSaveRequestDto);

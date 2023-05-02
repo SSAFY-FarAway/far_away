@@ -7,17 +7,24 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new LoginInterceptor())
-//                .order(1)
-//                .addPathPatterns("/**")
-//                .excludePathPatterns("/",
-//                        "/login",
-//                        "/signUp",
-//                        "/resources/static/**",
-//                        "/swagger-ui/**",
-//                        "/swagger-resources/**",
-//                        "/v2/api-docs");
-//    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginInterceptor())
+                .order(1)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/",
+                        "/login",
+                        "/sign-up",
+                        "/member/login",
+                        "/member/sign-up",
+                        "/attraction/**",
+                        "/plan-list",
+                        "/hotplace-list",
+                        "/post-list",
+                        "/swagger-ui/**",
+                        "/swagger-resources/**",
+                        "/resources/static/**",
+                        "/v2/api-docs");
+    }
+
 }

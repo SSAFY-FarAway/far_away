@@ -22,7 +22,7 @@ public class MainController {
     public String mvLogout () { return "index";
     }
 
-    @GetMapping("/signUp")
+    @GetMapping("/sign-up")
     public String mvSignUp () {
         return "member/sign_up";
     }
