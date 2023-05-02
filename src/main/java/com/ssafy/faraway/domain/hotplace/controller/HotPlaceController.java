@@ -40,7 +40,7 @@ public class HotPlaceController {
     private String uploadPath;
 
 
-    @PostMapping("/")
+    @PostMapping()
     public ResponseEntity saveHotPlace(@RequestBody @Valid final HotPlaceSaveRequestDto hotPlaceSaveRequestDto, @RequestParam(value = "uploadFiles", required = false) MultipartFile[] files) {
         try {
             Long hotPlaceId = hotPlaceService.save(hotPlaceSaveRequestDto);
@@ -104,7 +104,7 @@ public class HotPlaceController {
         }
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity findAllHotPlace(@ModelAttribute SearchCondition searchCondition) {
         PagingResponse<HotPlaceListResponseDto> pagingResponse = null;
         try {
@@ -119,7 +119,7 @@ public class HotPlaceController {
         }
     }
 
-    @PutMapping("/")
+    @PutMapping()
     public ResponseEntity updateHotPlace(@RequestBody @Valid final HotPlaceUpdateRequestDto hotPlaceUpdateRequestDto) {
         try {
             int result = hotPlaceService.update(hotPlaceUpdateRequestDto);

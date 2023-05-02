@@ -15,7 +15,12 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/",
                         "/login",
                         "/sign-up",
+                        "/find",
+                        "/member/",
+                        "/member/check/**",
                         "/member/login",
+                        "/member/login-pwd",
+                        "/member/login-id",
                         "/member/sign-up",
                         "/search_place",
                         "/attraction/**",
@@ -25,6 +30,9 @@ public class WebConfig implements WebMvcConfigurer {
                         "/swagger-ui/**",
                         "/swagger-resources/**",
                         "/resources/static/**",
-                        "/v2/api-docs");
+                        "/v2/api-docs",
+                        "/plan-view/**",
+                        "/plan/**"
+                        );
     }
 }

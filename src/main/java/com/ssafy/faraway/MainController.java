@@ -37,18 +37,52 @@ public class MainController {
         return "member/modify";
     }
 
-    @GetMapping("/search_place")
+    @GetMapping("/find")
+    public String mvFind() {
+        return "member/find";
+    }
+
+    @GetMapping("/search-place")
     public String searchPlace() {
         return "attraction/search_place";
     }
 
-    @GetMapping("/plan_list")
-    public String planList(@RequestParam int page,@RequestParam(required = false) String key, @RequestParam(required = false) String word, Model model) {
+    @GetMapping("/plan-list")
+    public String planList(@RequestParam(required = false, defaultValue = "1") int page,
+                           @RequestParam(required = false) String key,
+                           @RequestParam(required = false) String word,
+                           Model model) {
         model.addAttribute("page",page);
         model.addAttribute("key",key);
         model.addAttribute("word",word);
 
         return "plan/list";
+    }
 
+    @GetMapping("/plan-write")
+    public String planWrite() {
+        return "plan/write";
+    }
+
+    @GetMapping("/plan-view")
+    public String planView(@RequestParam Long id, Model model) {
+        model.addAttribute("id", id);
+        return "plan/view";
+
+    }
+
+    @GetMapping("/plan-modify")
+    public String planModify(@RequestParam Long id, Model model) {
+        model.addAttribute("id",id);
+        return "plan/modify";
+    }
+
+
+    @GetMapping("/hotplace-list")
+    public String hotPlaceList(@RequestParam int page,@RequestParam(required = false) String key, @RequestParam(required = false) String word, Model model) {
+        model.addAttribute("page",page);
+        model.addAttribute("key",key);
+        model.addAttribute("word",word);
+        return "hotplace/list";
     }
 }

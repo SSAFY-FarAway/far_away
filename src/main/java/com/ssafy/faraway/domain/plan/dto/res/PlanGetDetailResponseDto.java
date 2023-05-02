@@ -18,12 +18,12 @@ public class PlanGetDetailResponseDto {
     private String loginId;
     private Long hit;
     private List<AttractionGetResponseDto> attractionList = new ArrayList<>();
-    private List<Long> shortestPathList = new ArrayList<>();
+    private int[] shortestPathList;
 
 
     public PlanGetDetailResponseDto toDto(PlanGetDetailDto planGetDetailDto,
                                           List<AttractionGetResponseDto> attractionList,
-                                          List<Long> shortestPath) {
+                                          int[] shortestPath) {
         return PlanGetDetailResponseDto.builder()
                 .id(planGetDetailDto.getId())
                 .title(planGetDetailDto.getTitle())

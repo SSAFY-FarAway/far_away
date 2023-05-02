@@ -16,7 +16,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/member")
@@ -81,7 +86,7 @@ public class MemberController {
         }
     }
 
-    @PutMapping("/password")
+    @PutMapping("/new-password")
     public ResponseEntity<?> loginPwdUpdate(@RequestBody @Valid MemberLoginPwdUpdateRequestDto memberLoginPwdUpdateRequestDto) {
         try {
             if(memberService.loginPwdUpdate(memberLoginPwdUpdateRequestDto) == null){
@@ -144,8 +149,10 @@ public class MemberController {
     @GetMapping("/check/{loginId}") //countByLoginId
     public ResponseEntity<?> loginIdCheck(@PathVariable("loginId") String loginId) {
         try {
+            Map<String, Integer> resultMap = new HashMap<>();
             int cnt = memberService.loginIdCheck(loginId);
-            return new ResponseEntity<>(cnt + "", HttpStatus.OK);
+            resultMap.put("canUse", cnt);
+            return new ResponseEntity<>(resultMap, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return exceptionHandling(e);
@@ -160,6 +167,56 @@ public class MemberController {
             }
             List<MemberListResponseDto> list = memberService.findAll();
             return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return exceptionHandling(e);
+        }
+    }
+
+    @GetMapping("/login-id")
+    public ResponseEntity<?> findLoginIdByEmailAndBirth(@RequestParam @NotEmpty(message = "loginId ust not be empty") @Email String email,
+                                                        @RequestParam @NotEmpty @Size(min=6, max=6, message = "birth's size must not be 6") String birth){
+        System.out.println("login-id 호출");
+        try{
+            Map<String, String> map = new HashMap<>();
+            Map<String, String> resultMap = new HashMap<>();
+            map.put("email", email);
+            map.put("birth", birth);
+            String loginId = memberService.findLoginIdByEmailAndBirth(map);
+
+            if(loginId == null){
+                resultMap.put("success", String.valueOf(false));
+                resultMap.put("errorMsg","이메일과 생년월일을 정확히 입력해 주세요.");
+                return new ResponseEntity<>(resultMap, HttpStatus.UNAUTHORIZED);
+            }
+            resultMap.put("success", String.valueOf(true));
+            resultMap.put("loginId",loginId);
+            return new ResponseEntity<>(resultMap, HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return exceptionHandling(e);
+        }
+    }
+
+    @GetMapping("/login-pwd")
+    public ResponseEntity<?> findLoginPwd(@RequestParam @Size(min = 6, max = 20, message = "loginId ust not be empty") String loginId,
+                                            @RequestParam @NotEmpty(message = "loginId ust not be empty") @Email String email,
+                                            @RequestParam @NotEmpty @Size(min=6, max=6, message = "birth's size must not be 6") String birth){
+        try{
+            Map<String, String> map = new HashMap<>();
+            Map<String, String> resultMap = new HashMap<>();
+            map.put("loginId", loginId);
+            map.put("email", email);
+            map.put("birth", birth);
+            String loginPwd = memberService.findLoginPwd(map);
+            if(loginPwd == null){
+                resultMap.put("success", String.valueOf(false));
+                resultMap.put("errorMsg", "이메일, 생년월일, 아이디를 정확히 입력해 주세요");
+                return new ResponseEntity<>(resultMap, HttpStatus.UNAUTHORIZED);
+            }
+            resultMap.put("success", String.valueOf(true));
+            resultMap.put("loginPwd",loginPwd);
+            return new ResponseEntity<>(resultMap, HttpStatus.OK);
         } catch (Exception e){
             e.printStackTrace();
             return exceptionHandling(e);

@@ -10,6 +10,7 @@ import com.ssafy.faraway.domain.member.dto.res.MemberResponseDto;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,8 @@ public interface MemberService {
     Integer loginIdCheck(String loginId) throws SQLException;
     boolean loginPwdCheck(Long id, String loginPwd) throws SQLException;
 
+    String findLoginIdByEmailAndBirth(Map<String, String> map)throws SQLException;
+
+    String findLoginPwd(Map<String, String> map) throws SQLException;
 
 }

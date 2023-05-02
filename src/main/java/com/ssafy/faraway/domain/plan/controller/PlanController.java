@@ -36,17 +36,17 @@ public class PlanController {
     private final AttractionService attractionService;
     private final PlanCommentService planCommentService;
 
-    @PostMapping("/")
-    public ResponseEntity savePlan(@RequestBody PlanSaveRequestDto planSaveRequestDto, HttpSession session) {
+    @PostMapping("")
+    public ResponseEntity<Integer> savePlan(@RequestBody PlanSaveRequestDto planSaveRequestDto, HttpSession session) {
         // TODO: session의 loginId를 기반으로 memberId 를 받아오는 로직 필요
-        Long memberId = 1L;
-        planSaveRequestDto.setMemberId(memberId);
+        planSaveRequestDto.setMemberId(planSaveRequestDto.getMemberId());
         try {
             int result = planService.save(planSaveRequestDto);
             if(result == 0) {
                 return ResponseEntity.badRequest().build();
             }
-            return ResponseEntity.ok().build();
+            System.out.println(planSaveRequestDto.getId());
+            return new ResponseEntity(planSaveRequestDto.getId(),HttpStatus.OK);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -79,7 +79,6 @@ public class PlanController {
     public ResponseEntity<PlanGetDetailResponseDto> findPlanById(@PathVariable Long id) {
         PlanGetDetailDto plan = null;
         try {
-
             plan = planService.findById(id);
             if(plan == null) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -90,7 +89,7 @@ public class PlanController {
             List<AttractionGetResponseDto> attractionList = attractionService.findAllByIds(plan.getPlan());
 
             // 해당 attractionList로 최단 경로 list 받아오기
-            List<Long> shortestPath = planService.getShortestPath(attractionList);
+            int[] shortestPath = planService.getShortestPath(attractionList);
 
             // PlanDetailResponseDto 로 build
             PlanGetDetailResponseDto planGetDetailResponseDto = new PlanGetDetailResponseDto().toDto(plan,attractionList,shortestPath);
@@ -104,7 +103,7 @@ public class PlanController {
     }
 
 
-    @PutMapping("/")
+    @PutMapping("")
     public ResponseEntity updatePlan(@RequestBody PlanUpdateRequestDto planUpdateRequestDto) {
 
         try {
