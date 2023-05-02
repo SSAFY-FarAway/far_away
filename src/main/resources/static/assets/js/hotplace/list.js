@@ -2,7 +2,7 @@ window.onload = function() {
     initList();
 }
 const urlParams = new URLSearchParams(location.search);
-const currentPage = urlParams.get("page");
+const currentPage = urlParams.get("page") == null?1:urlParams.get("page");
 const key = urlParams.get("key") == null ? "" : urlParams.get("key");
 const word = urlParams.get("word") == null ? "" : urlParams.get("word");
 function initList() {
@@ -17,7 +17,6 @@ function initList() {
 
 function makeList(data) {
     var hotplaceTable = document.getElementById("hotplace-table");
-    console.log(data.list);
     data.list.forEach(hotplace => {
         let tr = document.createElement("tr");
         tr.className = "text-center";
@@ -49,7 +48,7 @@ function makeList(data) {
         tr.appendChild(thRating);
 
         let thCreated = document.createElement("td");
-        thCreated.innerText = hotplace['createdDate'];
+        thCreated.innerText = hotplace['createdDate'].substring(0, 10);
         tr.appendChild(thCreated);
 
         hotplaceTable.appendChild(tr);
