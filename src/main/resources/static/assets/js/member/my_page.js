@@ -39,16 +39,16 @@ const displayMemberInfo = (data) => {
 const mvModify = () => {
     const urlParams = new URLSearchParams(location.search);
     const id = urlParams.get("id");
-   const loginPwd = window.prompt("비밀번호를 입력해주세요.")
-    let url = root + "/member/check";
-
+    const loginPwd = window.prompt("비밀번호를 입력해주세요.")
+    let url = `${root}/member/check`;
+    console.log(loginPwd)
     fetch(url, {
         method: "post",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            id: id, loginPwd: loginPwd
+                id: id, loginPwd: loginPwd
             }
         )
     }).then(res => console.log(res));
