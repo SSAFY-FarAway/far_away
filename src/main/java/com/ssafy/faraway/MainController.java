@@ -3,6 +3,7 @@ package com.ssafy.faraway;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -109,7 +110,9 @@ public class MainController {
 
 
     @GetMapping("/hotplace-list")
-    public String hotPlaceList(@RequestParam int page, @RequestParam(required = false) String key, @RequestParam(required = false) String word, Model model) {
+    public String hotPlaceList(@RequestParam(defaultValue = "1") int page,
+                               @RequestParam(required = false) String key,
+                               @RequestParam(required = false) String word, Model model) {
         model.addAttribute("page", page);
         model.addAttribute("key", key);
         model.addAttribute("word", word);
@@ -124,5 +127,11 @@ public class MainController {
     @GetMapping("/hotplace-write")
     public String hotPlaceWrite() {
         return "/hotplace/write";
+    }
+
+    @GetMapping("/hotplace-modify")
+    public String hotPlaceModify(@RequestParam Long id, Model model) {
+        model.addAttribute("id", id);
+        return "/hotplace/modify";
     }
 }
