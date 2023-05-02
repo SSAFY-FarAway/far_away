@@ -140,7 +140,7 @@
 
 <!-- JS files-->
 <script src="${root}/resources/static/assets/js/script.js"></script>
-<script src='${root}/resources/static/assets/js/member/find.js'></script>
+<script src='${root}/resources/static/assets/js/member/sign_up.js'></script>
 
 </body>
 

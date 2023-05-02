@@ -14,24 +14,24 @@ let isIdValid = false;
 
 // 아이디 확인
 const idCheck = () => {
-    let loginId = document.getElementById("loginId");
-    let url = root + "/member/idCheck";
+    let loginId = document.getElementById("login-id");
+    let url = `${root}/member/check/${loginId.value}`;
 
     fetch(url)
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
             console.log(data);
-            if (data != 0) {
-                // 아이디 중복
+            if(data.canUse === 0){
+                // 아이디 사용 가능.
+                alert(loginId.value + "는 사용할 수 있습니다.")
+                loginId.readOnly = true;
+                isIdValid = true;
+            } else {
+                // 아이디 사용 불가능
                 alert(loginId.value + "는 사용할 수 없습니다.");
                 loginId.value = "";
                 loginId.focus();
                 isIdValid = false;
-
-            } else {
-                alert(loginId.value + "는 사용할 수 있습니다.")
-                loginId.readOnly = true;
-                isIdValid = true;
             }
         });
 }

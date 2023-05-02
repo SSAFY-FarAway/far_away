@@ -149,8 +149,10 @@ public class MemberController {
     @GetMapping("/check/{loginId}") //countByLoginId
     public ResponseEntity<?> loginIdCheck(@PathVariable("loginId") String loginId) {
         try {
+            Map<String, Integer> resultMap = new HashMap<>();
             int cnt = memberService.loginIdCheck(loginId);
-            return new ResponseEntity<>(cnt + "", HttpStatus.OK);
+            resultMap.put("canUse", cnt);
+            return new ResponseEntity<>(resultMap, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return exceptionHandling(e);
