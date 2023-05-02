@@ -23,7 +23,7 @@ document.querySelector("#btn-register").addEventListener("click", function () {
             };
             fetch(root + "/post/", config)
                 .then((response) => response.json());
-                // location.href = root + "/post-list";
+                location.href = root + "/post-list";
         })
 
 

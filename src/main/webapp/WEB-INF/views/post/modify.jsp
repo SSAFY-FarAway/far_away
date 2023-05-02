@@ -28,15 +28,14 @@
     <link href="resources/static/assets/css/style.css" rel="stylesheet" />
     <link href="resources/static/assets/css/map.css" rel="stylesheet" />
 </head>
-
 <jsp:include page="../fragment/head.jsp"/>
 <body id="page-top">
 <jsp:include page="../fragment/nav.jsp"/>
 
+<!-- Masthead-->
 <header class="masthead">
     <div class="masthead-subheading">Wherever You Go</div>
 </header>
-
 <section>
     <div class="container" id="mypage-section">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -44,44 +43,34 @@
                 <div class="card text-black shadow border border-primary" style="border-radius: 25px">
                     <div class="card-body p-md-5 sh" id="bgimg">
                         <div class="row justify-content-center">
-                            <div class="container" id="article-view-section">
+                            <div class="container" id="article-list-section">
                                 <div class="row justify-content-center">
                                     <div class="col-lg-8 col-md-10 col-sm-12">
                                         <h2 class="border border-warning rounded my-3 py-3 shadow-sm  text-center">
-                                            글보기
+                                            글 수정하기
                                         </h2>
                                     </div>
-                                    <div class="col-lg-8 col-md-10 col-sm-12 bg-white border rounded-3 shadow">
-                                        <div class="row my-2">
-                                            <input type="text" id="title" class="px-5"></input>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="clearfix align-content-center">
-                                                    <img class="avatar me-2 float-md-start bg-light p-2"
-                                                         src="https://raw.githubusercontent.com/twbs/icons/main/icons/person-fill.svg" />
-                                                    <p>
-                                                        <span id="member-id" class="fw-bold"></span>
-                                                        <br />
-                                                        <span id="created-date" class="text-secondary fw-light"></span>
-                                                        <span id="hit" class="text-secondary fw-light"></span>
-                                                        <span id="category" class="text-secondary fw-light"></span>
-                                                    </p>
-                                                </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <form id="form-register" method="POST" action="">
+                                            <input type="hidden" name="action" value="write">
+                                            <div class="mb-3">
+                                                <label for="subject" class="form-label fw-bolder">제목 :
+                                                </label>
+                                                <input type="text" class="form-control" id="subject"
+                                                       name="subject" placeholder="제목..." />
                                             </div>
-                                            <%-- TODO : comment 생성하고 변경 해야되는 부분--%>
-                                            <div class="col-md-4 align-self-center text-end">댓글 : 17</div>
-                                            <p id="address"></p>
-                                            <div class="divider mb-3 bg-light"></div>
-                                            <input type="text" id="content"></input>
-                                            <div class=" divider mt-3 mb-3"></div>
-                                            <div id="btn-area" class="d-flex justify-content-end">
-                                                <button type="button" id="btn-list"
-                                                        class="btn btn-outline-primary shadow-sm mb-3">
-                                                    글목록
-                                                </button>
+                                            <div class="mb-3">
+                                                <label for="content" class="form-label fw-bolder">내용 :
+                                                </label>
+                                                <textarea class="form-control" id="content" name="content"
+                                                          rows="7"></textarea>
                                             </div>
-                                        </div>
+                                            <div id="btn-area" class="col-auto text-center">
+
+                                                <button type="reset"
+                                                        class="btn btn-danger shadow mb-3">초기화</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -91,20 +80,20 @@
             </div>
         </div>
     </div>
-
     <div id="user" style='display: none;' login-member="${loginMember.id}"></div>
 
     </div>
 </section>
-<!-- Footer start-->
-<footer class="footer py-4 mt-5">
+<!-- Footer-->
+<footer class="footer py-4">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-4 text-lg-start">
                 Copyright &copy; Your Website 2022
             </div>
             <div class="col-lg-4 my-3 my-lg-0">
-                <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i
+                        class="fab fa-twitter"></i></a>
                 <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i
                         class="fab fa-facebook-f"></i></a>
                 <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i
@@ -116,20 +105,22 @@
             </div>
         </div>
     </div>
-
 </footer>
-<!-- Footer end -->
 
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="resources/static/assets/js/script.js"></script>
-<script src="resources/static/assets/js/post/view.js"></script>
-
+<script src="resources/static/assets/js/view.js"></script>
+<script src="resources/static/assets/js/post/modify.js"></script>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                               SB Forms JS                               * *-->
+<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-<!-- kakao api JS -->
-<script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=65e66ed3a412cb73e32b300c2f3a1803&libraries=services,clusterer,drawing"></script>
+
+
+
 </body>
 
 </html>

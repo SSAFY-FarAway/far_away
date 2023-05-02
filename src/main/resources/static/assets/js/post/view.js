@@ -56,7 +56,7 @@ function makeView(data) {
         btnDelete.addEventListener("click", btnDeleteOnClick);
         btnArea.appendChild(btnDelete);
     }
-    document.getElementById("btn-list").addEventListener("click", ()=>btnMoveOnClick("post-list"));
+    document.getElementById("btn-list").addEventListener("click", ()=>btnMoveOnClick("/post-list"));
 
 }
 
