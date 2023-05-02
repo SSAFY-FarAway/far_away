@@ -53,7 +53,8 @@ public class MainController {
     }
 
     @GetMapping("/hotplace-list")
-    public String hotPlaceList(@RequestParam int page,@RequestParam(required = false) String key, @RequestParam(required = false) String word, Model model) {
+    public String hotPlaceList(@RequestParam int page,@RequestParam(required = false, defaultValue = "none") String key, @RequestParam(required = false, defaultValue = "none") String word, Model model) {
+        System.out.println("key: " + key + " word: " + word);
         model.addAttribute("page",page);
         model.addAttribute("key",key);
         model.addAttribute("word",word);

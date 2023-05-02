@@ -15,7 +15,7 @@
     </select>
 
     <select id="findById" parameterType="long" resultType="HotPlaceResponseDto">
-        select hp.id, hp.member_id, m.login_id, hp.title, hp.content, hp.hit, hp.zipcode, hp.main_address, hp.sub_address, hp.rating, hp.modified_date
+        select hp.id, hp.member_id, m.login_id, hp.title, hp.content, hp.hit, hp.zipcode, hp.main_address, hp.sub_address, hp.rating, hp.created_date
         from hotplace hp join member m
         on hp.member_id = m.id
         and hp.id = #{id}
@@ -28,17 +28,17 @@
     </update>
 
     <select id="findAllByCondition" parameterType="SearchCondition" resultType="HotPlaceListResponseDto">
-        select hp.id, hp.member_id, m.login_id, hp.title, hp.hit, hp.main_address, hp.rating, hp.modified_date
+        select hp.id, hp.member_id, m.login_id, hp.title, hp.hit, hp.main_address, hp.rating, hp.created_date
         from hotplace hp join member m
         on hp.member_id = m.id
-        <if test='key != null and !key.equals("none")'>
+        <if test='!key.equals("none")'>
             and ${key} like concat('%', #{word}, '%')
         </if>
         <if test='orderBy != null and !orderBy.equals("none")'>
             order by ${orderBy} ${orderByDir}
         </if>
         <if test='orderBy.equals("none")'>
-            order by hp.modified_date ${orderByDir}
+            order by hp.created_date ${orderByDir}
         </if>
         limit #{pagination.limitStart}, #{recordSize}
     </select>
@@ -47,7 +47,7 @@
         select count(*)
         from hotplace hp join member m
         on hp.member_id = m.id
-        <if test='key != null and !key.equals("none")'>
+        <if test='!key.equals("none")'>
             and ${key} like concat('%', #{word}, '%')
         </if>
     </select>

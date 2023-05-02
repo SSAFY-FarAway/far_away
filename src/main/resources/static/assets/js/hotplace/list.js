@@ -3,8 +3,8 @@ window.onload = function() {
 }
 const urlParams = new URLSearchParams(location.search);
 const currentPage = urlParams.get("page");
-const key = urlParams.get("key");
-const word = urlParams.get("word");
+const key = urlParams.get("key") == null ? "" : urlParams.get("key");
+const word = urlParams.get("word") == null ? "" : urlParams.get("word");
 function initList() {
     fetch(root+"/hotplace?page="+currentPage+"&key="+key+"&word="+word)
         .then((response) => {
@@ -12,7 +12,7 @@ function initList() {
                 makeList(data)
                 makeNavigation(data.pagination);
             });
-        })
+        });
 }
 
 function makeList(data) {
