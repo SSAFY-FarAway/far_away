@@ -44,7 +44,14 @@ public class MainController {
     }
 
     @GetMapping("/post-list")
-    public String mvPostList() {
+    public String postList(@RequestParam(required = false, defaultValue = "1") int page,
+                           @RequestParam(required = false) String key,
+                           @RequestParam(required = false) String word,
+                           Model model) {
+        model.addAttribute("page", page);
+        model.addAttribute("key", key);
+        model.addAttribute("word", word);
+
         return "post/list";
     }
 
