@@ -13,16 +13,26 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(1)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/",
-                        "/member/login",
+                        "/login",
+                        "/sign-up",
+                        "/find",
                         "/member/",
                         "/member/check/**",
-                        "/login",
-                        "/signUp",
-                        "/resources/static/**",
+                        "/member/login",
+                        "/member/login-pwd",
+                        "/member/login-id",
+                        "/member/sign-up",
+                        "/search_place",
+                        "/attraction/**",
+                        "/plan-list",
+                        "/hotplace-list",
+                        "/post-list",
                         "/swagger-ui/**",
                         "/swagger-resources/**",
+                        "/resources/static/**",
                         "/v2/api-docs",
                         "/plan-view/**",
-                        "/plan/**");
+                        "/plan/**"
+                        );
     }
 }

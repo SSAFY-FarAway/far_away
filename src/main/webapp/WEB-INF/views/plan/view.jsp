@@ -17,8 +17,8 @@
         <h3 class="section-subheading text-muted">
             원하는 여행경로를 공유해보세요.
         </h3>
-        <div class="container" id="article-list-section">
-            <div class="row align-self-center mb-2">
+        <div class="flex" id="article-list-section">
+            <div class="row  justify-content-center align-self-center mb-2">
                 <div class="col-4">
                     <%--지도위치--%>
                     <div class="h4">My Plan</div>

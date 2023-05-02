@@ -84,4 +84,21 @@
         where id = #{id}
     </update>
 
+    <select id="findLoginIdByEmailAndBirth" parameterType="Map" resultType="String">
+        select login_id
+        from member
+        where email = #{email} and birth = #{birth}
+    </select>
+
+    <select id="findLoginPwd" parameterType="Map" resultType="String">
+        select login_pwd
+        from member
+        where login_id = #{loginId} and email = #{email} and birth = #{birth}
+    </select>
+
+    <update id="updateLoginPwdToZero" parameterType="Map">
+        update member set login_pwd = #{loginPwd}, salt = #{salt}
+        where login_id = #{loginId} and email = #{email} and birth = #{birth}
+    </update>
+
 </mapper>

@@ -22,7 +22,7 @@ public class MainController {
     public String mvLogout () { return "index";
     }
 
-    @GetMapping("/signUp")
+    @GetMapping("/sign-up")
     public String mvSignUp () {
         return "member/sign_up";
     }
@@ -37,12 +37,17 @@ public class MainController {
         return "member/modify";
     }
 
-    @GetMapping("/search_place")
+    @GetMapping("/find")
+    public String mvFind() {
+        return "member/find";
+    }
+
+    @GetMapping("/search-place")
     public String searchPlace() {
         return "attraction/search_place";
     }
 
-    @GetMapping("/plan_list")
+    @GetMapping("/plan-list")
     public String planList(@RequestParam(required = false, defaultValue = "1") int page,
                            @RequestParam(required = false) String key,
                            @RequestParam(required = false) String word,
@@ -54,7 +59,7 @@ public class MainController {
         return "plan/list";
     }
 
-    @GetMapping("/plan_write")
+    @GetMapping("/plan-write")
     public String planWrite() {
         return "plan/write";
     }
@@ -72,4 +77,12 @@ public class MainController {
         return "plan/modify";
     }
 
+
+    @GetMapping("/hotplace-list")
+    public String hotPlaceList(@RequestParam int page,@RequestParam(required = false) String key, @RequestParam(required = false) String word, Model model) {
+        model.addAttribute("page",page);
+        model.addAttribute("key",key);
+        model.addAttribute("word",word);
+        return "hotplace/list";
+    }
 }
