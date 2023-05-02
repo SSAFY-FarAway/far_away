@@ -12,15 +12,15 @@ public class PostCommentListResponseDto {
     private long memberId;
     private String loginId;
     private String conent;
-    private LocalDateTime modifiedDate;
+    private LocalDateTime createdDate;
 
     @Builder
-    public PostCommentListResponseDto(long id, long postId, long memberId, String loginId, String conent, LocalDateTime modifiedDate) {
+    public PostCommentListResponseDto(long id, long postId, long memberId, String loginId, String conent, LocalDateTime createdDate) {
         this.id = id;
         this.postId = postId;
         this.memberId = memberId;
         this.loginId = loginId;
         this.conent = conent;
-        this.modifiedDate = modifiedDate;
+        this.createdDate = createdDate;
     }
 }

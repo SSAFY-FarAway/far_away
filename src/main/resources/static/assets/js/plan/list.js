@@ -1,13 +1,14 @@
-var root = "http://localhost/faraway";
+
 window.onload = function() {
 
     initList();
 }
 const urlParams = new URLSearchParams(location.search);
 const currentPage = urlParams.get("page");
-const key = urlParams.get("key");
-const word = urlParams.get("word");
+const key = urlParams.get("key") == null?"":urlParams.get("key");
+const word = urlParams.get("word") == null?"":urlParams.get("word");
 function initList() {
+    console.log(root+"/plan?page="+currentPage+"&key="+key+"&word="+word);
     fetch(root+"/plan?page="+currentPage+"&key="+key+"&word="+word)
         .then((response) => {
             response.json().then((data) => {
@@ -53,8 +54,6 @@ function makeList(data) {
 
         planTable.appendChild(tr);
     })
-
-
 }
 
 function makeNavigation(pagination) {
@@ -64,22 +63,22 @@ function makeNavigation(pagination) {
     if(pagination.startPage == 1) {
         content += '<li class ="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true"> Previous </a></li>';
     } else {
-        content += '<li class ="page-item"><a class="page-link" href="'+ root+'/plan_list?page=' + pagination.startPage
+        content += '<li class ="page-item"><a class="page-link" href="'+ root+'/plan-list?page=' + pagination.startPage
             +'" tabindex="-1" aria-disabled="true"> Previous </a></li>';
     }
 
     for(let i = pagination.startPage;i<=pagination.endPage;i++) {
         if(i == currentPage) {
-            content += '<li class="page-item active"><a class="page-link" href="' + root + '/plan_list?page=' + i +'&key='+key+'&word='+word+'">'+i+'</a></li>';
+            content += '<li class="page-item active"><a class="page-link" href="' + root + '/plan-list?page=' + i +'&key='+key+'&word='+word+'">'+i+'</a></li>';
         } else {
-            content += '<li class="page-item"><a class="page-link" href="' + root + '/plan_list?page=' + i + '">'+i+'</a></li>';
+            content += '<li class="page-item"><a class="page-link" href="' + root + '/plan-list?page=' + i + '">'+i+'</a></li>';
         }
     }
 
     if(pagination.endPage == pagination.totalRecordCount) {
         content += '<li class ="page-item disabled"><a class="page-link" href="#"> Next </a></li>';
     } else {
-        content += '<li class ="page-item"><a class="page-link" href="'+ root+'/plan_list?page=' + pagination.endPage
+        content += '<li class ="page-item"><a class="page-link" href="'+ root+'/plan-list?page=' + pagination.endPage
             +'"> Next </a></li>';
     }
     content += "</ul>";

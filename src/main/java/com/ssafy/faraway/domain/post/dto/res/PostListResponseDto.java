@@ -14,16 +14,16 @@ public class PostListResponseDto {
     private String category;
     private String title;
     private long hit;
-    private LocalDateTime modifiedDate;
+    private LocalDateTime createdDate;
 
     @Builder
-    public PostListResponseDto(long id, long memberId, String loginId, String category, String title, long hit, LocalDateTime modifiedDate) {
+    public PostListResponseDto(long id, long memberId, String loginId, String category, String title, long hit, LocalDateTime createdDate) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;
         this.category = category;
         this.title = title;
         this.hit = hit;
-        this.modifiedDate = modifiedDate;
+        this.createdDate = createdDate;
     }
 }

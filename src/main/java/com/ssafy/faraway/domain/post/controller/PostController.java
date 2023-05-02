@@ -42,8 +42,9 @@ public class PostController {
         }
     }
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/list")
     public ResponseEntity<PagingResponse<PostListResponseDto>> findAllPost(@ModelAttribute SearchCondition searchCondition) {
+        System.out.println("come in sibal");
         PagingResponse<PostListResponseDto> pagingResponse = null;
         try {
             pagingResponse = postService.findAllByCondition(searchCondition);

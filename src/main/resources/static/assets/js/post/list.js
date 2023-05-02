@@ -1,6 +1,4 @@
-var root = "http://localhost/faraway";
 window.onload = function() {
-
     initList();
 }
 const urlParams = new URLSearchParams(location.search);
@@ -8,7 +6,7 @@ const currentPage = urlParams.get("page");
 const key = urlParams.get("key");
 const word = urlParams.get("word");
 function initList() {
-    fetch(root+"/plan?page="+currentPage+"&key="+key+"&word="+word)
+    fetch(root+"/post/list?page="+currentPage+"&key="+key+"&word="+word)
         .then((response) => {
             response.json().then((data) => {
                 makeList(data)
@@ -18,15 +16,14 @@ function initList() {
 }
 
 function makeList(data) {
-    var planTable = document.getElementById("plan-table");
+    var postTable = document.getElementById("post-table");
     console.log(data.list);
-    data.list.forEach(plan => {
+    data.list.forEach(post => {
         let tr = document.createElement("tr");
         tr.className = "text-center";
-
         let thId = document.createElement("th");
         thId.scope = "row";
-        thId.innerText = plan['id'];
+        thId.innerText = post['id'];
         tr.appendChild(thId);
 
         let thTitle = document.createElement("td");
@@ -34,24 +31,28 @@ function makeList(data) {
         let aTag = document.createElement("a");
         aTag.href = root+"/plan_view?id="+plan['id'];
         aTag.style="text-decoration: none";
-        aTag.innerText = plan['title'];
+        aTag.innerText = post['title'];
         thTitle.appendChild(aTag);
         tr.appendChild(thTitle);
 
+        let thCategory = document.createElement("td");
+        thCategory.innerText = post['category'];
+        tr.appendChild(thCategory);
+
         let thLoginId = document.createElement("td");
-        thLoginId.innerText = plan['loginId'];
+        thLoginId.innerText = post['loginId'];
         tr.appendChild(thLoginId);
 
         let thHit = document.createElement("td");
-        thHit.innerText = plan['hit'];
+        thHit.innerText = post['hit'];
         tr.appendChild(thHit);
 
         let thCreated = document.createElement("td");
-        thCreated.innerText = plan['createdDate'];
+        thCreated.innerText = post['createdDate'];
         tr.appendChild(thCreated);
 
 
-        planTable.appendChild(tr);
+        postTable.appendChild(tr);
     })
 
 
@@ -64,22 +65,22 @@ function makeNavigation(pagination) {
     if(pagination.startPage == 1) {
         content += '<li class ="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true"> Previous </a></li>';
     } else {
-        content += '<li class ="page-item"><a class="page-link" href="'+ root+'/plan_list?page=' + pagination.startPage
+        content += '<li class ="page-item"><a class="page-link" href="'+ root+'/post-list?page=' + pagination.startPage
             +'" tabindex="-1" aria-disabled="true"> Previous </a></li>';
     }
 
     for(let i = pagination.startPage;i<=pagination.endPage;i++) {
         if(i == currentPage) {
-            content += '<li class="page-item active"><a class="page-link" href="' + root + '/plan_list?page=' + i +'&key='+key+'&word='+word+'">'+i+'</a></li>';
+            content += '<li class="page-item active"><a class="page-link" href="' + root + '/post-list?page=' + i +'&key='+key+'&word='+word+'">'+i+'</a></li>';
         } else {
-            content += '<li class="page-item"><a class="page-link" href="' + root + '/plan_list?page=' + i + '">'+i+'</a></li>';
+            content += '<li class="page-item"><a class="page-link" href="' + root + '/post-list?page=' + i + '">'+i+'</a></li>';
         }
     }
 
     if(pagination.endPage == pagination.totalRecordCount) {
         content += '<li class ="page-item disabled"><a class="page-link" href="#"> Next </a></li>';
     } else {
-        content += '<li class ="page-item"><a class="page-link" href="'+ root+'/plan_list?page=' + pagination.endPage
+        content += '<li class ="page-item"><a class="page-link" href="'+ root+'/post-list?page=' + pagination.endPage
             +'"> Next </a></li>';
     }
     content += "</ul>";
