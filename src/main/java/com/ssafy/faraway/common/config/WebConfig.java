@@ -16,6 +16,8 @@ public class WebConfig implements WebMvcConfigurer {
                         "/login",
                         "/sign-up",
                         "/find",
+                        "/member/",
+                        "/member/check/**",
                         "/member/login",
                         "/member/login-pwd",
                         "/member/login-id",
@@ -28,6 +30,9 @@ public class WebConfig implements WebMvcConfigurer {
                         "/swagger-ui/**",
                         "/swagger-resources/**",
                         "/resources/static/**",
-                        "/v2/api-docs");
+                        "/v2/api-docs"
+                        "/plan-view/**",
+                        "/plan/**"
+                        );
     }
 }

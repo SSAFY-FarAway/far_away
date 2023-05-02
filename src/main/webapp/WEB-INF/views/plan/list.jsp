@@ -46,7 +46,7 @@
             <div class="row align-self-center mb-2">
                 <div class="col-md-2 text-start">
                     <button type="button" id="btn-mv-register" class="btn btn-outline-primary btn shadow-sm">
-                        글쓰기
+                        여행경로 등록
                     </button>
                 </div>
                 <div class="col-md-7 offset-3">
@@ -78,20 +78,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="article" items="${articles}">
-                    <tr class="text-center">
-                        <th scope="row">${article.id}</th>
-                        <td class="text-start">
-                            <a href="#" class="article-title link-dark" data-no="${article.id}"
-                               style="text-decoration: none">
-                                    ${article.subject}
-                            </a>
-                        </td>
-                        <td>${article.memberName}</td>
-                        <td>${article.hit}</td>
-                        <td>${article.createdDate}</td>
-                    </tr>
-                </c:forEach>
+
                 </tbody>
             </table>
             <nav aria-label="Page navigation" class="row" id="navigation">

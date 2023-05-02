@@ -79,7 +79,6 @@ function makeOptionForSigun(data) {
       } else {
           alert('컨텐츠를 선택해주세요.');
       }    
-      console.log(searchUrl);
       fetch(searchUrl)
         .then((response) => response.json())
         .then((data) => {
