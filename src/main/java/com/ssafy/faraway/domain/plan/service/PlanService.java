@@ -16,7 +16,7 @@ public interface PlanService {
     PagingResponse<PlanGetResponseDto> findAllByCondition(SearchCondition searchCondition) throws Exception;
     PlanGetDetailDto findById(Long id) throws Exception;
 
-    List<Long> getShortestPath(List<AttractionGetResponseDto> attractionList);
+    int[] getShortestPath(List<AttractionGetResponseDto> attractionList);
 
     int updateHit(Long id) throws Exception;
     int updatePlan(PlanUpdateRequestDto planUpdateRequestDto) throws Exception;

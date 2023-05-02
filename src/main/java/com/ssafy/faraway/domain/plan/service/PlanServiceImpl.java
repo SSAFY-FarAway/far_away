@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class PlanServiceImpl implements PlanService{
     }
 
     @Override
-    public List<Long> getShortestPath(List<AttractionGetResponseDto> attractionList) {
+    public int[] getShortestPath(List<AttractionGetResponseDto> attractionList) {
         List<Long> list = new ArrayList<>();
         //  attractionList 로 map 을 만들기
         double map[][] = makeMap(attractionList);
@@ -59,7 +60,7 @@ public class PlanServiceImpl implements PlanService{
         for(int i =0;i<result.length;i++) {
             list.add(attractionList.get(result[i]).getContentId());
         }
-        return list;
+        return result;
     }
 
     @Override

@@ -88,7 +88,7 @@ public class PlanController {
             List<AttractionGetResponseDto> attractionList = attractionService.findAllByIds(plan.getPlan());
 
             // 해당 attractionList로 최단 경로 list 받아오기
-            List<Long> shortestPath = planService.getShortestPath(attractionList);
+            int[] shortestPath = planService.getShortestPath(attractionList);
 
             // PlanDetailResponseDto 로 build
             PlanGetDetailResponseDto planGetDetailResponseDto = new PlanGetDetailResponseDto().toDto(plan,attractionList,shortestPath);
