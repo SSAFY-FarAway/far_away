@@ -14,7 +14,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <div class="masthead-heading text-uppercase">FAR AWAY</div>
         <a
           class="btn btn-primary btn-xl text-uppercase"
-          href="${root}/attraction?action=mvsearch#search-place"
+          href="${root}/search-place#search-place"
           >Search Place</a
         >
       </div>
