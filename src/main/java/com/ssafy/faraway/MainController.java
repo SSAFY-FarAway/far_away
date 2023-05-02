@@ -42,12 +42,12 @@ public class MainController {
         return "member/find";
     }
 
-    @GetMapping("/search_place")
+    @GetMapping("/search-place")
     public String searchPlace() {
         return "attraction/search_place";
     }
 
-    @GetMapping("/plan_list")
+    @GetMapping("/plan-list")
     public String planList(@RequestParam int page,@RequestParam(required = false) String key, @RequestParam(required = false) String word, Model model) {
         model.addAttribute("page",page);
         model.addAttribute("key",key);
