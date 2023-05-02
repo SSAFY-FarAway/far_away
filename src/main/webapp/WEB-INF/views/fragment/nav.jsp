@@ -32,7 +32,7 @@
             <a class="nav-link" href="${root}/login#login-section">login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${root}/signUp#signup-section">Sign Up</a>
+            <a class="nav-link" href="${root}/sign-up#signup-section">Sign Up</a>
           </li>
         </c:if>
         <c:if test="${not empty loginMember}">
@@ -40,7 +40,7 @@
             <a class="nav-link" href="${root}/myattraction?action=list">My Travel</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${root}//plan_list?page=1">Plan</a>
+            <a class="nav-link" href="${root}/plan-list?page=1">Plan</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="${root}/article?action=list#article-list-section"
