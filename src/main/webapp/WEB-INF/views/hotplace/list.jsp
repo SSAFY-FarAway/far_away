@@ -36,7 +36,7 @@
     <div class="masthead-subheading">Share Wherever Your Plan</div>
 </header>
 
-<section class="page-section p-3 mt-3" id="share-plan-list">
+<section class="page-section p-3 mt-3" id="hotplace-list">
     <div class="text-center fw-bold" role="alert">
         <h2 class="section-heading text-uppercase">Hot Place</h2>
         <h3 class="section-subheading text-muted">
@@ -45,7 +45,7 @@
         <div class="container" id="article-list-section">
             <div class="row align-self-center mb-2">
                 <div class="col-md-2 text-start">
-                    <button type="button" id="btn-mv-register" class="btn btn-outline-primary btn shadow-sm">
+                    <button type="button" id="btn-mv-save" class="btn btn-outline-primary btn shadow-sm">
                         글쓰기
                     </button>
                 </div>

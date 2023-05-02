@@ -1,6 +1,5 @@
 window.onload = function () {
     initView();
-    addOnClickEventListeners();
 }
 
 const urlParams = new URLSearchParams(location.search);
@@ -11,6 +10,13 @@ function initView() {
         .then((response) => {
             response.json().then((data) => {
                 makeView(data)
+            });
+        });
+
+    fetch(root + "/hotplace/" + hotPlaceId + "/file")
+        .then((response) => {
+            response.json().then((data) => {
+                makeFileView(data)
             });
         });
 }
@@ -50,7 +56,7 @@ function makeView(data) {
         btnModify.className = "btn btn-outline-success shadow-sm mb-3 ms-1";
         btnModify.type = "button";
         btnModify.innerText = "글수정";
-        btnModify.addEventListener("click", ()=>btnMoveOnClick(`hotplace-modify?id=${hotPlaceId}`));
+        btnModify.addEventListener("click", ()=>btnMoveOnClick(`/hotplace-modify?id=${hotPlaceId}`));
         btnArea.appendChild(btnModify);
 
         let btnDelete = document.createElement("button");
@@ -61,7 +67,22 @@ function makeView(data) {
         btnDelete.addEventListener("click", btnDeleteOnClick);
         btnArea.appendChild(btnDelete);
     }
-    document.getElementById("btn-list").addEventListener("click", ()=>btnMoveOnClick("hotplace-list"));
+    document.getElementById("btn-list").addEventListener("click", ()=>btnMoveOnClick("/hotplace-list"));
+}
+
+function makeFileView (data) {
+    let fileInfos = document.getElementById("fileInfos");
+    data.list.forEach(fileInfo => {
+        let li = document.createElement("li");
+        li.innerText = fileInfo['originalFile'];
+
+        let a = document.createElement("a");
+        a.className = "btn btn-outline-primary";
+        a.href = root + "/file/download/" + fileInfo['saveFolder'] + "/" + fileInfo['originalFile'] + "/" + fileInfo['saveFile'];
+        a.innerText = "[다운로드]";
+        li.appendChild(a);
+        fileInfos.appendChild(li);
+    })
 }
 
 const btnMoveOnClick = (url) => {
@@ -76,8 +97,11 @@ const btnDeleteOnClick = () =>{
                     "Content-Type": "application/json",
                 },
             };
-            fetch(root + "/hotplace/" + hotPlaceId, config)
-                .then((response) => response.json());
-            location.href = root + "/hotplace-list";
+            fetch(root + "/hotplace", config)
+                .then((response) => {
+                    if(response.status == 200) {
+                        location.href = root + "/hotplace-list#hotplace-list";
+                    }
+                });
     }
 }

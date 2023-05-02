@@ -13,6 +13,9 @@ function initList() {
                 makeNavigation(data.pagination);
             });
         });
+    document.getElementById("btn-mv-save").addEventListener("click", function () {
+       location.href = root + "/hotplace-write";
+    });
 }
 
 function makeList(data) {

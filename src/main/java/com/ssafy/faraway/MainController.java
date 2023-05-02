@@ -46,7 +46,7 @@ public class MainController {
     @GetMapping("/mvPostWrite")
     public String mvPostWrite() { return "post/write"; }
 
-    @GetMapping("/search_place")
+    @GetMapping("/search-place")
     public String searchPlace() {
         return "attraction/search_place";
     }
@@ -88,5 +88,15 @@ public class MainController {
         model.addAttribute("key",key);
         model.addAttribute("word",word);
         return "hotplace/list";
+    }
+
+    @GetMapping("/hotplace-view")
+    public String hotPlaceView() {
+        return "hotplace/view";
+    }
+
+    @GetMapping("/hotplace-write")
+    public String hotPlaceWrite() {
+        return "/hotplace/write";
     }
 }
