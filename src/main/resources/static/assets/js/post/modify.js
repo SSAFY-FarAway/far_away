@@ -1,6 +1,5 @@
 window.onload = function () {
     initView();
-    addOnClickEventListeners();
 }
 
 const urlParams = new URLSearchParams(location.search);
