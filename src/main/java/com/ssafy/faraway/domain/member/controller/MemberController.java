@@ -202,14 +202,19 @@ public class MemberController {
                                             @RequestParam @NotEmpty @Size(min=6, max=6, message = "birth's size must not be 6") String birth){
         try{
             Map<String, String> map = new HashMap<>();
+            Map<String, String> resultMap = new HashMap<>();
             map.put("loginId", loginId);
             map.put("email", email);
             map.put("birth", birth);
             String loginPwd = memberService.findLoginPwd(map);
             if(loginPwd == null){
-                return new ResponseEntity<>("이메일, 생년월일, 아이디를 정확히 입력해 주세요", HttpStatus.UNAUTHORIZED);
+                resultMap.put("success", String.valueOf(false));
+                resultMap.put("errorMsg", "이메일, 생년월일, 아이디를 정확히 입력해 주세요");
+                return new ResponseEntity<>(resultMap, HttpStatus.UNAUTHORIZED);
             }
-            return new ResponseEntity<>(loginPwd, HttpStatus.OK);
+            resultMap.put("success", String.valueOf(true));
+            resultMap.put("loginPwd",loginPwd);
+            return new ResponseEntity<>(resultMap, HttpStatus.OK);
         } catch (Exception e){
             e.printStackTrace();
             return exceptionHandling(e);

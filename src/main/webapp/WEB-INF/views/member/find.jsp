@@ -68,8 +68,8 @@
                                     <div class="d-flex flex-row mb-4">
                                         <i class="mt-3 fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="text" placeholder="사용자 ID" id="find-pwd-id" name="findPwdId" class="form-control"/>
-                                            <label class="form-label" for="find-pwd-id">Your ID</label>
+                                            <input type="text" placeholder="사용자 ID" id="find-pwd-login-id" name="findPwdId" class="form-control"/>
+                                            <label class="form-label" for="find-pwd-login-id">Your ID</label>
                                         </div>
                                     </div>
                                     <div class="d-flex flex-row mb-4">
@@ -90,7 +90,7 @@
 
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                         <button type="button" class="btn btn-primary btn-lg" id="find-pwd-button">
-                                            비밀번호 찾기
+                                            비밀번호 초기화
                                         </button>
                                     </div>
                                 </form>

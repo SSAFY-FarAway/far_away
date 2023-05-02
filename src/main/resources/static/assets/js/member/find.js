@@ -26,10 +26,26 @@ const handleFindIdResponse = (data) => {
     }
 }
 const findPwd = () => {
-    const id = document.getElementById("find-pwd-id");
-    const email = document.getElementById("find-pwd-email");
-    const birth = document.getElementById("find-pwd-birth");
-    const url = `${root}/member/login-pwd/`
+    const loginId = document.getElementById("find-pwd-login-id").value;
+    const email = document.getElementById("find-pwd-email").value;
+    const birth = document.getElementById("find-pwd-birth").value;
+    const url = `${root}/member/login-pwd?loginId=${loginId}&email=${email}&birth=${birth}`
 
-    fetch(url).then(res => console.log(res));
+    fetch(url).then(res => res.json()).then(data => handleFindPwdResponse(data));
+}
+
+const handleFindPwdResponse = (data) => {
+    switch(data.success) {
+        case 'true' : {
+            console.log(`임시 비밀번호 [ ${data.loginPwd} ]로 초기화 되었습니다. 비밀번호를 변경 후 이용해주세요.`);
+            alert(`임시 비밀번호 [ ${data.loginPwd} ]로 초기화 되었습니다. 비밀번호를 변경 후 이용해주세요.`);
+            break;
+        }
+        case 'false' : {
+            console.log(`비밀번호 찾기 실패 ! ${data.errorMsg}`);
+            alert(`비밀번호 찾기 실패 ! ${data.errorMsg}`);
+            break;
+        }
+        default : break;
+    }
 }
