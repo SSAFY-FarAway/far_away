@@ -16,7 +16,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/member")
@@ -81,7 +86,7 @@ public class MemberController {
         }
     }
 
-    @PutMapping("/password")
+    @PutMapping("/new-password")
     public ResponseEntity<?> loginPwdUpdate(@RequestBody @Valid MemberLoginPwdUpdateRequestDto memberLoginPwdUpdateRequestDto) {
         try {
             if(memberService.loginPwdUpdate(memberLoginPwdUpdateRequestDto) == null){
@@ -160,6 +165,44 @@ public class MemberController {
             }
             List<MemberListResponseDto> list = memberService.findAll();
             return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return exceptionHandling(e);
+        }
+    }
+
+    @GetMapping("/login-id")
+    public ResponseEntity<?> findLoginIdByEmailAndBirth(@RequestParam @NotEmpty(message = "loginId ust not be empty") @Email String email,
+                                                        @RequestParam @NotEmpty @Size(min=6, max=6, message = "birth's size must not be 6") String birth){
+        try{
+            Map<String, String> map = new HashMap<>();
+            map.put("email", email);
+            map.put("birth", birth);
+            String loginId = memberService.findLoginIdByEmailAndBirth(map);
+            if(loginId == null){
+                return new ResponseEntity<>("이메일과 생년월일을 정확히 입력해 주세요.", HttpStatus.UNAUTHORIZED);
+            }
+            return new ResponseEntity<>(loginId, HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return exceptionHandling(e);
+        }
+    }
+
+    @GetMapping("/login-pwd")
+    public ResponseEntity<?> findLoginPwd(@RequestParam @Size(min = 6, max = 20, message = "loginId ust not be empty") String loginId,
+                                            @RequestParam @NotEmpty(message = "loginId ust not be empty") @Email String email,
+                                            @RequestParam @NotEmpty @Size(min=6, max=6, message = "birth's size must not be 6") String birth){
+        try{
+            Map<String, String> map = new HashMap<>();
+            map.put("loginId", loginId);
+            map.put("email", email);
+            map.put("birth", birth);
+            String loginPwd = memberService.findLoginPwd(map);
+            if(loginPwd == null){
+                return new ResponseEntity<>("이메일, 생년월일, 아이디를 정확히 입력해 주세요", HttpStatus.UNAUTHORIZED);
+            }
+            return new ResponseEntity<>(loginPwd, HttpStatus.OK);
         } catch (Exception e){
             e.printStackTrace();
             return exceptionHandling(e);

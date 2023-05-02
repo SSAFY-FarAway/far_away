@@ -17,6 +17,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import java.math.BigInteger;
+import java.util.Map;
+
 @RequiredArgsConstructor
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -99,6 +101,26 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public boolean loginPwdCheck(Long id, String loginPwd) throws SQLException {
         return checkPwd(id, loginPwd);
+    }
+
+    @Override
+    public String findLoginIdByEmailAndBirth(Map<String, String> map) {
+        return memberRepository.findLoginIdByEmailAndBirth(map);
+    }
+
+    @Override
+    public String findLoginPwd(Map<String, String> map) throws SQLException {
+        if(memberRepository.findLoginPwd(map) == null){
+            return null;
+        }
+        // 새로운 비밀번호를 00000000 ( 0 x 8) 으로 초기화 하고 암호화 한 후 집어넣어줘야함 !
+        String newLoginPwd = "00000000";
+        String salt = getSalt();
+        String encodedNewLoginPwd = encrypt(newLoginPwd , salt);
+        map.put("loginPwd", encodedNewLoginPwd);
+        map.put("salt", salt);
+        memberRepository.updateLoginPwdToZero(map);
+        return newLoginPwd;
     }
 
     public boolean checkPwd(Long id, String loginPwd){
