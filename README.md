@@ -120,21 +120,21 @@
 - 제목, 내용, 우편번호, 주소, 별점 등록이 가능합니다. 
 - 파일 업로드 구현 중에 있습니다. 
 
-![hotplacewrite](./docs/img/hotplacewrite.jpg)
+![hotplacewrite](./docs/img/hotplace-write.png)
 ### ✔ 핫플레이스 전체 조회 화면
 - 모든 회원이 등록한 핫플레이스를 게시글 형태로 확인할 수 있습니다. 
 - 제목과 작성자로 핫플레이스를 검색할 수 있습니다. 
 - 페이징 처리를 통해 핫플레이스를 조회할 수 있습니다. 
 
-![hotplacelist](./docs/img/hotplacelist.jpg)
+![hotplacelist](./docs/img/hotplace-list.png)
 ### ✔ 핫플레이스 상세 조회 화면
 - 등록된 핫플레이스의 세부 정보를 조회할 수 있습니다. 
 - 자신이 등록한 핫플레이스일 경우 수정 및 삭제가 가능합니다. 
 
-![hotplaceview](./docs/img/hotplaceview.jpg)
+![hotplaceview](./docs/img/hotplace-view.png)
 ### ✔ 핫플레이스 수정 화면
 - 회원이 등록한 핫플레이스의 수정이 가능합니다. 
 - 핫플레이스의 제목, 내용, 우편번호, 주소, 평점 등의 정보 수정이 가능합니다. 
 - 파일 다운로드 구현 중에 있습니다. 
 
-![hotplacemodify](./docs/img/hotplacemodify.jpg)
+![hotplacemodify](./docs/img/hotplace-modify.png)
