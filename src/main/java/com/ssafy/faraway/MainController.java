@@ -14,21 +14,22 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String mvLogin () {
+    public String mvLogin() {
         return "member/login";
     }
 
     @GetMapping("/logout")
-    public String mvLogout () { return "index";
+    public String mvLogout() {
+        return "index";
     }
 
     @GetMapping("/sign-up")
-    public String mvSignUp () {
+    public String mvSignUp() {
         return "member/sign_up";
     }
 
     @GetMapping("/myPage")
-    public String mvMyPage () {
+    public String mvMyPage() {
         return "member/my_page";
     }
 
@@ -42,9 +43,15 @@ public class MainController {
         return "member/find";
     }
 
+    @GetMapping("/post-list")
+    public String mvPostList() {
+        return "post/list";
+    }
 
     @GetMapping("/mvPostWrite")
-    public String mvPostWrite() { return "post/write"; }
+    public String mvPostWrite() {
+        return "post/write";
+    }
 
     @GetMapping("/search-place")
     public String searchPlace() {
@@ -56,9 +63,9 @@ public class MainController {
                            @RequestParam(required = false) String key,
                            @RequestParam(required = false) String word,
                            Model model) {
-        model.addAttribute("page",page);
-        model.addAttribute("key",key);
-        model.addAttribute("word",word);
+        model.addAttribute("page", page);
+        model.addAttribute("key", key);
+        model.addAttribute("word", word);
 
         return "plan/list";
     }
@@ -77,16 +84,16 @@ public class MainController {
 
     @GetMapping("/plan-modify")
     public String planModify(@RequestParam Long id, Model model) {
-        model.addAttribute("id",id);
+        model.addAttribute("id", id);
         return "plan/modify";
     }
 
 
     @GetMapping("/hotplace-list")
-    public String hotPlaceList(@RequestParam int page,@RequestParam(required = false) String key, @RequestParam(required = false) String word, Model model) {
-        model.addAttribute("page",page);
-        model.addAttribute("key",key);
-        model.addAttribute("word",word);
+    public String hotPlaceList(@RequestParam int page, @RequestParam(required = false) String key, @RequestParam(required = false) String word, Model model) {
+        model.addAttribute("page", page);
+        model.addAttribute("key", key);
+        model.addAttribute("word", word);
         return "hotplace/list";
     }
 
