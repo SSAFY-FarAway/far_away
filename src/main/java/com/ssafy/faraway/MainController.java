@@ -18,6 +18,12 @@ public class MainController {
         return "member/login";
     }
 
+    @GetMapping("/mvPost")
+    public String mvPostView(@RequestParam int id, Model model){
+        model.addAttribute("id", id);
+        return "post/view";
+    }
+
     @GetMapping("/logout")
     public String mvLogout() {
         return "index";
@@ -75,6 +81,12 @@ public class MainController {
         model.addAttribute("word", word);
 
         return "plan/list";
+    }
+
+    @GetMapping("/mvPostModify")
+    public String mvPostModify(@RequestParam Long id, Model model){
+        model.addAttribute("id", id);
+        return "post/modify";
     }
 
     @GetMapping("/plan-write")
