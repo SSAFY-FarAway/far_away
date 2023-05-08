@@ -1,5 +1,6 @@
 package com.ssafy.faraway.domain.post.dto.req;
 
+import com.ssafy.faraway.domain.member.entity.Member;
 import com.ssafy.faraway.domain.post.entity.Post;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,8 +15,6 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @ToString
 public class PostSaveRequestDto {
-    @NotNull(message = "사용자 정보가 없습니다.")
-    private long memberId;
     @NotBlank(message = "카테고리를 입력해주세요.")
     @Size(max = 20, message = "카테고리는 20자 이하입니다.")
     private String category;
@@ -24,18 +23,20 @@ public class PostSaveRequestDto {
     private String title;
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
+    @NotNull(message = "사용자 정보가 없습니다.")
+    private Member member;
 
     @Builder
-    public PostSaveRequestDto(long memberId, String category, String title, String content) {
-        this.memberId = memberId;
+    public PostSaveRequestDto(String category, String title, String content, Member member) {
         this.category = category;
         this.title = title;
         this.content = content;
+        this.member = member;
     }
 
     public Post toEntity() {
         return Post.builder()
-                .memberId(memberId)
+                .member(member)
                 .category(category)
                 .title(title)
                 .content(content)

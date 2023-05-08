@@ -11,8 +11,6 @@ import javax.validation.constraints.Size;
 @Getter
 @NoArgsConstructor
 public class PostUpdateRequestDto {
-    @NotNull(message = "게시글 정보가 없습니다.")
-    private long id;
     @NotBlank(message = "카테고리를 입력해주세요.")
     @Size(max = 20, message = "카테고리는 20자 이하입니다.")
     private String category;
@@ -23,8 +21,7 @@ public class PostUpdateRequestDto {
     private String content;
 
     @Builder
-    public PostUpdateRequestDto(long id, String category, String title, String content) {
-        this.id = id;
+    public PostUpdateRequestDto(String category, String title, String content) {
         this.category = category;
         this.title = title;
         this.content = content;

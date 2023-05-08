@@ -8,16 +8,16 @@ import java.time.LocalDateTime;
 
 @Getter
 public class PostListResponseDto {
-    private long id;
-    private long memberId;
+    private Long id;
+    private Long memberId;
     private String loginId;
     private String category;
     private String title;
-    private long hit;
+    private Long hit;
     private LocalDateTime createdDate;
 
     @Builder
-    public PostListResponseDto(long id, long memberId, String loginId, String category, String title, long hit, LocalDateTime createdDate) {
+    public PostListResponseDto(Long id, Long memberId, String loginId, String category, String title, Long hit, LocalDateTime createdDate) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;

@@ -1,4 +1,4 @@
-package com.ssafy.faraway.domain.post.repository;
+package com.ssafy.faraway.domain.post.repository.old;
 
 import com.ssafy.faraway.domain.post.dto.req.PostCommentUpdateRequestDto;
 import com.ssafy.faraway.domain.post.dto.res.PostCommentListResponseDto;

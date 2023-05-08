@@ -9,17 +9,17 @@ import java.time.LocalDateTime;
 
 @Getter
 public class PostResponseDto {
-    private long id;
-    private long memberId;
+    private Long id;
+    private Long memberId;
     private String loginId;
     private String category;
     private String title;
     private String content;
-    private long hit;
+    private Long hit;
     private LocalDateTime createdDate;
 
     @Builder
-    public PostResponseDto(long id, long memberId, String loginId, String category, String title, String content, long hit, LocalDateTime createdDate) {
+    public PostResponseDto(Long id, Long memberId, String loginId, String category, String title, String content, Long hit, LocalDateTime createdDate) {
         this.id = id;
         this.memberId = memberId;
         this.loginId = loginId;

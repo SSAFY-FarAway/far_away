@@ -3,7 +3,7 @@ package com.ssafy.faraway.domain.post.service;
 import com.ssafy.faraway.domain.post.dto.req.PostCommentSaveRequestDto;
 import com.ssafy.faraway.domain.post.dto.req.PostCommentUpdateRequestDto;
 import com.ssafy.faraway.domain.post.dto.res.PostCommentListResponseDto;
-import com.ssafy.faraway.domain.post.repository.PostCommentRepository;
+import com.ssafy.faraway.domain.post.repository.old.PostCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

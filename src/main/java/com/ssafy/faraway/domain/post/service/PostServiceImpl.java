@@ -7,7 +7,7 @@ import com.ssafy.faraway.domain.post.dto.req.PostSaveRequestDto;
 import com.ssafy.faraway.domain.post.dto.req.PostUpdateRequestDto;
 import com.ssafy.faraway.domain.post.dto.res.PostListResponseDto;
 import com.ssafy.faraway.domain.post.dto.res.PostResponseDto;
-import com.ssafy.faraway.domain.post.repository.PostRepository;
+import com.ssafy.faraway.domain.post.repository.old.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

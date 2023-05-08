@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ssafy.faraway.domain.post.repository.PostRepository">
+<mapper namespace="com.ssafy.faraway.domain.post.repository.old.PostRepository">
 
     <select id="findById" parameterType="long" resultType="PostResponseDto">
         select p.id,
